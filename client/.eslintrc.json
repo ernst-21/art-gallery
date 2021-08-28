@@ -1,0 +1,53 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "globals": {
+     "React": false,
+     "localStorage": false,
+    "sessionStorage": false,
+     "window": false,
+     "XMLHttpRequest": false,
+     "FormData": false,
+     "document": false,
+     "ReactDOM": false
+  },
+  "plugins": [
+    "react",
+    "react-hooks"
+  ],
+  "parser": "babel-eslint",
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 8,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "indent": [
+      "error",
+      2,
+      { "SwitchCase": 1 }
+    ],
+    "linebreak-style": 0,
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "react/prop-types": "off"
+  }
+}

@@ -1,0 +1,25 @@
+@import './variables';
+
+.ant-dropdown {
+  box-shadow: 0 6px 16px -3px rgba(0,0,0,0.29) !important;
+  top: 2.4rem !important;
+}
+
+.ant-dropdown-trigger {
+  color: @website-dark;
+  text-decoration: none;
+  &:hover {
+    color: @accent-color;
+  }
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item {
+  text-align: center;
+  &:hover {
+    background-color: @background-gray;
+  }
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected, .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-active {
+  background-color: white;
+}
