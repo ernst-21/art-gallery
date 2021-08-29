@@ -27,23 +27,31 @@ const EditProfile = () => {
     return () => showErrorModal(null);
   }, [error, httpError, showErrorModal]);
 
-  const { data: user, isLoading, isError } = useQuery(['user', userId], () => read({ userId: userId }, { t: jwt.token }).then(data => data), { onError: () => setRedirectToSignin(true) });
+  const { data: user, isLoading, isError } = useQuery(
+    ['user', userId],
+    () => read({ userId: userId }, { t: jwt.token }).then((data) => data),
+    { onError: () => setRedirectToSignin(true) }
+  );
 
   const queryClient = useQueryClient();
 
-  const { mutate: updateUserMutation } = useMutation((user) => update({ userId: userId }, { t: jwt.token }, user).then(data => data), {
-    onSuccess: (data) => {
-      queryClient.setQueryData(['user', data._id], data);
-      auth.clearJWT(() => history.push('/signin'));
-      success('Account successfully updated. Please sign in');
-    },
-    onError: (data) => console.log(data)
-  });
+  const { mutate: updateUserMutation } = useMutation(
+    (user) =>
+      update({ userId: userId }, { t: jwt.token }, user).then((data) => data),
+    {
+      onSuccess: (data) => {
+        queryClient.setQueryData(['user', data._id], data);
+        auth.clearJWT(() => history.push('/signin'));
+        success('Account successfully updated. Please sign in');
+      },
+      onError: (data) => console.log(data)
+    }
+  );
 
   if (auth.isAuthenticated() && redirectToSignin) {
-    return <Redirect to='/' />;
+    return <Redirect to="/" />;
   } else if (!auth.isAuthenticated()) {
-    return <Redirect to='/signin' />;
+    return <Redirect to="/signin" />;
   }
 
   const handleImageChange = (info) => {
@@ -66,7 +74,7 @@ const EditProfile = () => {
   };
 
   if (isError) {
-    return <Redirect to='/info-network-error' />;
+    return <Redirect to="/info-network-error" />;
   }
 
   return (
@@ -91,12 +99,17 @@ const EditProfile = () => {
             </p>
             <div className="upload-avatar__container">
               {user && user.pic ? (
-                <div className='photo-icon-container'>
+                <div className="photo-icon-container">
                   <Avatar size={110} src={user.pic} alt="avatar" />{' '}
                   {user.pic && (
                     <DeleteOutlined
                       style={{ marginTop: '.4rem' }}
-                      onClick={() => queryClient.setQueryData(['user', user._id], {...user, pic: ''})}
+                      onClick={() =>
+                        queryClient.setQueryData(['user', user._id], {
+                          ...user,
+                          pic: ''
+                        })
+                      }
                     />
                   )}
                 </div>
@@ -199,9 +212,11 @@ const EditProfile = () => {
                   <Input.Password />
                 </Form.Item>
                 <Form.Item>
-                  <Button type="primary" htmlType="submit">
-                    Update
-                  </Button>
+                  <div className="submit-btn-container">
+                    <Button className='submit-btn' type="primary" htmlType="submit">
+                      Update
+                    </Button>
+                  </div>
                 </Form.Item>
               </Form>
             )}

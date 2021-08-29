@@ -26,6 +26,24 @@ const MenuItems = (props) => {
           Artworks
         </NavLink>
       </li>) : (<li><ArtworksMenu history={props.history} /></li>)}
+      <li onClick={props.onClick}>
+        <NavLink
+          style={isActive(props.history, '/artists')}
+          onClick={props.onClick}
+          to="/artists"
+        >
+          Artists
+        </NavLink>
+      </li>
+      <li onClick={props.onClick}>
+        <NavLink
+          style={isActive(props.history, '/galleries')}
+          onClick={props.onClick}
+          to="/galleries"
+        >
+          Galleries
+        </NavLink>
+      </li>
       {!auth.isAuthenticated() && (
         <>
           <li onClick={props.onClick}>

@@ -7,7 +7,6 @@ const Artworks = () => {
         Artworks
       </h2>
     </div>
-
   );
 };
 

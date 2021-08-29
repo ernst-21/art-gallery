@@ -1,7 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Home from './layout/Content/Home';
+import Home from './layout/Content/Home/Home';
 import Artworks from './layout/Content/Artworks';
+import Artists from './layout/Content/Artists';
+import Galleries from './layout/Content/Galleries';
 import Users from './modules/user/Users';
 import Signup from './modules/user/Signup';
 import Signin from './modules/auth/Signin';
@@ -19,6 +21,8 @@ const MainRouter = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/artworks" component={Artworks} />
+        <Route path="/artists" component={Artists} />
+        <Route path="/galleries" component={Galleries} />
         <Route path="/users" component={Users} />
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
