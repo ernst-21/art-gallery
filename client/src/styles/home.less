@@ -1,12 +1,13 @@
 .home-page {
   display: block;
+  margin: 0;
   .carousel-image-container {
     position: relative;
     text-align: center;
     color: white;
     .carousel-image {
       height: 500px;
-      width: 100vw;
+      width: 100%;
       filter: brightness(23%);
     }
     .promo-text {
@@ -18,11 +19,30 @@
       transform: translate(-50%, -50%)
     }
   }
+  .recommended-section {
+    background-color: @light-gray;
+  }
+  .featured-section, .recommended-section  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5em 2em;
+
+    .featured-section .featured-artworks__container, .recommended-section .recommended-artists__container {
+      padding: 1em;
+    }
+  }
 }
 
 @media (min-width: 768px) {
   .home-page .carousel-image-container .promo-text {
     font-size: 3rem;
+  }
+  .home-page .featured-section, .home-page .recommended-section {
+    padding: 3em;
+    .featured-artworks__container, .recommended-artists__container {
+      padding: 1em 2.5em;
+    }
   }
 }
 

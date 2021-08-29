@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Home from './layout/Content/Home/Home';
-import Artworks from './layout/Content/Artworks';
-import Artists from './layout/Content/Artists';
+import Artworks from './layout/Content/Artworks/Artworks';
+import Artists from './layout/Content/Artists/Artists';
 import Galleries from './layout/Content/Galleries';
 import Users from './modules/user/Users';
 import Signup from './modules/user/Signup';
