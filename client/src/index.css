@@ -14,27 +14,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 1px;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-
-.card {
-  margin-top: 2rem;
-  width: 50%;
-}
-
-
-.upload-avatar__container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  place-items: center;
-  width: 100%;
-  flex-direction: column;
-  margin-bottom: 1.8rem;
 }

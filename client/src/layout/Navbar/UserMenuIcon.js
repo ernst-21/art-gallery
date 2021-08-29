@@ -30,7 +30,9 @@ const UserMenu = (props) => {
 const UserMenuIcon = (props) => {
   return (
     <MenuDropDown className='user-dropdown' overlay={<UserMenu history={props.history} />} placement="bottomCenter">
-      <UserOutlined onClick={(e) => e.preventDefault()} />
+      <a onClick={(e) => e.preventDefault()}>
+        <UserOutlined style={{fontSize: '18px'}} />
+      </a>
     </MenuDropDown>
   );
 };
