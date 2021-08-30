@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Home from './layout/Content/Home/Home';
 import Artworks from './layout/Content/Artworks/Artworks';
 import Artists from './layout/Content/Artists/Artists';
-import Galleries from './layout/Content/Galleries';
+import Galleries from './layout/Content/Galleries/Galleries';
 import Users from './modules/user/Users';
 import Signup from './modules/user/Signup';
 import Signin from './modules/auth/Signin';

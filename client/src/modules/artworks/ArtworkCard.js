@@ -1,4 +1,3 @@
-import React from 'react';
 import {Card} from 'antd';
 import {HeartOutlined, ShoppingCartOutlined  } from '@ant-design/icons';
 

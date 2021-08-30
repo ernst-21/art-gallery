@@ -16,6 +16,26 @@
   text-align: center;
 }
 
+.elements-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.my-masonry-grid {
+  display: flex;
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding: 10px 10px; /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+  margin-bottom: 30px;
+}
+
 .section-title {
   font-size: 2rem !important;
   font-family: 'Rufina', sans-serif !important;

@@ -2,6 +2,7 @@
 .ant-layout {
   min-height: 100vh;
   background-color: #fff;
+  overflow-x: hidden !important;
 }
 
 .ant-layout-content {
@@ -29,6 +30,18 @@
   min-height: 100%;
   width: 100%;
 }
+
+.section {
+  display: block;
+  padding: 1em;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 1.5em 3em;
+  }
+}
+
 
 .upload-avatar__container {
   display: flex;

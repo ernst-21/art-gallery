@@ -1,11 +1,11 @@
-import React from 'react';
+import FilteredArtworks from '../../../modules/artworks/FilteredArtworks';
+import ArtworksFilter from '../../../modules/artworks/ArtworksFilter';
 
 const Artworks = () => {
   return (
     <div className='artworks-page'>
-      <h2>
-        Artworks
-      </h2>
+      <ArtworksFilter />
+      <FilteredArtworks />
     </div>
   );
 };

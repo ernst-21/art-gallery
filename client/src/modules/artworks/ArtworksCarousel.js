@@ -1,6 +1,6 @@
 import React from 'react';
 import { Carousel } from 'antd';
-import { forCarousel } from '../../../mockData';
+import { forCarousel } from '../../mockData';
 
 const settings = {
   dots: true,
