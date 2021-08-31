@@ -58,69 +58,71 @@ const Signin = (props) => {
   }
 
   return (
-    <div className="form-card-container">
-      <Card
-        className={screens.xs === true ? 'drawer-card' : 'form-card'}
-        title='Login'
-        extra={
-          <Link to="/signup">Don&apos;t have an account? Sign Up instead</Link>
-        }
-      >
-        <Form
-          name="basic"
-          initialValues={{
-            remember: true
-          }}
-          onFinish={clickSubmit}
-        >
-          <Form.Item
-            labelCol={{ span: 24 }}
-            name="email"
-            label="E-mail"
-            rules={[
-              {
-                type: 'email',
-                message: 'The input is not valid E-mail!'
-              },
-              {
-                required: true,
-                message: 'Please input your E-mail!'
-              }
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            labelCol={{ span: 24 }}
-            label="Password:"
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your password!'
-              }
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
-          <Form.Item name="remember" valuePropName="checked">
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-
-          <Form.Item>
-            <div className='submit-btn-container'>
-              <Button className='submit-btn' type="primary" htmlType="submit">
-                Sign In
-              </Button>
-            </div>
-          </Form.Item>
-          <div className='lower-link'>
-            <Link  to="/email" >
-              Forgot password?
+    <div className="sign-section">
+      <div className="form-card-container">
+        <Card
+          className={screens.xs === true ? 'drawer-card' : 'form-card'}
+          title="Login"
+          extra={
+            <Link to="/signup">
+              Don&apos;t have an account? Sign Up instead
             </Link>
-          </div>
-        </Form>
-      </Card>
+          }
+        >
+          <Form
+            name="basic"
+            initialValues={{
+              remember: true
+            }}
+            onFinish={clickSubmit}
+          >
+            <Form.Item
+              labelCol={{ span: 24 }}
+              name="email"
+              label="E-mail"
+              rules={[
+                {
+                  type: 'email',
+                  message: 'The input is not valid E-mail!'
+                },
+                {
+                  required: true,
+                  message: 'Please input your E-mail!'
+                }
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              labelCol={{ span: 24 }}
+              label="Password:"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your password!'
+                }
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+            <Form.Item name="remember" valuePropName="checked">
+              <Checkbox>Remember me</Checkbox>
+            </Form.Item>
+
+            <Form.Item>
+              <div className="submit-btn-container">
+                <Button className="submit-btn" type="primary" htmlType="submit">
+                  Sign In
+                </Button>
+              </div>
+            </Form.Item>
+            <div className="lower-link">
+              <Link to="/email">Forgot password?</Link>
+            </div>
+          </Form>
+        </Card>
+      </div>
     </div>
   );
 };

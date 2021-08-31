@@ -7,7 +7,7 @@ import { strongPass, wrongPasswordMessage } from '../../config/config';
 import { useMutation } from 'react-query';
 import { success } from '../../components/Message';
 
-const {useBreakpoint} = Grid;
+const { useBreakpoint } = Grid;
 
 const Signup = (props) => {
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
@@ -59,114 +59,113 @@ const Signup = (props) => {
   }
 
   return (
-    <div className='form-card-container' >
-      <Card
-        className={screens.xs === true ? 'drawer-card' : 'form-card'}
-        title='Register'
-        extra={<Link to="/signin">Already registered? Login instead</Link>}
-      >
-        <Form
-          name="basic"
-          initialValues={{
-            remember: true
-          }}
-          onFinish={clickSubmit}
+    <div className='sign-section'>
+      <div className="form-card-container">
+        <Card
+          className={screens.xs === true ? 'drawer-card' : 'form-card'}
+          title="Register"
+          extra={<Link to="/signin">Already registered? Login instead</Link>}
         >
-          <Form.Item
-            labelCol={{span: 24}}
-            label="Username"
-            name="name"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your username!'
-              }
-            ]}
+          <Form
+            name="basic"
+            initialValues={{
+              remember: true
+            }}
+            onFinish={clickSubmit}
           >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            labelCol={{span: 24}}
-            name="email"
-            label="E-mail"
-            rules={[
-              {
-                type: 'email',
-                message: 'The input is not valid E-mail!'
-              },
-              {
-                required: true,
-                message: 'Please input your E-mail!'
-              }
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            labelCol={{span: 24}}
-            label="Password"
-            name="password"
-            hasFeedback
-            rules={[
-              {
-                required: true,
-                message: 'Please input your password!'
-              },
-              () => ({
-                validator(_, value) {
-                  if (!value || strongPass.test(value)) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(new Error(wrongPasswordMessage));
+            <Form.Item
+              labelCol={{ span: 24 }}
+              label="Username"
+              name="name"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your username!'
                 }
-              })
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
-          <Form.Item
-            labelCol={{span: 24}}
-            name="confirm"
-            label="Confirm Password"
-            dependencies={['password']}
-            hasFeedback
-            rules={[
-              {
-                required: true,
-                message: 'Please confirm your password!'
-              },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue('password') === value) {
-                    return Promise.resolve();
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              labelCol={{ span: 24 }}
+              name="email"
+              label="E-mail"
+              rules={[
+                {
+                  type: 'email',
+                  message: 'The input is not valid E-mail!'
+                },
+                {
+                  required: true,
+                  message: 'Please input your E-mail!'
+                }
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              labelCol={{ span: 24 }}
+              label="Password"
+              name="password"
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your password!'
+                },
+                () => ({
+                  validator(_, value) {
+                    if (!value || strongPass.test(value)) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(new Error(wrongPasswordMessage));
                   }
+                })
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+            <Form.Item
+              labelCol={{ span: 24 }}
+              name="confirm"
+              label="Confirm Password"
+              dependencies={['password']}
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: 'Please confirm your password!'
+                },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue('password') === value) {
+                      return Promise.resolve();
+                    }
 
-                  return Promise.reject(
-                    new Error(
-                      'The two passwords that you entered do not match!'
-                    )
-                  );
-                }
-              })
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
-          <Form.Item
-          >
-            <div className='submit-btn-container'>
-              <Button className='submit-btn' type="primary" htmlType="submit">
-                Sign Up
-              </Button>
+                    return Promise.reject(
+                      new Error(
+                        'The two passwords that you entered do not match!'
+                      )
+                    );
+                  }
+                })
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+            <Form.Item>
+              <div className="submit-btn-container">
+                <Button className="submit-btn" type="primary" htmlType="submit">
+                  Sign Up
+                </Button>
+              </div>
+            </Form.Item>
+            <div className="lower-link">
+              <Link to="/email">Forgot password?</Link>
             </div>
-          </Form.Item>
-          <div className='lower-link'>
-            <Link to="/email">
-              Forgot password?
-            </Link>
-          </div>
-        </Form>
-      </Card>
+          </Form>
+        </Card>
+      </div>
     </div>
   );
 };

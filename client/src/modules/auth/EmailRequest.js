@@ -44,45 +44,47 @@ const EmailRequest = () => {
   }
 
   return (
-    <div className="form-card-container">
-      <Card
-        title='Enter e-mail to update password'
-        extra={<Link to="/signin">Cancel</Link>}
-        className='form-card'
-      >
-        <Form
-          name="basic"
-          initialValues={{
-            remember: true
-          }}
-          onFinish={clickSubmit}
+    <div className="sign-section">
+      <div className="form-card-container">
+        <Card
+          title="Enter e-mail to update password"
+          extra={<Link to="/signin">Cancel</Link>}
+          className="form-card"
         >
-          <Form.Item
-            labelCol={{span: 24}}
-            name="email"
-            label="E-mail:"
-            rules={[
-              {
-                type: 'email',
-                message: 'The input is not valid E-mail!'
-              },
-              {
-                required: true,
-                message: 'Please input your E-mail!'
-              }
-            ]}
+          <Form
+            name="basic"
+            initialValues={{
+              remember: true
+            }}
+            onFinish={clickSubmit}
           >
-            <Input />
-          </Form.Item>
-          <Form.Item>
-            <div className='submit-btn-container'>
-              <Button className='submit-btn' type="primary" htmlType="submit">
-                Submit
-              </Button>
-            </div>
-          </Form.Item>
-        </Form>
-      </Card>
+            <Form.Item
+              labelCol={{ span: 24 }}
+              name="email"
+              label="E-mail:"
+              rules={[
+                {
+                  type: 'email',
+                  message: 'The input is not valid E-mail!'
+                },
+                {
+                  required: true,
+                  message: 'Please input your E-mail!'
+                }
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item>
+              <div className="submit-btn-container">
+                <Button className="submit-btn" type="primary" htmlType="submit">
+                  Submit
+                </Button>
+              </div>
+            </Form.Item>
+          </Form>
+        </Card>
+      </div>
     </div>
   );
 };
