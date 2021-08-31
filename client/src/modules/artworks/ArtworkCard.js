@@ -7,6 +7,7 @@ const ArtworkCard = (props) => {
   return (
     <Card
       hoverable
+      style={{padding: '1em 1em 0 1em'}}
       cover={<img alt={props.name} src={props.url} />}
       actions={[
         <HeartOutlined key="like" />,

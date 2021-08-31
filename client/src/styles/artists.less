@@ -1,0 +1,23 @@
+@import './variables';
+.artists-page {
+  display: block;
+  margin: 0;
+  .artist-filter__container {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .filtered-artists__section {
+    background-color: @background-gray;
+  }
+}
+
+@media (min-width: 768px) {
+  .artists-page {
+    .artist-filter__container {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+}

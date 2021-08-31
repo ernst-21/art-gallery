@@ -1,9 +1,11 @@
-import React from 'react';
+import GalleriesTabs from '../../../modules/galleries/GalleriesTabs';
 
 const Galleries = () => {
   return (
-    <div className='galleries-page'>
-      <h2>Galleries</h2>
+    <div className="galleries-page">
+      <div className="section galleries-tabs">
+        <GalleriesTabs />
+      </div>
     </div>
   );
 };

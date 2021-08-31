@@ -1,0 +1,29 @@
+@import './variables';
+
+.galleries-page {
+  display: block;
+  background-color: @background-gray;
+  margin: 0;
+  .galleries-tabs {
+    padding-top: 2rem !important;
+  }
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: @accent-color;
+  text-shadow: 0 0 0.25px currentColor;
+}
+
+.ant-tabs-ink-bar {
+  position: absolute;
+  background: @accent-color;
+  pointer-events: none;
+}
+
+.ant-tabs-top > .ant-tabs-nav::before, .ant-tabs-bottom > .ant-tabs-nav::before, .ant-tabs-top > div > .ant-tabs-nav::before, .ant-tabs-bottom > div > .ant-tabs-nav::before {
+  position: absolute;
+  right: 0;
+  left: 0;
+  border-bottom: 1px solid #c8c8c8;
+  content: '';
+}

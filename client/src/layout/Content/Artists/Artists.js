@@ -1,11 +1,11 @@
-import React from 'react';
+import ArtistsFilter from '../../../modules/artists/ArtistsFilter';
+import FilteredArtists from '../../../modules/artists/FilteredArtists';
 
 const Artists = () => {
   return (
     <div className='artists-page'>
-      <h2>
-        Artists
-      </h2>
+      <ArtistsFilter />
+      <FilteredArtists />
     </div>
   );
 };
