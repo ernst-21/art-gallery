@@ -14,14 +14,18 @@ const Signin = (props) => {
   const screens = useBreakpoint();
 
   const { mutate: signInMutation, isError } = useMutation(
-    (user) => signin(user).then((data) => data),
+    (user) =>
+      signin(user)
+        .then((res) => res.json())
+        .then((data) => data),
     {
       onSuccess: (data) => {
-        if (data && !data.error) {
+        if (!data.error) {
           auth.authenticate(data, () => {
             setRedirectToReferrer(true);
           });
-        } else {
+        } else if (data && data.error) {
+          console.log(isError);
           showErrorModal(data.error);
         }
       }

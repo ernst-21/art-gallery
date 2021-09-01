@@ -14,18 +14,17 @@ const Profile = () => {
   const jwt = auth.isAuthenticated();
   const userId = useParams().userId;
 
-  const { data: user, isLoading, error } = useQuery(
+  const { data: user, isLoading, isError } = useQuery(
     ['user', userId],
     () =>
-      read({ userId: userId }, { t: jwt.token })
-        .then(data => data)
+      read({ userId: userId }, { t: jwt.token }).then(res => res.json()).then(data => data)
   );
 
   if (!auth.isAuthenticated()) {
     return <Redirect to="/signin" />;
   }
 
-  if (error) {
+  if (isError) {
     return <Redirect to="/info-network-error" />;
   }
 

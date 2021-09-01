@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import auth from '../auth/auth-helper';
+import { useMutation } from 'react-query';
+import {success} from '../../components/Message';
 import { remove } from './api-user.js';
 import { Redirect } from 'react-router-dom';
-import { Modal, message, Button } from 'antd';
+import { Modal, Button } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 import { useHttpError } from '../../hooks/http-hook';
 
@@ -13,6 +15,21 @@ export default function DeleteUser(props) {
 
   const jwt = auth.isAuthenticated();
 
+  const { mutate: deleteUserMutation, isError } = useMutation(
+    (params) =>
+      remove(params, { t: jwt.token })
+        .then((res) => res.json())
+        .then((data) => data),
+    {
+      onSuccess: (data) => {
+        if (data && !data.error) {
+          auth.clearJWT(() => success('Account successfully deleted'));
+          setRedirect(true);
+        }
+      }
+    }
+  );
+
   useEffect(() => {
     if (error) {
       httpError();
@@ -20,33 +37,15 @@ export default function DeleteUser(props) {
     return () => showErrorModal(null);
   }, [error, httpError, showErrorModal]);
 
-  const success = (msg) => {
-    message.success(msg);
-  };
-
-  const deleteAccount = () => {
-    remove(
-      {
-        userId: props.userId
-      },
-      { t: jwt.token }
-    ).then((data) => {
-      if (data && data.error) {
-        showErrorModal(data.error);
-      } else {
-        auth.clearJWT(() => success('Account successfully deleted'));
-        setRedirect(true);
-      }
-    });
-  };
-
   const showModal = () => {
     setIsModalVisible(true);
   };
 
   const handleOk = () => {
     setIsModalVisible(false);
-    deleteAccount();
+    deleteUserMutation({
+      userId: props.userId
+    });
   };
 
   const handleCancel = () => {
@@ -56,6 +55,11 @@ export default function DeleteUser(props) {
   if (redirect) {
     return <Redirect to="/" />;
   }
+
+  if (isError) {
+    return <Redirect to="/info-network-error" />;
+  }
+
   return (
     <>
       <Button onClick={showModal} style={{ color: 'red' }}>
@@ -76,4 +80,3 @@ export default function DeleteUser(props) {
     </>
   );
 }
-

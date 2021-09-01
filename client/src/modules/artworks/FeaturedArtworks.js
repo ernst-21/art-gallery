@@ -1,30 +1,17 @@
-import {useState} from 'react';
 import ElementsGrid from '../../components/ElementsGrid';
-import { useQuery, useQueryClient} from 'react-query';
+import { useQuery} from 'react-query';
 import { listArtworks } from './api-artworks';
 import SpinLoader from '../../components/SpinLoader';
 import { Redirect } from 'react-router-dom';
 
 const FeaturedArtworks = () => {
-  const [redirectToNetError, setRedirectToNetError] = useState(false);
-
-  const queryClient = useQueryClient();
-
-  const { data: featured = [], isLoading} = useQuery(
+  const { data: featured = [], isLoading, isError} = useQuery(
     'featured',
-    () => listArtworks().then((data) => data), {
-      onSuccess: (data) => {
-        if (data && !data.error) {
-          queryClient.invalidateQueries('featured').then(data => data);
-        } else {
-          setRedirectToNetError(true);
-        }
-      }
-    });
+    () => listArtworks().then(res => res.json()).then((data) => data));
 
   const featuredArtworks = featured.filter(item => item.featured === true);
 
-  if (redirectToNetError) {
+  if (isError) {
     return <Redirect to="/info-network-error" />;
   }
 

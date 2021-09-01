@@ -13,7 +13,7 @@ const ResetPassword = () => {
   const token = useParams().token;
 
   const { mutate: resetPassMutation, isError } = useMutation(
-    (user) => resetPass({ token: token }, user).then((data) => data),
+    (user) => resetPass({ token: token }, user).then(res => res.json()).then((data) => data),
     {
       onSuccess: (data) => {
         if (data && !data.error) {

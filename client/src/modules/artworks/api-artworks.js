@@ -1,38 +1,20 @@
-const listArtworks = async () => {
-  try {
-    let response = await fetch('http://localhost:5000/api/artworks',{
-      method: 'GET'
-    });
-    return await response.json();
-  } catch (err) {
-    console.log(err);
-  }
-};
+const listArtworks = async () =>
+  await fetch('http://localhost:5000/api/artworks', {
+    method: 'GET'
+  });
 
-const listArtworksByCategory = async (params) => {
-  try {
-    let response = await fetch('http://localhost:5000/api/artworks/category/' + params.artCategory, {
+const listArtworksByCategory = async (params) =>
+  await fetch(
+    'http://localhost:5000/api/artworks/category/' + params.artCategory,
+    {
       method: 'GET'
-    });
-    return await response.json();
-  } catch (err) {
-    console.log(err);
-  }
-};
+    }
+  );
 
-const readArtwork = async (params) => {
-  try {
-    let response = await fetch(
-      'http://localhost:5000/api/artworks/' + params.artworkId,
-      {
-        method: 'GET'
-      }
-    );
-    return await response.json();
-  } catch (err) {
-    console.log(err);
-  }
-};
+const readArtwork = async (params) =>
+  await fetch('http://localhost:5000/api/artworks/' + params.artworkId, {
+    method: 'GET'
+  });
 
 const voteArtwork = async (params, credentials, user) =>
   await fetch('http://localhost:5000/api/artworks/vote/' + params.artworkId, {
@@ -56,4 +38,10 @@ const unVoteArtwork = async (params, credentials, user) =>
     body: JSON.stringify(user)
   });
 
-export { listArtworks, readArtwork, voteArtwork, unVoteArtwork, listArtworksByCategory };
+export {
+  listArtworks,
+  readArtwork,
+  voteArtwork,
+  unVoteArtwork,
+  listArtworksByCategory
+};

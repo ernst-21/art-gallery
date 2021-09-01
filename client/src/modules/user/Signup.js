@@ -15,7 +15,7 @@ const Signup = (props) => {
   const screens = useBreakpoint();
 
   const { mutate: signUpMutation, isError } = useMutation(
-    (user) => create(user).then((data) => data),
+    (user) => create(user).then(res => res.json()).then((data) => data),
     {
       onSuccess: (data) => {
         if (data && !data.error) {

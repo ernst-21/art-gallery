@@ -1,19 +1,13 @@
-const signin = async (user) => {
-  try {
-    let response = await fetch('http://localhost:5000/auth/signin', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include',
-      body: JSON.stringify(user)
-    });
-    return await response.json();
-  } catch (err) {
-    console.log(err);
-  }
-};
+const signin = async (user) =>
+  await fetch('http://localhost:5000/auth/signin', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include',
+    body: JSON.stringify(user)
+  });
 
 const signout = async () => {
   try {
@@ -23,5 +17,6 @@ const signout = async () => {
     console.log(err);
   }
 };
+
 
 export { signin, signout };

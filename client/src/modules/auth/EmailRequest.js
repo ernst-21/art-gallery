@@ -10,7 +10,7 @@ const EmailRequest = () => {
   const [redirect, setRedirect] = useState(false);
   const {httpError, showErrorModal, error} = useHttpError();
 
-  const {mutate: emailToPassMutation, isError} = useMutation((user) => emailToPass(user).then(data => data), {
+  const {mutate: emailToPassMutation, isError} = useMutation((user) => emailToPass(user).then(res => res.json()).then(data => data), {
     onSuccess: data => {
       if (data && !data.error) {
         success(data.message);

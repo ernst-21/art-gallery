@@ -29,22 +29,36 @@ const EditProfile = () => {
 
   const { data: user, isLoading, isError } = useQuery(
     ['user', userId],
-    () => read({ userId: userId }, { t: jwt.token }).then((data) => data),
-    { onError: () => setRedirectToSignin(true) }
+    () =>
+      read({ userId: userId }, { t: jwt.token })
+        .then((res) => res.json())
+        .then((data) => data),
+    {
+      onSuccess: (data) => {
+        if (data && data.error) {
+          setRedirectToSignin(true);
+        }
+      }
+    }
   );
 
   const queryClient = useQueryClient();
 
-  const { mutate: updateUserMutation } = useMutation(
+  const { mutate: updateUserMutation, status } = useMutation(
     (user) =>
-      update({ userId: userId }, { t: jwt.token }, user).then((data) => data),
+      update({ userId: userId }, { t: jwt.token }, user)
+        .then((res) => res.json())
+        .then((data) => data),
     {
       onSuccess: (data) => {
-        queryClient.setQueryData(['user', data._id], data);
-        auth.clearJWT(() => history.push('/signin'));
-        success('Account successfully updated. Please sign in');
-      },
-      onError: (data) => console.log(data)
+        if (data && !data.error) {
+          queryClient.setQueryData(['user', data._id], data);
+          auth.clearJWT(() => history.push('/signin'));
+          success('Account successfully updated. Please sign in');
+        } else {
+          showErrorModal(data.error);
+        }
+      }
     }
   );
 
@@ -73,156 +87,164 @@ const EditProfile = () => {
     updateUserMutation(usr);
   };
 
-  if (isError) {
+  if (isError || status === 'error') {
     return <Redirect to="/info-network-error" />;
   }
 
   return (
-    <div className="form-card-container">
-      {isLoading ? (
-        <Spin />
-      ) : (
-        <Card
-          className="form-card"
-          title="Edit Profile"
-          extra={<Link to={`/user/${userId}`}>Cancel</Link>}
-        >
-          <div>
-            <p
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                fontSize: '12px'
-              }}
-            >
-              * Empty values will not overwrite your actual credentials.
-            </p>
-            <div className="upload-avatar__container">
-              {user && user.pic ? (
-                <div className="photo-icon-container">
-                  <Avatar size={110} src={user.pic} alt="avatar" />{' '}
-                  {user.pic && (
-                    <DeleteOutlined
-                      style={{ marginTop: '.4rem' }}
-                      onClick={() =>
-                        queryClient.setQueryData(['user', user._id], {
-                          ...user,
-                          pic: ''
-                        })
+    <div className="sign-section">
+      <div className="form-card-container">
+        {isLoading ? (
+          <Spin />
+        ) : (
+          <Card
+            className="form-card"
+            title="Edit Profile"
+            extra={<Link to={`/user/${userId}`}>Cancel</Link>}
+          >
+            <div>
+              <p
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  fontSize: '12px'
+                }}
+              >
+                * Empty values will not overwrite your actual credentials.
+              </p>
+              <div className="upload-avatar__container">
+                {user && user.pic ? (
+                  <div className="photo-icon-container">
+                    <Avatar size={110} src={user.pic} alt="avatar" />{' '}
+                    {user.pic && (
+                      <DeleteOutlined
+                        style={{ marginTop: '.4rem' }}
+                        onClick={() =>
+                          queryClient.setQueryData(['user', user._id], {
+                            ...user,
+                            pic: ''
+                          })
+                        }
+                      />
+                    )}
+                  </div>
+                ) : (
+                  <AvatarUpload
+                    onChange={handleImageChange}
+                    customRequest={() => uploadPic(image)}
+                    handleDelete={handleImgDelete}
+                    url={imageUrl}
+                    src={imageUrl}
+                    img={image}
+                  />
+                )}
+              </div>
+              {user && (
+                <Form
+                  name="basic"
+                  initialValues={{
+                    remember: false,
+                    name: user.name,
+                    email: user.email
+                  }}
+                  onFinish={clickSubmit}
+                >
+                  <Form.Item
+                    labelCol={{ span: 24 }}
+                    label="Username:"
+                    name="name"
+                    rules={[
+                      {
+                        required: false,
+                        message: 'Please input your username!'
                       }
-                    />
-                  )}
-                </div>
-              ) : (
-                <AvatarUpload
-                  onChange={handleImageChange}
-                  customRequest={() => uploadPic(image)}
-                  handleDelete={handleImgDelete}
-                  url={imageUrl}
-                  src={imageUrl}
-                  img={image}
-                />
+                    ]}
+                  >
+                    <Input />
+                  </Form.Item>
+                  <Form.Item
+                    labelCol={{ span: 24 }}
+                    initialValue={user ? user.email : 'hh'}
+                    name="email"
+                    label="E-mail"
+                    rules={[
+                      {
+                        type: 'email',
+                        message: 'The input is not valid E-mail!'
+                      },
+                      {
+                        required: false
+                      }
+                    ]}
+                  >
+                    <Input />
+                  </Form.Item>
+                  <Form.Item
+                    labelCol={{ span: 24 }}
+                    label="New Password:"
+                    name="password"
+                    hasFeedback
+                    rules={[
+                      {
+                        required: false
+                      },
+                      () => ({
+                        validator(_, value) {
+                          if (!value || strongPass.test(value)) {
+                            return Promise.resolve();
+                          }
+
+                          return Promise.reject(
+                            new Error(wrongPasswordMessage)
+                          );
+                        }
+                      })
+                    ]}
+                  >
+                    <Input.Password />
+                  </Form.Item>
+                  <Form.Item
+                    labelCol={{ span: 24 }}
+                    name="confirm"
+                    label="Confirm New Password"
+                    dependencies={['password']}
+                    hasFeedback
+                    rules={[
+                      {
+                        required: false
+                      },
+                      ({ getFieldValue }) => ({
+                        validator(_, value) {
+                          if (getFieldValue('password') === value) {
+                            return Promise.resolve();
+                          }
+
+                          return Promise.reject(
+                            new Error('Passwords do not match!')
+                          );
+                        }
+                      })
+                    ]}
+                  >
+                    <Input.Password />
+                  </Form.Item>
+                  <Form.Item>
+                    <div className="submit-btn-container">
+                      <Button
+                        className="submit-btn"
+                        type="primary"
+                        htmlType="submit"
+                      >
+                        Update
+                      </Button>
+                    </div>
+                  </Form.Item>
+                </Form>
               )}
             </div>
-            {user && (
-              <Form
-                name="basic"
-                initialValues={{
-                  remember: false,
-                  name: user.name,
-                  email: user.email
-                }}
-                onFinish={clickSubmit}
-              >
-                <Form.Item
-                  labelCol={{ span: 24 }}
-                  label="Username:"
-                  name="name"
-                  rules={[
-                    {
-                      required: false,
-                      message: 'Please input your username!'
-                    }
-                  ]}
-                >
-                  <Input />
-                </Form.Item>
-                <Form.Item
-                  labelCol={{ span: 24 }}
-                  initialValue={user ? user.email : 'hh'}
-                  name="email"
-                  label="E-mail"
-                  rules={[
-                    {
-                      type: 'email',
-                      message: 'The input is not valid E-mail!'
-                    },
-                    {
-                      required: false
-                    }
-                  ]}
-                >
-                  <Input />
-                </Form.Item>
-                <Form.Item
-                  labelCol={{ span: 24 }}
-                  label="New Password:"
-                  name="password"
-                  hasFeedback
-                  rules={[
-                    {
-                      required: false
-                    },
-                    () => ({
-                      validator(_, value) {
-                        if (!value || strongPass.test(value)) {
-                          return Promise.resolve();
-                        }
-
-                        return Promise.reject(new Error(wrongPasswordMessage));
-                      }
-                    })
-                  ]}
-                >
-                  <Input.Password />
-                </Form.Item>
-                <Form.Item
-                  labelCol={{ span: 24 }}
-                  name="confirm"
-                  label="Confirm New Password"
-                  dependencies={['password']}
-                  hasFeedback
-                  rules={[
-                    {
-                      required: false
-                    },
-                    ({ getFieldValue }) => ({
-                      validator(_, value) {
-                        if (getFieldValue('password') === value) {
-                          return Promise.resolve();
-                        }
-
-                        return Promise.reject(
-                          new Error('Passwords do not match!')
-                        );
-                      }
-                    })
-                  ]}
-                >
-                  <Input.Password />
-                </Form.Item>
-                <Form.Item>
-                  <div className="submit-btn-container">
-                    <Button className='submit-btn' type="primary" htmlType="submit">
-                      Update
-                    </Button>
-                  </div>
-                </Form.Item>
-              </Form>
-            )}
-          </div>
-        </Card>
-      )}
+          </Card>
+        )}
+      </div>
     </div>
   );
 };
