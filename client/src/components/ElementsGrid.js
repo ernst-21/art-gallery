@@ -31,8 +31,9 @@ const ElementsGrid = (props) => {
             />
           ) : (
             <ArtistCard
-              key={item.id}
+              key={item._id}
               name={item.name}
+              discipline={item.discipline.charAt(0).toUpperCase() + item.discipline.slice(1)}
               pic={item.pic}
               country={item.country}
               likes={item.likes}

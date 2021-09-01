@@ -15,6 +15,7 @@ const ArtistSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  discipline: {type:String},
   country: {
     type: String,
     required: true

@@ -9,7 +9,7 @@ const ArtistCard = (props) => {
       style={{padding: '1em 1em 0 1em'}}
       cover={<img alt={props.name} src={props.pic} />}
     >
-      <Meta title={props.name} description={['Name: ' + props.name, <br key={1}/>,'Country: ' + props.country, <br key={2}/>, 'likes: ' + props.likes]} />
+      <Meta title={props.name} description={[props.discipline ,<br key={1}/>,'Country: ' + props.country, <br key={2}/>, 'likes: ' + props.likes]} />
     </Card>
   );
 };
