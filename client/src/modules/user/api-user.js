@@ -14,18 +14,6 @@ const create = async (user) => {
   }
 };
 
-const list = async (signal) => {
-  try {
-    let response = await fetch('http://localhost:5000/api/users/', {
-      method: 'GET',
-      signal: signal
-    });
-    return await response.json();
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 const read = async (params, credentials) => {
   try {
     let response = await fetch(
@@ -119,4 +107,4 @@ const resetPass = async (params, user) => {
   }
 };
 
-export { create, list, read, update, remove, emailToPass, resetPass };
+export { create, read, update, remove, emailToPass, resetPass };

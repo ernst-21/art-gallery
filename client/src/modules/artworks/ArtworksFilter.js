@@ -3,7 +3,7 @@
 const ArtworksFilter = () => {
   return (
     <div className='artworks-filter__container'>
-      Filter Here
+      <h1>Filter Here</h1>
     </div>
   );
 };

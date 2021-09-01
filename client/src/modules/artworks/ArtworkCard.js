@@ -14,7 +14,7 @@ const ArtworkCard = (props) => {
         <ShoppingCartOutlined key="addToCart" />
       ]}
     >
-      <Meta title={props.name} description={['Artist: ' + props.artist, <br key={1}/>,'Price: $' + props.price, <br key={2}/>, 'Gallery: ' + props.gallery]} />
+      <Meta title={props.name} description={[props.category ,<br key={1}/>,'Artist: ' + props.artist, <br key={2}/>,'Price: $' + props.price, <br key={3}/>, 'Gallery: ' + props.gallery]} />
     </Card>
   );
 };

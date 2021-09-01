@@ -9,19 +9,19 @@ const ArtworksCategories = (props) => {
   return (
     <Menu>
       <Menu.Item>
-        <NavLink style={isActive(props.history, '/artworks')} to={'/artworks'}>All</NavLink>
+        <NavLink style={isActive(props.history, '/artworks/category/all')} to={'/artworks/category/all'}>All</NavLink>
       </Menu.Item>
       <Menu.Item>
-        <NavLink style={isActive(props.history, '/artworks/paintings')} to={'/artworks/paintings'}>Paintings</NavLink>
+        <NavLink style={isActive(props.history, '/artworks/category/painting')} to={'/artworks/category/painting'}>Painting</NavLink>
       </Menu.Item>
       <Menu.Item>
-        <NavLink style={isActive(props.history, '/artworks/photography')} to={'/artworks/photography'}>Photography</NavLink>
+        <NavLink style={isActive(props.history, '/artworks/category/photography')} to={'/artworks/category/photography'}>Photography</NavLink>
       </Menu.Item>
       <Menu.Item>
-        <NavLink style={isActive(props.history, '/artworks/prints')} to={'/artworks/prints'}>Prints</NavLink>
+        <NavLink style={isActive(props.history, '/artworks/category/print')} to={'/artworks/category/print'}>Print</NavLink>
       </Menu.Item>
       <Menu.Item>
-        <NavLink style={isActive(props.history, '/artworks/sculpture')} to={'/artworks/sculpture'}>Sculpture</NavLink>
+        <NavLink style={isActive(props.history, '/artworks/category/sculpture')} to={'/artworks/category/sculpture'}>Sculpture</NavLink>
       </Menu.Item>
     </Menu>
   );

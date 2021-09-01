@@ -21,10 +21,11 @@ const ElementsGrid = (props) => {
         {props.elements.map((item) =>
           props.artworks === true ? (
             <ArtworkCard
-              key={item.id}
+              key={item._id}
               url={item.url}
               price={item.price}
               name={item.name}
+              category={item.category.charAt(0).toUpperCase() + item.category.slice(1)}
               artist={item.artist}
               gallery={item.gallery}
             />

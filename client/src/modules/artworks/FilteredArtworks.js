@@ -1,12 +1,11 @@
 import ElementsGrid from '../../components/ElementsGrid';
-import { artworks } from '../../mockData';
 
-const FilteredArtworks = () => {
+const FilteredArtworks = (props) => {
   return (
     <div className="section filtered-artworks__section">
       <ElementsGrid
-        title="All Categories" // change this dynamically
-        elements={artworks} // and this
+        title={props.title} // change this dynamically
+        elements={props.artworks} // and this
         artworks={true}
       />
     </div>

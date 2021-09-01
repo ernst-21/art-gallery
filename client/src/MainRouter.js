@@ -4,7 +4,6 @@ import Home from './layout/Content/Home/Home';
 import Artworks from './layout/Content/Artworks/Artworks';
 import Artists from './layout/Content/Artists/Artists';
 import Galleries from './layout/Content/Galleries/Galleries';
-import Users from './modules/user/Users';
 import Signup from './modules/user/Signup';
 import Signin from './modules/auth/Signin';
 import EditProfile from './modules/user/EditProfile';
@@ -20,10 +19,9 @@ const MainRouter = () => {
     <div className="site-layout-background">
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/artworks" component={Artworks} />
         <Route path="/artists" component={Artists} />
+        <Route path="/artworks/category/:artCategory" component={Artworks} />
         <Route path="/galleries" component={Galleries} />
-        <Route path="/users" component={Users} />
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
         <Route path="/reset/edit/:token" component={ResetPassword} />

@@ -21,7 +21,7 @@ const MenuItems = (props) => {
       </li>
       {props.className === 'links-container_vertical' ? (<li onClick={props.onClick}>
         <NavLink
-          style={isActive(props.history, '/artworks')} to="/artworks"
+          style={isActive(props.history, '/artworks/category/all')} to="/artworks/category/all"
         >
           Artworks
         </NavLink>

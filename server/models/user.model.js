@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const mongoose = require('mongoose');
+const {ObjectId} = mongoose.Schema.Types;
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -14,6 +15,9 @@ const UserSchema = new mongoose.Schema({
     match: [/.+\@.+\..+/, 'Please fill a valid email address'],
     required: 'Email is required'
   },
+  favoriteArtworks : [{type: ObjectId, ref: 'Artwork'}],
+  favoriteArtists : [{type: ObjectId, ref: 'Artist'}],
+  purchased : [{type: ObjectId, ref: 'Artwork'}],
   resetToken: String,
   expireToken: Date,
   pic: {type: String},
