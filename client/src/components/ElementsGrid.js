@@ -28,6 +28,7 @@ const ElementsGrid = (props) => {
               name={item.name}
               category={item.category.charAt(0).toUpperCase() + item.category.slice(1)}
               artist={item.artist}
+              artist_Id={item.artist_Id}
               gallery={item.gallery}
             />
           ) : (

@@ -18,7 +18,8 @@ const ArtistProfile = () => {
     () =>
       readArtist({ artistId: artistId })
         .then((res) => res.json())
-        .then((data) => data));
+        .then((data) => data)
+  );
 
   const artworks = artist?.artworks;
 
@@ -60,12 +61,7 @@ const ArtistProfile = () => {
             </div>
             <div className="artist-info__container">
               <h1>{artist.name}</h1>
-              <p className="artist-info__description">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut
-                delectus harum non, perspiciatis recusandae veniam? Accusantium
-                cumque dignissimos esse exercitationem explicabo, facilis ipsam
-                libero pariatur, possimus, reprehenderit sint vero voluptate.
-              </p>
+              <p className="artist-info__description">{artist.about}</p>
               <h4>
                 <em>likes: {artist.likes}</em>
               </h4>

@@ -11,6 +11,7 @@ const ArtistSchema = new mongoose.Schema({
     type: Boolean,
     required: true
   },
+  about: {type: String, required: true},
   pic: {
     type: String,
     required: true

@@ -3,7 +3,7 @@ const errorHandler = require('../helpers/dbErrorHandler');
 
 const listArtworks = async (req, res) => {
   try {
-    let artworks = await Artwork.find().select('name artist category price _id gallery tags colors featured orientation url voters size purchased');
+    let artworks = await Artwork.find().select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     res.json(artworks);
   } catch (err) {
     return res.status(400).json({
@@ -17,9 +17,9 @@ const listByCategory = async (req, res) => {
   let artworks;
   try {
     if (category === 'all') {
-      artworks = await Artwork.find().select('name artist category price _id gallery tags colors featured orientation url voters size purchased');
+      artworks = await Artwork.find().select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     } else {
-      artworks = await Artwork.find({ category: category }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased');
+      artworks = await Artwork.find({ category: category }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     }
     res.json(artworks);
   } catch (err) {
@@ -84,7 +84,7 @@ const unVoteArtwork = async (req, res) => {
 const artistArtworks = async (req, res) => {
   let artistWork = req.body.artistWork;
   try {
-    let foundArtworks = await Artwork.find({ '_id': { $in: artistWork } }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased');
+    let foundArtworks = await Artwork.find({ '_id': { $in: artistWork } }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     res.json(foundArtworks);
   } catch (err) {
     return res.status(422).json({ error: err });

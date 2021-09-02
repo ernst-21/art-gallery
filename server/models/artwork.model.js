@@ -10,6 +10,7 @@ const ArtworkSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  artist_Id: {type: String, required: true},
   description: {
     type: String,
     required: true

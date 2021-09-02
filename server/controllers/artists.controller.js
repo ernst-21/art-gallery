@@ -17,9 +17,9 @@ const listByDiscipline = async (req, res) => {
   let artists;
   try {
     if (discipline === 'all') {
-      artists = await Artist.find().select('name artworks category _id discipline likes recommended pic country');
+      artists = await Artist.find().select('name artworks category _id discipline likes recommended pic country about');
     } else {
-      artists = await Artist.find({discipline: discipline}).select('name artworks category _id discipline likes recommended pic country');
+      artists = await Artist.find({discipline: discipline}).select('name artworks category _id discipline likes recommended pic country about');
     }
     res.json(artists);
   } catch (err) {
