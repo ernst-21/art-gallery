@@ -1,4 +1,4 @@
-import React from 'react';
+import {memo} from 'react';
 import { Carousel } from 'antd';
 import { forCarousel } from '../../mockData';
 
@@ -24,4 +24,4 @@ const ArtworksCarousel = () => {
   );
 };
 
-export default ArtworksCarousel;
+export default memo(ArtworksCarousel);

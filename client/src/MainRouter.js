@@ -13,13 +13,14 @@ import ResetPassword from './modules/auth/ResetPassword';
 import EmailRequest from './modules/auth/EmailRequest';
 import InfoSuccess from './modules/user/InfoSuccess';
 import InfoError from './components/InfoError';
+import ArtistProfile from './modules/artists/ArtistProfile';
 
 const MainRouter = () => {
   return (
     <div className="site-layout-background">
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/artists" component={Artists} />
+        <Route exact path="/artists" component={Artists} />
         <Route path="/artworks/category/:artCategory" component={Artworks} />
         <Route path="/galleries" component={Galleries} />
         <Route path="/signup" component={Signup} />
@@ -30,6 +31,7 @@ const MainRouter = () => {
         <Route path="/info-network-error" component={InfoError} />
         <PrivateRoute path="/user/edit/:userId" component={EditProfile} />
         <Route path="/user/:userId" component={Profile} />
+        <Route path="/artists/:artistId" component={ArtistProfile} />
       </Switch>
     </div>
   );

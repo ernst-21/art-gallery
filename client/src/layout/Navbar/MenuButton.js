@@ -1,7 +1,7 @@
 import React, { useState, memo } from 'react';
 import SideDrawer from '../../components/SideDrawer';
 import { Grid } from 'antd';
-import { MenuOutlined } from '@ant-design/icons';
+import {AiOutlineMenu} from 'react-icons/ai';
 import MenuItems from './MenuItems';
 
 const { useBreakpoint } = Grid;
@@ -16,7 +16,7 @@ const MenuButton = (props) => {
 
   return (
     <div>
-      <MenuOutlined
+      <AiOutlineMenu
         onClick={() => setCollapsed(true)}
         className="hamburger-menu"
       />

@@ -5,7 +5,7 @@ const artistCtrl = require('../controllers/artists.controller')
 const router = express.Router();
 
 router.route('/api/artists').get(artistCtrl.listArtists);
-router.route('/api/artists/:discipline').get(artistCtrl.listByDiscipline);
+router.route('/api/artists/artist/:discipline').get(artistCtrl.listByDiscipline);
 
 router.route('/api/artists/like/:artistId').put(authCtrl.requireSignin, artistCtrl.likeArtist);
 

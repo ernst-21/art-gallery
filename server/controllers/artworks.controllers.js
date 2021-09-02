@@ -19,7 +19,7 @@ const listByCategory = async (req, res) => {
     if (category === 'all') {
       artworks = await Artwork.find().select('name artist category price _id gallery tags colors featured orientation url voters size purchased');
     } else {
-      artworks = await Artwork.find({category: category}).select('name artist category price _id gallery tags colors featured orientation url voters size purchased');
+      artworks = await Artwork.find({ category: category }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased');
     }
     res.json(artworks);
   } catch (err) {
@@ -81,9 +81,20 @@ const unVoteArtwork = async (req, res) => {
   });
 };
 
+const artistArtworks = async (req, res) => {
+  let artistWork = req.body.artistWork;
+  try {
+    let foundArtworks = await Artwork.find({ '_id': { $in: artistWork } }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased');
+    res.json(foundArtworks);
+  } catch (err) {
+    return res.status(422).json({ error: err });
+  }
+};
+
 exports.listArtworks = listArtworks;
 exports.listByCategory = listByCategory;
 exports.artworkByID = artworkByID;
 exports.readArtwork = readArtwork;
 exports.voteArtwork = voteArtwork;
 exports.unVoteArtwork = unVoteArtwork;
+exports.artistArtworks = artistArtworks;

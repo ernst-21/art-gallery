@@ -38,10 +38,21 @@ const unVoteArtwork = async (params, credentials, user) =>
     body: JSON.stringify(user)
   });
 
+const artistArtworks = async (artistWork) =>
+  await fetch('http://localhost:5000/api/artworks/artistArtworks', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(artistWork)
+  });
+
 export {
   listArtworks,
   readArtwork,
   voteArtwork,
   unVoteArtwork,
-  listArtworksByCategory
+  listArtworksByCategory,
+  artistArtworks
 };

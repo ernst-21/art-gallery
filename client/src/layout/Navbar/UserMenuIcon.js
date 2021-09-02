@@ -1,7 +1,7 @@
 import React from 'react';
 import MenuDropDown from './MenuDropDown';
 import { Menu } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import {BiUser} from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
 import auth from '../../modules/auth/auth-helper';
 import SignoutBtn from '../../modules/auth/Signout';
@@ -26,12 +26,11 @@ const UserMenu = (props) => {
   );
 };
 
-
 const UserMenuIcon = (props) => {
   return (
     <MenuDropDown className='user-dropdown' overlay={<UserMenu history={props.history} />} placement="bottomCenter">
       <a onClick={(e) => e.preventDefault()}>
-        <UserOutlined style={{fontSize: '18px'}} />
+        <BiUser style={{fontSize: '22px', marginTop: '1.5rem'}} />
       </a>
     </MenuDropDown>
   );

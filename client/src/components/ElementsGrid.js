@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 import ArtworkCard from '../modules/artworks/ArtworkCard';
 import ArtistCard from '../modules/artists/ArtistCard';
 import Masonry from 'react-masonry-css';
@@ -30,14 +31,17 @@ const ElementsGrid = (props) => {
               gallery={item.gallery}
             />
           ) : (
-            <ArtistCard
-              key={item._id}
-              name={item.name}
-              discipline={item.discipline.charAt(0).toUpperCase() + item.discipline.slice(1)}
-              pic={item.pic}
-              country={item.country}
-              likes={item.likes}
-            />
+            <Link to={'/artists/' + item._id}>
+              <ArtistCard
+                key={item._id}
+                name={item.name}
+                discipline={item.discipline.charAt(0).toUpperCase() + item.discipline.slice(1)}
+                pic={item.pic}
+                country={item.country}
+                likes={item.likes}
+              />
+            </Link>
+
           )
         )}
       </Masonry>

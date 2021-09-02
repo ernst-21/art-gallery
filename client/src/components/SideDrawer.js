@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 import { Drawer } from 'antd';
-import {CloseOutlined} from '@ant-design/icons';
+import { MdClose } from 'react-icons/md';
 
 const SideDrawer = ({component, isSideDrawerOpen, onDrawerClose, width, placement, title, drawerStyle}) => {
   return (
@@ -11,7 +11,7 @@ const SideDrawer = ({component, isSideDrawerOpen, onDrawerClose, width, placemen
         width={width}
         placement={placement}
         closable={true}
-        closeIcon={<CloseOutlined />}
+        closeIcon={<MdClose />}
         onClose={onDrawerClose}
         visible={isSideDrawerOpen}
       >{component}</Drawer>

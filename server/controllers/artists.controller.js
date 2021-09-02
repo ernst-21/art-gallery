@@ -34,13 +34,13 @@ const artistByID = async (req, res, next, id) => {
     let artist = await Artist.findById(id);
     if (!artist)
       return res.status('400').json({
-        error: 'User not found'
+        error: 'Artist not found'
       });
     req.profile = artist;
     next();
   } catch (err) {
     return res.status('400').json({
-      error: 'Could not retrieve artwork'
+      error: 'Could not retrieve artist'
     });
   }
 };

@@ -5,7 +5,7 @@ const listArtists = async () =>
 
 const listArtistsByDiscipline = async (params) =>
   await fetch(
-    'http://localhost:5000/api/artists/' + params.discipline,
+    'http://localhost:5000/api/artists/artist/' + params.discipline,
     {
       method: 'GET'
     }
