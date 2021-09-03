@@ -18,7 +18,7 @@ const ArtworkCard = (props) => {
         <AiOutlineShoppingCart className="artwork-card__icon" key="addToCart" />
       ]}
     >
-      <h3>{props.name}</h3>
+      <h3><Link style={{color: '#3b3b3b'}} to={'/artworks/' + props.id}>{props.name}</Link></h3>
       <p className="card-text card-text__category">{props.category}</p>
       <p className="card-text">
         Artist: <Link to={'/artists/' + props.artist_Id}>{props.artist}</Link>

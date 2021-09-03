@@ -14,6 +14,7 @@ import EmailRequest from './modules/auth/EmailRequest';
 import InfoSuccess from './modules/user/InfoSuccess';
 import InfoError from './components/InfoError';
 import ArtistProfile from './modules/artists/ArtistProfile';
+import ArtworkPage from './modules/artworks/ArtworkPage';
 
 const MainRouter = () => {
   return (
@@ -32,6 +33,7 @@ const MainRouter = () => {
         <PrivateRoute path="/user/edit/:userId" component={EditProfile} />
         <Route path="/user/:userId" component={Profile} />
         <Route path="/artists/:artistId" component={ArtistProfile} />
+        <Route path="/artworks/:artworkId" component={ArtworkPage} />
       </Switch>
     </div>
   );

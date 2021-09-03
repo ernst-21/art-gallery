@@ -23,6 +23,7 @@ const ElementsGrid = (props) => {
           props.artworks === true ? (
             <ArtworkCard
               key={item._id}
+              id={item._id}
               url={item.url}
               price={item.price}
               name={item.name}

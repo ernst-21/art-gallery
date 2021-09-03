@@ -13,6 +13,8 @@ router.route('/api/artworks/unvote/:artworkId').put(authCtrl.requireSignin, artw
 
 router.route('/api/artworks/artistArtworks').post(artworkCtrl.artistArtworks);
 
+router.route('/api/artworks/similarArtworks').post(artworkCtrl.similarArtworks);
+
 router.param('artworkId', artworkCtrl.artworkByID);
 
 router.route('/api/artworks/:artworkId').get(artworkCtrl.readArtwork);

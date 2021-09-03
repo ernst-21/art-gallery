@@ -1,0 +1,49 @@
+@import './variables';
+
+.artwork-data {
+  display: block;
+  .artwork-data__container {
+    display: flex;
+    flex-direction: column;
+    padding: 2em 1em;
+    justify-content: space-between;
+    .artwork-photo__container {
+      margin-bottom: 1rem;
+    }
+    .artwork-info__container {
+      display: block;
+      height: 45%;
+      .artwork-info__description {
+        font-family: 'Lato', sans-serif;
+        font-size: 1rem;
+      }
+      .artist-info__social-icons {
+        margin-top: 2rem;
+      }
+    }
+  }
+  .similar-artworks__container {
+    padding: 2em .5em;
+    background-color: @background-gray;
+  }
+}
+
+@media (min-width: 768px) {
+  .artwork-data .artwork-data__container {
+    padding: 3em;
+    flex-direction: row;
+    justify-content: space-between;
+    .artwork-photo__container {
+      margin-bottom: 0;
+    }
+    .artwork-photo__container, .artwork-info__container {
+      width: 45%;
+    }
+    .artwork-info__container {
+      font-size: 1.2rem;
+    }
+  }
+  .artwork-data .similar-artworks__container {
+    padding: 3em;
+  }
+}
