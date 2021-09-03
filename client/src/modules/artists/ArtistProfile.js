@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import ArtistProfileCard from './ArtistProfileCard';
 import { Button } from 'antd';
 import { useQuery, useMutation } from 'react-query';
@@ -18,10 +18,10 @@ const ArtistProfile = () => {
     () =>
       readArtist({ artistId: artistId })
         .then((res) => res.json())
-        .then((data) => data)
+        .then((data) => data), {
+      onSuccess: (data) => artistWorkMutation({ artistWork: data.artworks })
+    }
   );
-
-  const artworks = artist?.artworks;
 
   const { mutate: artistWorkMutation, status } = useMutation(
     (art) =>
@@ -34,12 +34,6 @@ const ArtistProfile = () => {
       }
     }
   );
-
-  useEffect(() => {
-    if (artist) {
-      artistWorkMutation({ artistWork: artworks });
-    }
-  }, [artist, artistWorkMutation, artworks]);
 
   if (isError || status === 'error') {
     return <Redirect to="/info-network-error" />;

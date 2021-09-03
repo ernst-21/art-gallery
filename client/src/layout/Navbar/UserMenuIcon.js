@@ -11,15 +11,12 @@ const UserMenu = (props) => {
   return (
     auth.isAuthenticated() &&
     <Menu>
-      <Menu.Item>
+      <Menu.Item key='1'>
         <NavLink style={isActive(props.history, '/user/' + auth.isAuthenticated().user._id)} to={'/user/' + auth.isAuthenticated().user._id}>
           My Profile
         </NavLink>
       </Menu.Item>
-      <Menu.Item>
-        <NavLink style={isActive(props.history, '/artworks')} to={'/artworks'}>My Artworks</NavLink>
-      </Menu.Item>
-      <Menu.Item>
+      <Menu.Item key='2'>
         <SignoutBtn />
       </Menu.Item>
     </Menu>

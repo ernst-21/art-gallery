@@ -31,11 +31,12 @@ const ElementsGrid = (props) => {
               artist={item.artist}
               artist_Id={item.artist_Id}
               gallery={item.gallery}
+              voters={item.voters}
+              artworkPage={false}
             />
           ) : (
-            <Link to={'/artists/' + item._id}>
+            <Link key={item._id} to={'/artists/' + item._id}>
               <ArtistCard
-                key={item._id}
                 name={item.name}
                 discipline={item.discipline.charAt(0).toUpperCase() + item.discipline.slice(1)}
                 pic={item.pic}

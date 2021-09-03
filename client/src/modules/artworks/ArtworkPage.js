@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import { readArtwork, similarArtworks } from './api-artworks';
 import { useQuery, useMutation } from 'react-query';
 import { Redirect, useParams } from 'react-router-dom';
@@ -6,7 +6,7 @@ import SpinLoader from '../../components/SpinLoader';
 import { Button } from 'antd';
 import ArtworkTags from './ArtworkTags';
 import {Link} from 'react-router-dom';
-import ArtworkPageCard from './ArtworkPageCard';
+import ArtworkCard from './ArtworkCard';
 import ElementsGrid from '../../components/ElementsGrid';
 
 const ArtworkPage = () => {
@@ -18,7 +18,9 @@ const ArtworkPage = () => {
     () =>
       readArtwork({ artworkId: artworkId })
         .then((res) => res.json())
-        .then((data) => data)
+        .then((data) => data), {
+      onSuccess: (data) => similarWorkMutation({ tags: data.tags, artworkId: artworkId })
+    }
   );
   const tags = artwork?.tags;
 
@@ -34,12 +36,6 @@ const ArtworkPage = () => {
     }
   );
 
-  useEffect(() => {
-    if (artwork) {
-      similarWorkMutation({ tags: tags, artworkId: artworkId });
-    }
-  }, [artwork, similarWorkMutation, tags, artworkId]);
-
   if (isError || status === 'error') {
     return <Redirect to="/info-network-error" />;
   }
@@ -52,10 +48,13 @@ const ArtworkPage = () => {
         <>
           <div className="artwork-data__container">
             <div className="artwork-photo__container">
-              <ArtworkPageCard
+              <ArtworkCard
+                id={artwork._id}
                 style={{ fontSize: '2rem' }}
                 url={artwork.url}
                 name={artwork.name}
+                artworkPage={true}
+                voters={artwork.voters}
               />
             </div>
             <div className="artwork-info__container">
@@ -66,8 +65,8 @@ const ArtworkPage = () => {
               <p className="artwork-info__description">Size: <em>{artwork.size}</em></p>
               <p className="artwork-info__description">Orientation: <em>{artwork.orientation}</em></p>
               <ArtworkTags tags={tags} />
-              <h4>
-                <em>likes: {artwork.likes}</em>
+              <h4 style={{marginTop: '1rem'}}>
+                <em>likes: {artwork.voters.length}</em>
               </h4>
               <p className="artwork-info__description">Price: ${artwork.price}</p>
               <Button size="large" style={{ marginTop: '1rem' }} type="primary">
