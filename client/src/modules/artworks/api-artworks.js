@@ -48,6 +48,16 @@ const artistArtworks = async (artistWork) =>
     body: JSON.stringify(artistWork)
   });
 
+const userArtworks = async (userId) =>
+  await fetch('http://localhost:5000/api/artworks/userArtworks', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userId)
+  });
+
 const similarArtworks = async (similarPlusId) =>
   await fetch('http://localhost:5000/api/artworks/similarArtworks', {
     method: 'POST',
@@ -65,5 +75,6 @@ export {
   unVoteArtwork,
   listArtworksByCategory,
   artistArtworks,
+  userArtworks,
   similarArtworks
 };

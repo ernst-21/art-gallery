@@ -91,6 +91,16 @@ const artistArtworks = async (req, res) => {
   }
 };
 
+const userArtworks = async (req, res) => {
+  let userId = req.body.userId;
+  try {
+    let foundArtworks = await Artwork.find({ 'voters': { $in: userId } }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
+    res.json(foundArtworks);
+  } catch (err) {
+    return res.status(422).json({ error: err });
+  }
+};
+
 const similarArtworks = async (req, res) => {
   let similar = req.body.tags;
   let artworkId = req.body.artworkId;
@@ -110,3 +120,4 @@ exports.voteArtwork = voteArtwork;
 exports.unVoteArtwork = unVoteArtwork;
 exports.artistArtworks = artistArtworks;
 exports.similarArtworks = similarArtworks;
+exports.userArtworks = userArtworks;

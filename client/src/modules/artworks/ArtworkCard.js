@@ -37,11 +37,7 @@ const ArtworkCard = forwardRef((props, ref) => {
         .then((data) => data),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('artworks');
-        queryClient.invalidateQueries('featured');
-        queryClient.invalidateQueries('artwork');
-        queryClient.invalidateQueries('galleries');
-        queryClient.invalidateQueries('artist');
+        queryClient.invalidateQueries({exact: true});
       }
     }
   );
@@ -53,11 +49,7 @@ const ArtworkCard = forwardRef((props, ref) => {
         .then((data) => data),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('artworks');
-        queryClient.invalidateQueries('featured');
-        queryClient.invalidateQueries('artwork');
-        queryClient.invalidateQueries('galleries');
-        queryClient.invalidateQueries('artist');
+        queryClient.invalidateQueries({exact: true});
       }
     }
   );
