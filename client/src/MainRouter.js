@@ -15,6 +15,7 @@ import InfoSuccess from './modules/user/InfoSuccess';
 import InfoError from './components/InfoError';
 import ArtistProfile from './modules/artists/ArtistProfile';
 import ArtworkPage from './modules/artworks/ArtworkPage';
+import StoriesPage from './modules/artworks/StoriesPage';
 
 const MainRouter = () => {
   return (
@@ -34,6 +35,7 @@ const MainRouter = () => {
         <Route path="/user/:userId" component={Profile} />
         <Route path="/artists/:artistId" component={ArtistProfile} />
         <Route path="/artworks/:artworkId" component={ArtworkPage} />
+        <Route exact path="/artwork/carousel/stories" component={StoriesPage} />
       </Switch>
     </div>
   );

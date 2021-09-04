@@ -1,4 +1,5 @@
-import {memo} from 'react';
+import { memo } from 'react';
+import { Link } from 'react-router-dom';
 import { Carousel } from 'antd';
 import { forCarousel } from '../../mockData';
 
@@ -15,10 +16,16 @@ const ArtworksCarousel = () => {
   return (
     <Carousel {...settings}>
       {forCarousel.map((item, i) => (
-        <div className="carousel-image-container" key={i}>
-          <img className="carousel-image" src={item.url} alt="carousel-photo" />
-          <span className="promo-text">{item.promo}</span>
-        </div>
+        <Link to='/artwork/carousel/stories' key={i}>
+          <div className="carousel-image-container">
+            <img
+              className="carousel-image"
+              src={item.url}
+              alt="carousel-photo"
+            />
+            <span className="promo-text">{item.promo}</span>
+          </div>
+        </Link>
       ))}
     </Carousel>
   );

@@ -3,15 +3,12 @@ import auth from './auth-helper';
 import { Link, Redirect } from 'react-router-dom';
 import { signin } from './api-auth.js';
 import { useHttpError } from '../../hooks/http-hook';
-import { Form, Input, Button, Checkbox, Card, Grid } from 'antd';
+import { Form, Input, Button, Checkbox, Card } from 'antd';
 import { useMutation } from 'react-query';
 
-const { useBreakpoint } = Grid;
-
-const Signin = (props) => {
+const Signin = ({ handleClose, isModalVisible }) => {
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
   const { error, showErrorModal, httpError } = useHttpError();
-  const screens = useBreakpoint();
 
   const { mutate: signInMutation, isError } = useMutation(
     (user) =>
@@ -24,8 +21,8 @@ const Signin = (props) => {
           auth.authenticate(data, () => {
             setRedirectToReferrer(true);
           });
+          if (isModalVisible) return handleClose();
         } else if (data && data.error) {
-          console.log(isError);
           showErrorModal(data.error);
         }
       }
@@ -47,14 +44,16 @@ const Signin = (props) => {
     signInMutation(user);
   };
 
-  const { from } = props.location.state || {
-    from: {
-      pathname: '/'
+  const pathToDirect = (path) => {
+    if (path === '/signin') {
+      return '/';
+    } else {
+      return path;
     }
   };
 
   if (redirectToReferrer) {
-    return <Redirect to={from} />;
+    return <Redirect to={pathToDirect(window.location.pathname)} />;
   }
 
   if (isError) {
@@ -65,7 +64,7 @@ const Signin = (props) => {
     <div className="sign-section">
       <div className="form-card-container">
         <Card
-          className={screens.xs === true ? 'drawer-card' : 'form-card'}
+          className="form-card"
           title="Login"
           extra={
             <Link to="/signup">
