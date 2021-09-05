@@ -25,7 +25,7 @@ const ArtistCard = (props) => {
           <br key={1} />,
           'Country: ' + props.country,
           <br key={2} />,
-          'likes: ' + props.likes
+          'likes: ' + props.likes.length
         ]}
       />
     </Card>

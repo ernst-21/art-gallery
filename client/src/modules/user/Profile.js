@@ -7,6 +7,7 @@ import { UserOutlined, EditOutlined } from '@ant-design/icons';
 import DeleteUser from './DeleteUser';
 import { useQuery, useMutation } from 'react-query';
 import { userArtworks } from '../artworks/api-artworks';
+import {userArtists} from '../artists/api-artists';
 import SpinLoader from '../../components/SpinLoader';
 import ElementsGrid from '../../components/ElementsGrid';
 
@@ -16,6 +17,7 @@ const Profile = () => {
   const jwt = auth.isAuthenticated();
   const userId = useParams().userId;
   const [profileArtworks, setProfileArtworks] = useState([]);
+  const [profileArtists, setProfileArtists] = useState([]);
 
   const { data: user, isLoading, isError } = useQuery(
     ['user', userId],
@@ -24,11 +26,14 @@ const Profile = () => {
         .then((res) => res.json())
         .then((data) => data),
     {
-      onSuccess: (data) => userArtworksMutation({ userId: data._id })
+      onSuccess: (data) => {
+        userArtworksMutation({ userId: data._id });
+        userArtistsMutation({ userId: data._id });
+      }
     }
   );
 
-  const { mutate: userArtworksMutation, status } = useMutation(
+  const { mutate: userArtworksMutation, status: mutationStatus } = useMutation(
     (user) =>
       userArtworks(user)
         .then((res) => res.json())
@@ -38,11 +43,21 @@ const Profile = () => {
     }
   );
 
+  const { mutate: userArtistsMutation, status } = useMutation(
+    (user) =>
+      userArtists(user)
+        .then((res) => res.json())
+        .then((data) => data),
+    {
+      onSuccess: (data) => setProfileArtists(data)
+    }
+  );
+
   if (!auth.isAuthenticated()) {
     return <Redirect to="/signin" />;
   }
 
-  if (isError || status === ' error') {
+  if (isError || status === ' error' || mutationStatus === 'error' ) {
     return <Redirect to="/info-network-error" />;
   }
 
@@ -72,6 +87,15 @@ const Profile = () => {
                   artworks={true}
                   elements={profileArtworks}
                   title="My favorite artworks"
+                />
+              </div>
+            )}
+            {profileArtists.length > 0 && (
+              <div className="my-artists__container">
+                <ElementsGrid
+                  artworks={false}
+                  elements={profileArtists}
+                  title="My favorite artists"
                 />
               </div>
             )}

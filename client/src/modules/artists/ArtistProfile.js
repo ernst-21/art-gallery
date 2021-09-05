@@ -48,16 +48,18 @@ const ArtistProfile = () => {
           <div className="artist-data__container">
             <div className="artist-photo__container">
               <ArtistProfileCard
-                style={{ fontSize: '2rem' }}
+                id={artistId}
                 pic={artist.pic}
                 discipline={artist.discipline}
+                likes={artist.likes}
               />
             </div>
             <div className="artist-info__container">
               <h1>{artist.name}</h1>
               <p className="artist-info__description">{artist.about}</p>
+              <p className="artist-info__description">Country: {artist.country}</p>
               <h4>
-                <em>likes: {artist.likes}</em>
+                <em>likes: {artist.likes.length}</em>
               </h4>
               <Button size="large" style={{ marginTop: '1rem' }} type="primary">
                 <a href="mailto:artist@gmail.com">Get in Contact</a>

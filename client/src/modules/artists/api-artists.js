@@ -38,10 +38,21 @@ const unlikeArtist = async (params, credentials, user) =>
     body: JSON.stringify(user)
   });
 
+const userArtists = async (userId) =>
+  await fetch('http://localhost:5000/api/artists/profile/userArtists', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userId)
+  });
+
 export {
   likeArtist,
   readArtist,
   listArtists,
   unlikeArtist,
-  listArtistsByDiscipline
+  listArtistsByDiscipline,
+  userArtists
 };

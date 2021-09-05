@@ -3,7 +3,7 @@ const errorHandler = require('../helpers/dbErrorHandler');
 
 const listArtworks = async (req, res) => {
   try {
-    let artworks = await Artwork.find().select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
+    let artworks = await Artwork.find({'purchased': { $in: false }}).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     res.json(artworks);
   } catch (err) {
     return res.status(400).json({

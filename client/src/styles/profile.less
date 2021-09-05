@@ -11,14 +11,16 @@
     margin: 3rem auto;
     text-align: center;
   }
-  .my-artworks__container {
+  .my-artworks__container, .my-artists__container {
     padding: 2em .5em;
+  }
+  .my-artworks__container {
     background-color: @background-gray;
   }
 }
 
 @media(min-width: 768px) {
-  .profile-card-container .my-artworks__container {
+  .profile-card-container .my-artworks__container,  .profile-card-container .my-artists__container{
     padding: 3em;
   }
 }

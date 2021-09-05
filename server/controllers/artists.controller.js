@@ -53,7 +53,7 @@ const likeArtist = async (req, res) => {
   await Artist.findByIdAndUpdate(
     req.params.artistId,
     {
-      $push: { voters: req.body.userId }
+      $push: { likes: req.body.userId }
     },
     { new: true }
   ).exec((err, result) => {
@@ -69,7 +69,7 @@ const unLikeArtist = async (req, res) => {
   await Artist.findByIdAndUpdate(
     req.params.artistId,
     {
-      $pull: { voters: req.body.userId }
+      $pull: { likes: req.body.userId }
     },
     { new: true }
   ).exec((err, result) => {
@@ -81,9 +81,20 @@ const unLikeArtist = async (req, res) => {
   });
 };
 
+const userArtists = async (req, res) => {
+  let userId = req.body.userId;
+  try {
+    let foundArtists = await Artist.find({ 'likes': { $in: userId } }).select('name _id discipline country likes pic' );
+    res.json(foundArtists);
+  } catch (err) {
+    return res.status(422).json({ error: err });
+  }
+};
+
 exports.listArtists = listArtists;
 exports.listByDiscipline = listByDiscipline;
 exports.artistByID = artistByID;
 exports.readArtist = readArtist;
 exports.likeArtist = likeArtist;
 exports.unLikeArtist = unLikeArtist;
+exports.userArtists = userArtists;

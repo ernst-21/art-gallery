@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef } from 'react';
 import { Card } from 'antd';
 import { unVoteArtwork, voteArtwork } from './api-artworks';
 import { useQueryClient, useMutation } from 'react-query';
@@ -10,10 +10,11 @@ import {
   AiOutlineShoppingCart
 } from 'react-icons/ai';
 import { Link, Redirect } from 'react-router-dom';
+import useSignToVote from '../../hooks/useSignToVote';
 import LazyLoad from 'react-lazyload';
 
 const ArtworkCard = forwardRef((props, ref) => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const {isModalVisible, handleClose, unLikeOrSign} = useSignToVote();
 
   const jwt = auth.isAuthenticated();
 
@@ -25,20 +26,6 @@ const ArtworkCard = forwardRef((props, ref) => {
     } else if (arg === true) {
       return { textAlign: 'center' };
     }
-  };
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleClose = () => {
-    setIsModalVisible(false);
-  };
-
-  const unLikeOrSign = () => {
-    auth.isAuthenticated()
-      ? likeMutation({ userId: auth.isAuthenticated().user._id })
-      : showModal();
   };
 
   const { mutate: likeMutation, status } = useMutation(
@@ -77,11 +64,17 @@ const ArtworkCard = forwardRef((props, ref) => {
         style={setStyles(props.artworkPage)}
         cover={
           <LazyLoad>
-            <img
+            {props.artworkPage ? (<img
               style={{ width: '100%', height: 'auto' }}
               alt={props.name}
               src={props.url}
-            />
+            />) : (<Link to={'/artworks/' + props.id}>
+              <img
+                style={{ width: '100%', height: 'auto' }}
+                alt={props.name}
+                src={props.url}
+              />
+            </Link>)}
           </LazyLoad>
         }
         actions={
@@ -100,7 +93,7 @@ const ArtworkCard = forwardRef((props, ref) => {
                   />
                 ) : (
                   <AiOutlineHeart
-                    onClick={() => unLikeOrSign()}
+                    onClick={() => unLikeOrSign(likeMutation)}
                     className="artwork-card__icon outline-heart"
                     key="like"
                   />
@@ -125,7 +118,7 @@ const ArtworkCard = forwardRef((props, ref) => {
                   />
                 ) : (
                   <AiOutlineHeart
-                    onClick={() => unLikeOrSign()}
+                    onClick={() => unLikeOrSign(likeMutation)}
                     className="artwork-card__icon outline-heart"
                     key="like"
                   />
