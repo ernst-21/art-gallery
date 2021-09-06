@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Carousel } from 'antd';
-import { forCarousel } from '../../mockData';
+import { forCarousel } from '../../../mockData';
 
 const settings = {
   dots: true,

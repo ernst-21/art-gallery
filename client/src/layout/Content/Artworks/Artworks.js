@@ -1,6 +1,6 @@
-import FilteredArtworks from '../../../modules/artworks/FilteredArtworks';
-import ArtworksFilter from '../../../modules/artworks/ArtworksFilter';
-import {listArtworksByCategory} from '../../../modules/artworks/api-artworks';
+import FilteredArtworks from '../../../modules/artworks/components/FilteredArtworks';
+import ArtworksFilter from '../../../modules/artworks/components/ArtworksFilter/ArtworksFilter';
+import {listArtworksByCategory} from '../../../modules/artworks/api/api-artworks';
 import {useQuery} from 'react-query';
 import SpinLoader from '../../../components/SpinLoader';
 import { Redirect, useParams } from 'react-router-dom';

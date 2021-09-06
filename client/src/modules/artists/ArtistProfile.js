@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import { useQuery, useMutation } from 'react-query';
 import { Redirect, useParams } from 'react-router-dom';
 import { readArtist } from './api-artists';
-import { artistArtworks } from '../artworks/api-artworks';
+import { artistArtworks } from '../artworks/api/api-artworks';
 import SpinLoader from '../../components/SpinLoader';
 import ArtistSocial from './artistSocialIcons';
 import ElementsGrid from '../../components/ElementsGrid';

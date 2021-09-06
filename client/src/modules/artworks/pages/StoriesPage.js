@@ -1,4 +1,4 @@
-import {forCarousel} from '../../mockData';
+import {forCarousel} from '../../../mockData';
 
 const StoriesPage = () => {
   return (

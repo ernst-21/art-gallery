@@ -1,7 +1,7 @@
-import ElementsGrid from '../../components/ElementsGrid';
+import ElementsGrid from '../../../components/ElementsGrid';
 import { useQuery} from 'react-query';
-import { listArtworks } from './api-artworks';
-import SpinLoader from '../../components/SpinLoader';
+import { listArtworks } from '../api/api-artworks';
+import SpinLoader from '../../../components/SpinLoader';
 import { Redirect } from 'react-router-dom';
 
 const FeaturedArtworks = () => {

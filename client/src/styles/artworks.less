@@ -2,15 +2,81 @@
 .artworks-page {
   display: block;
   margin: 0;
+  .ant-radio-wrapper {
+    place-items: center;
+  }
+  .ant-radio-inner, .ant-radio-checked::after {
+    border: 1px solid transparent !important;
+    display: none;
+  }
+  .ant-radio-wrapper-checked {
+    padding-bottom: 1.5px;
+    border-bottom: 4px solid @accent-color !important;
+  }
   .artworks-filter__container {
     display: flex;
-    border: 1px solid red;
+    flex-direction: column;
     justify-content: center;
     place-items: center;
-    //padding: 0 2em;
+    padding: 0 2em 1em 2em;
+    .filter-categories__container, .filter-price-orientation-size__container, .artworks-more-filter__container {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      margin-right: auto;
+      margin-left: auto;
+      justify-content: space-around;
+    }
+    .filter-price-orientation-size__container, .artworks-more-filter__container {
+      padding: 1em 0;
+      .slider-price__container, .radio-orientation__container, .radio-size__container {
+        padding: 1em;
+        width: 100%;
+      }
+    }
+    .artworks-more-filter__container .select-filters__container, .artworks-more-filter__container .color-filters__container {
+      padding: 1em;
+      .select-filter__container {
+        margin-bottom: 1rem;
+      }
+    }
   }
   .filtered-artworks__section {
     background-color: @background-gray;
+  }
+}
+
+@media(min-width: 768px) {
+  .artworks-page   {
+    .artworks-filter__container {
+      padding: 1em 3em;
+      .filter-categories__container, .filter-price-orientation-size__container, .artworks-more-filter__container .select-filter__container {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        .slider-price__container, .radio-orientation__container, .radio-size__container {
+          padding: 1em;
+          width: 25%;
+        }
+        .radio-orientation__container, .radio-size__container {
+          display: flex;
+          justify-content: center;
+          text-align: center;
+        }
+      }
+      .artworks-more-filter__container .select-filters__container {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        .select-filter__container {
+          width: 30%;
+        }
+      }
+      .color-filters__container {
+        justify-content: center;
+        text-align: center;
+      }
+    }
   }
 }
 

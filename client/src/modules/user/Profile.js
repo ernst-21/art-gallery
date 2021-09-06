@@ -6,7 +6,7 @@ import { Typography, Avatar } from 'antd';
 import { UserOutlined, EditOutlined } from '@ant-design/icons';
 import DeleteUser from './DeleteUser';
 import { useQuery, useMutation } from 'react-query';
-import { userArtworks } from '../artworks/api-artworks';
+import { userArtworks } from '../artworks/api/api-artworks';
 import {userArtists} from '../artists/api-artists';
 import SpinLoader from '../../components/SpinLoader';
 import ElementsGrid from '../../components/ElementsGrid';

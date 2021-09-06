@@ -1,6 +1,6 @@
 import React from 'react';
-import ArtworksCarousel from '../../../modules/artworks/ArtworksCarousel';
-import FeaturedArtworks from '../../../modules/artworks/FeaturedArtworks';
+import ArtworksCarousel from '../../../modules/artworks/components/ArtworksCarousel';
+import FeaturedArtworks from '../../../modules/artworks/components/FeaturedArtworks';
 import RecommendedArtists from '../../../modules/artists/RecommendedArtists';
 
 const Home = () => {

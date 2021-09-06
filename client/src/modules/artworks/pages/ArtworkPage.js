@@ -1,13 +1,13 @@
 import {useState} from 'react';
-import { readArtwork, similarArtworks } from './api-artworks';
+import { readArtwork, similarArtworks } from '../api/api-artworks';
 import { useQuery, useMutation } from 'react-query';
 import { Redirect, useParams } from 'react-router-dom';
-import SpinLoader from '../../components/SpinLoader';
+import SpinLoader from '../../../components/SpinLoader';
 import { Button } from 'antd';
-import ArtworkTags from './ArtworkTags';
+import ArtworkTags from '../components/ArtworkTags';
 import {Link} from 'react-router-dom';
-import ArtworkCard from './ArtworkCard';
-import ElementsGrid from '../../components/ElementsGrid';
+import ArtworkCard from '../components/ArtworkCard';
+import ElementsGrid from '../../../components/ElementsGrid';
 
 const ArtworkPage = () => {
   const artworkId = useParams().artworkId;

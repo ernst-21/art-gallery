@@ -14,8 +14,8 @@ import EmailRequest from './modules/auth/EmailRequest';
 import InfoSuccess from './modules/user/InfoSuccess';
 import InfoError from './components/InfoError';
 import ArtistProfile from './modules/artists/ArtistProfile';
-import ArtworkPage from './modules/artworks/ArtworkPage';
-import StoriesPage from './modules/artworks/StoriesPage';
+import ArtworkPage from './modules/artworks/pages/ArtworkPage';
+import StoriesPage from './modules/artworks/pages/StoriesPage';
 
 const MainRouter = () => {
   return (

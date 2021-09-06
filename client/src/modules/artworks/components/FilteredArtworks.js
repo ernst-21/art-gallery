@@ -1,4 +1,4 @@
-import ElementsGrid from '../../components/ElementsGrid';
+import ElementsGrid from '../../../components/ElementsGrid';
 
 const FilteredArtworks = (props) => {
   return (

@@ -1,16 +1,16 @@
 import React, { forwardRef } from 'react';
 import { Card } from 'antd';
-import { unVoteArtwork, voteArtwork } from './api-artworks';
+import { unVoteArtwork, voteArtwork } from '../api/api-artworks';
 import { useQueryClient, useMutation } from 'react-query';
-import auth from '../auth/auth-helper';
-import SignModal from '../../components/SignModal';
+import auth from '../../auth/auth-helper';
+import SignModal from '../../../components/SignModal';
 import {
   AiFillHeart,
   AiOutlineHeart,
   AiOutlineShoppingCart
 } from 'react-icons/ai';
 import { Link, Redirect } from 'react-router-dom';
-import useSignToVote from '../../hooks/useSignToVote';
+import useSignToVote from '../../../hooks/useSignToVote';
 import LazyLoad from 'react-lazyload';
 
 const ArtworkCard = forwardRef((props, ref) => {
