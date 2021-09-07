@@ -71,195 +71,179 @@ export const themes = [
 export const colors = [
   {
     id: 1,
+    content: '',
     style: {
       backgroundColor: 'maroon',
       width: '1.2rem',
       height: '1.2rem',
       border: '1px solid lightgray'
     },
-    color: 'maroon',
-    width: '1.2rem',
-    height: '1.2rem'
+    value: 'maroon'
   },
   {
     id: 2,
+    content: '',
     style: {
       backgroundColor: 'red',
       width: '1.2rem',
       height: '1.2rem',
       border: '1px solid lightgray'
     },
-    color: 'red',
-    width: '1.2rem',
-    height: '1.2rem'
+    value: 'red'
   },
   {
     id: 3,
+    content: '',
     style: {
       backgroundColor: 'orange',
       width: '1.2rem',
       height: '1.2rem',
       border: '1px solid lightgray'
     },
-    color: 'orange',
-    width: '1.2rem',
-    height: '1.2rem'
+    value: 'orange'
   },
   {
     id: 4,
+    content: '',
     style: {
       backgroundColor: 'yellow',
       width: '1.2rem',
       height: '1.2rem',
       border: '1px solid lightgray'
     },
-    color: 'yellow',
-    width: '1.2rem',
-    height: '1.2rem'
+    value: 'yellow'
   },
   {
     id: 5,
+    content: '',
     style: {
       backgroundColor: 'limegreen',
       width: '1.2rem',
       height: '1.2rem',
       border: '1px solid lightgray'
     },
-    color: 'limegreen',
-    width: '1.2rem',
-    height: '1.2rem'
+    value: 'limegreen'
   },
   {
     id: 6,
+    content: '',
     style: {
       backgroundColor: 'olive',
       width: '1.2rem',
       height: '1.2rem',
       border: '1px solid lightgray'
     },
-    color: 'olive',
-    width: '1.2rem',
-    height: '1.2rem'
+    value: 'olive'
   },
   {
     id: 7,
+    content: '',
     style: {
       backgroundColor: 'green',
       width: '1.2rem',
       height: '1.2rem',
       border: '1px solid lightgray'
     },
-    color: 'green',
-    width: '1.2rem',
-    height: '1.2rem'
+    value: 'green'
   },
   {
     id: 8,
+    content: '',
     style: {
       backgroundColor: 'darkcyan',
       width: '1.2rem',
       height: '1.2rem',
       border: '1px solid lightgray'
     },
-    color: 'darkcyan',
-    width: '1.2rem',
-    height: '1.2rem'
+    value: 'darkcyan'
   },
   {
     id: 9,
+    content: '',
     style: {
       backgroundColor: 'blue',
       width: '1.2rem',
       height: '1.2rem',
       border: '1px solid lightgray'
     },
-    color: 'blue',
-    width: '1.2rem',
-    height: '1.2rem'
+    value: 'blue'
   },
   {
     id: 10,
+    content: '',
     style: {
       backgroundColor: 'darkblue',
       width: '1.2rem',
       height: '1.2rem',
       border: '1px solid lightgray'
     },
-    color: 'darkblue',
-    width: '1.2rem',
-    height: '1.2rem'
+    value: 'darkblue'
   },
   {
     id: 11,
+    content: '',
     style: {
       backgroundColor: 'darkviolet',
       width: '1.2rem',
       height: '1.2rem',
       border: '1px solid lightgray'
     },
-    color: 'darkviolet',
-    width: '1.2rem',
-    height: '1.2rem'
+    value: 'darkviolet'
   },
   {
     id: 12,
+    content: '',
     style: {
       backgroundColor: 'pink',
       width: '1.2rem',
       height: '1.2rem',
       border: '1px solid lightgray'
     },
-    color: 'pink',
-    width: '1.2rem',
-    height: '1.2rem'
+    value: 'pink'
   },
   {
     id: 13,
+    content: '',
     style: {
       backgroundColor: 'magenta',
       width: '1.2rem',
       height: '1.2rem',
       border: '1px solid lightgray'
     },
-    color: 'magenta',
-    width: '1.2rem',
-    height: '1.2rem'
+    value: 'magenta'
   },
   {
     id: 14,
+    content: '',
     style: {
       backgroundColor: 'white',
       width: '1.2rem',
       height: '1.2rem',
       border: '1px solid lightgray'
     },
-    color: 'white',
-    width: '1.2rem',
-    height: '1.2rem'
+    value: 'white'
   },
   {
     id: 15,
+    content: '',
     style: {
       backgroundColor: 'gray',
       width: '1.2rem',
       height: '1.2rem',
       border: '1px solid lightgray'
     },
-    color: 'gray',
-    width: '1.2rem',
-    height: '1.2rem'
+    value: 'gray'
   },
   {
     id: 16,
+    content: '',
     style: {
       backgroundColor: 'black',
       width: '1.2rem',
       height: '1.2rem',
       border: '1px solid lightgray'
     },
-    color: 'black',
-    width: '1.2rem',
-    height: '1.2rem'
+    value: 'black'
   }
 ];
 
@@ -379,3 +363,52 @@ export const sizes = [
     }
   }
 ];
+
+export const filterDefaults = {
+  category: ['painting', 'print', 'sculpture', 'photography'],
+  orientation: ['landscape', 'portrait', 'square'],
+  size: ['big', 'small', 'medium'],
+  gallery: ['Paris', 'London', 'Berlin', 'New York'],
+  price: [0, 10000],
+  artist: [
+    'William Shakespeare',
+    'Alice Walker',
+    'Jane Eyre',
+    'Victor Hugo',
+    'Walt Whitman',
+    'John Doe',
+    'Alexandre Dumas'
+  ],
+  tags: [
+    'flowers',
+    'sea',
+    'beach',
+    'nature',
+    'man',
+    'men',
+    'woman',
+    'women',
+    'abstract',
+    'boat',
+    'river',
+    'lake',
+    'statue',
+    'head',
+    'children',
+    'dog',
+    'daked',
+    'dish',
+    'bottle',
+    'pottery',
+    'relaxing',
+    'jump',
+    'skating',
+    'colorful',
+    'road',
+    'camera',
+    'people',
+    'animals',
+    'village',
+    'mythology'
+  ],
+  colors : ['maroon', 'orange', 'yellow', 'limegreen','olive',  'green', 'darkcyan', 'blue','darkblue','darkviolet', 'pink', 'magenta', 'white', 'gray','black']};

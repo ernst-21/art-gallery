@@ -19,7 +19,9 @@ const Artworks = () => {
         .then((res) => res.json())
         .then((data) => data),
     {
-      onSuccess: () => setFilteredArtworks(receivedArtworks)
+      onSuccess: () => setFilteredArtworks(receivedArtworks),
+      staleTime: Infinity,
+      cacheTime: Infinity
     }
   );
 

@@ -6,8 +6,8 @@ const SelectElements = (props) => {
   return (
     <>
       <p>{props.label}</p>
-      <Select defaultValue='All' className='select-elements'>
-        {props.elements.sort().map((item, i) => (<Option key={i} >{item}</Option>))}
+      <Select onChange={props.onChange} defaultValue='All' className='select-elements'>
+        {props.elements.sort().map((item, i) => (<Option key={i} value={item}>{item}</Option>))}
       </Select>
     </>
 

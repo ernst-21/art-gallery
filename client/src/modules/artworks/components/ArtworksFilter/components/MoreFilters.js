@@ -1,25 +1,23 @@
-import { galleries } from '../../../../../mockData';
-import { artists } from '../../../../../mockData';
-import { themes } from '../../../../../mockData';
+import { galleries, artists, themes, colors } from '../../../../../mockData';
 import SelectElements from '../../../../../components/SelectElements';
-import ColorRadio from './ColorRadio';
+import RadioFilter from './RadioFilter';
 
-const MoreFilters = () => {
+const MoreFilters = (props) => {
   return (
     <div className="artworks-more-filter__container">
       <div className="select-filters__container">
         <div className="select-filter__container">
-          <SelectElements label="Galleries:" elements={galleries} />
+          <SelectElements onChange={props.onGalleriesChange} label="Galleries:" elements={galleries} />
         </div>
         <div className="select-filter__container">
-          <SelectElements label="Artists:" elements={artists} />
+          <SelectElements onChange={props.onArtistChange} label="Artists:" elements={artists} />
         </div>
         <div className="select-filter__container">
-          <SelectElements label="Themes:" elements={themes} />
+          <SelectElements onChange={props.onThemesChange} label="Themes:" elements={themes} />
         </div>
       </div>
       <div className='color-filters__container'>
-        <ColorRadio />
+        <RadioFilter elements={colors} title='Select color in artwork:' onChange={props.onColorChange} />
       </div>
     </div>
   );

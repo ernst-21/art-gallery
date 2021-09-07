@@ -126,12 +126,24 @@ const similarArtworks = async (req, res) => {
 };
 
 const searchArtworks = async (req, res) => {
-  console.log(req.body);
   let category = req.body.category;
   let orientation = req.body.orientation;
   let size = req.body.size;
+  let gallery = req.body.gallery;
+  let artist = req.body.artist;
+  let tags = req.body.tags;
+  let colors = req.body.colors;
+  let price = req.body.price;
+
   try {
-    let foundArtworks = await Artwork.find({ $and: [{category: {$in: category}}, {orientation: {$in: orientation}}, {size: {$in: size}}] }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
+    let foundArtworks = await Artwork.find({
+      $and: [{ purchased: { $in: false } }, { category: { $in: category } }, { orientation: { $in: orientation } }, { size: { $in: size } }, { gallery: { $in: gallery } }, { artist: { $in: artist } }, { tags: { $in: tags } }, { colors: { $in: colors } }, {
+        price: {
+          $gt: price[0],
+          $lt: price[1]
+        }
+      }]
+    }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     res.json(foundArtworks);
   } catch (err) {
     return res.status(422).json({ error: err });
