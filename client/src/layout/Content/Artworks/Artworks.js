@@ -1,25 +1,54 @@
+import { useState } from 'react';
 import FilteredArtworks from '../../../modules/artworks/components/FilteredArtworks';
 import ArtworksFilter from '../../../modules/artworks/components/ArtworksFilter/ArtworksFilter';
-import {listArtworksByCategory} from '../../../modules/artworks/api/api-artworks';
-import {useQuery} from 'react-query';
+import {
+  listArtworks,
+  searchArtworks
+} from '../../../modules/artworks/api/api-artworks';
+import { useQuery, useMutation } from 'react-query';
 import SpinLoader from '../../../components/SpinLoader';
-import { Redirect, useParams } from 'react-router-dom';
-import {titleWrangler} from '../../../utils/category-title-wrangler';
+import { Redirect } from 'react-router-dom';
 
 const Artworks = () => {
-  const category = useParams().artCategory;
-  const title = titleWrangler(category);
+  const [filteredArtworks, setFilteredArtworks] = useState([]);
 
-  const {data: artworks = [], isLoading, isError} = useQuery(['artworks', category], () => listArtworksByCategory({artCategory: category}).then(res => res.json()).then(data => data));
+  const { data: receivedArtworks = [], isLoading, isError } = useQuery(
+    'artworks',
+    () =>
+      listArtworks()
+        .then((res) => res.json())
+        .then((data) => data),
+    {
+      onSuccess: () => setFilteredArtworks(receivedArtworks)
+    }
+  );
 
-  if (isError) {
+  const { mutate: searchMutation, status } = useMutation(
+    (filter) =>
+      searchArtworks(filter)
+        .then((res) => res.json())
+        .then((data) => data),
+    {
+      onSuccess: (data) => {
+        setFilteredArtworks(data);
+      }
+    }
+  );
+
+  if (isError || status === 'error') {
     return <Redirect to="/info-network-error" />;
   }
 
   return (
     <div className="artworks-page">
-      <ArtworksFilter />
-      {isLoading ? (<SpinLoader />) : (<FilteredArtworks title={title} artworks={artworks} />)}
+      {filteredArtworks && <ArtworksFilter searchMutation={searchMutation} />}
+      {isLoading ? (
+        <SpinLoader />
+      ) : filteredArtworks.length > 0 ? (
+        <FilteredArtworks title="Artworks" artworks={filteredArtworks} />
+      ) : (
+        <FilteredArtworks title="No artworks to display" artworks={[]} />
+      )}
     </div>
   );
 };

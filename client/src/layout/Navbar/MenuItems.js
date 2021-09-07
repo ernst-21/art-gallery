@@ -3,7 +3,6 @@ import { NavLink, useHistory } from 'react-router-dom';
 import auth from '../../modules/auth/auth-helper';
 import SignoutBtn from '../../modules/auth/Signout';
 import UserMenuIcon from './UserMenuIcon';
-import ArtworksMenu from './ArtworksMenu';
 import {isActive} from '../../utils/navlinkStyles';
 
 const MenuItems = (props) => {
@@ -19,13 +18,13 @@ const MenuItems = (props) => {
           Home
         </NavLink>
       </li>
-      {props.className === 'links-container_vertical' ? (<li onClick={props.onClick}>
+      <li onClick={props.onClick}>
         <NavLink
-          style={isActive(props.history, '/artworks/category/all')} to="/artworks/category/all"
+          style={isActive(props.history, '/artworks')} to="/artworks"
         >
           Artworks
         </NavLink>
-      </li>) : (<li><ArtworksMenu history={props.history} /></li>)}
+      </li>
       <li onClick={props.onClick}>
         <NavLink
           style={isActive(props.history, '/artists')}

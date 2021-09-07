@@ -17,7 +17,8 @@ const ArtworkSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    required: true
+    required: true,
+    default: 'all'
   },
   price: {
     type: Number,
@@ -36,6 +37,7 @@ const ArtworkSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  size: {type: String},
   url: {
     type: String,
     required: true
