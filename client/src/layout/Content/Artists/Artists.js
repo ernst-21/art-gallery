@@ -1,7 +1,7 @@
-import ArtistsFilter from '../../../modules/artists/ArtistsFilter';
-import FilteredArtists from '../../../modules/artists/FilteredArtists';
+import ArtistsFilter from '../../../modules/artists/components/ArtistsFilter';
+import FilteredArtists from '../../../modules/artists/components/FilteredArtists';
 import {useQuery} from 'react-query';
-import { listArtists } from '../../../modules/artists/api-artists';
+import { listArtists } from '../../../modules/artists/api/api-artists';
 import { Redirect } from 'react-router-dom';
 import SpinLoader from '../../../components/SpinLoader';
 

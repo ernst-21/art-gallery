@@ -3,8 +3,8 @@ import MenuDropDown from './MenuDropDown';
 import { Menu } from 'antd';
 import {BiUser} from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
-import auth from '../../modules/auth/auth-helper';
-import SignoutBtn from '../../modules/auth/Signout';
+import auth from '../../modules/auth/api/auth-helper';
+import SignoutBtn from '../../modules/auth/components/Signout';
 import {isActive} from '../../utils/navlinkStyles';
 
 const UserMenu = (props) => {

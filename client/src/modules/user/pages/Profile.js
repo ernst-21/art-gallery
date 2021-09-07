@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { useParams, Redirect, Link } from 'react-router-dom';
-import auth from '../auth/auth-helper';
-import { read } from './api-user';
+import auth from '../../auth/api/auth-helper';
+import { read } from '../api/api-user';
 import { Typography, Avatar } from 'antd';
 import { UserOutlined, EditOutlined } from '@ant-design/icons';
-import DeleteUser from './DeleteUser';
+import DeleteUser from '../components/DeleteUser';
 import { useQuery, useMutation } from 'react-query';
-import { userArtworks } from '../artworks/api/api-artworks';
-import {userArtists} from '../artists/api-artists';
-import SpinLoader from '../../components/SpinLoader';
-import ElementsGrid from '../../components/ElementsGrid';
+import { userArtworks } from '../../artworks/api/api-artworks';
+import {userArtists} from '../../artists/api/api-artists';
+import SpinLoader from '../../../components/SpinLoader';
+import ElementsGrid from '../../../components/ElementsGrid';
 
 const { Title } = Typography;
 

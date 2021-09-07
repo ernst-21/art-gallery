@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import ArtistProfileCard from './ArtistProfileCard';
+import ArtistProfileCard from '../components/ArtistProfileCard';
 import { Button } from 'antd';
 import { useQuery, useMutation } from 'react-query';
 import { Redirect, useParams } from 'react-router-dom';
-import { readArtist } from './api-artists';
-import { artistArtworks } from '../artworks/api/api-artworks';
-import SpinLoader from '../../components/SpinLoader';
-import ArtistSocial from './artistSocialIcons';
-import ElementsGrid from '../../components/ElementsGrid';
+import { readArtist } from '../api/api-artists';
+import { artistArtworks } from '../../artworks/api/api-artworks';
+import SpinLoader from '../../../components/SpinLoader';
+import ArtistSocial from '../components/artistSocialIcons';
+import ElementsGrid from '../../../components/ElementsGrid';
 
 const ArtistProfile = () => {
   const artistId = useParams().artistId;

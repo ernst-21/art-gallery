@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import auth from './auth-helper';
+import auth from '../api/auth-helper';
 import { Link, Redirect } from 'react-router-dom';
-import { signin } from './api-auth.js';
-import { useHttpError } from '../../hooks/http-hook';
+import { signin } from '../api/api-auth.js';
+import { useHttpError } from '../../../hooks/http-hook';
 import { Form, Input, Button, Checkbox, Card } from 'antd';
 import { useMutation } from 'react-query';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import auth from '../../modules/auth/auth-helper';
-import SignoutBtn from '../../modules/auth/Signout';
+import auth from '../../modules/auth/api/auth-helper';
+import SignoutBtn from '../../modules/auth/components/Signout';
 import UserMenuIcon from './UserMenuIcon';
 import {isActive} from '../../utils/navlinkStyles';
 

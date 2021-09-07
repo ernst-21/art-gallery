@@ -1,7 +1,7 @@
 import React from 'react';
 import { Divider, Modal } from 'antd';
 import { AiOutlineClose } from 'react-icons/ai';
-import Signin from '../modules/auth/Signin';
+import Signin from '../modules/auth/components/Signin';
 
 const SignModal = ({ handleClose, visible, isModalVisible }) => {
   return (

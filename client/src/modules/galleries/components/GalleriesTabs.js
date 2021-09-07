@@ -1,8 +1,8 @@
 import { Tabs } from 'antd';
 import {useQuery} from 'react-query';
-import {listArtworks} from '../artworks/api/api-artworks';
-import ElementsGrid from '../../components/ElementsGrid';
-import SpinLoader from '../../components/SpinLoader';
+import {listArtworks} from '../../artworks/api/api-artworks';
+import ElementsGrid from '../../../components/ElementsGrid';
+import SpinLoader from '../../../components/SpinLoader';
 import { Redirect } from 'react-router-dom';
 
 const { TabPane } = Tabs;

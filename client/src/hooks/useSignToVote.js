@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import auth from '../modules/auth/auth-helper';
+import auth from '../modules/auth/api/auth-helper';
 
 const useSignToVote = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);

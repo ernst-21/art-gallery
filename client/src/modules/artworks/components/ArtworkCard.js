@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import { Card } from 'antd';
 import { unVoteArtwork, voteArtwork } from '../api/api-artworks';
 import { useQueryClient, useMutation } from 'react-query';
-import auth from '../../auth/auth-helper';
+import auth from '../../auth/api/auth-helper';
 import SignModal from '../../../components/SignModal';
 import {
   AiFillHeart,

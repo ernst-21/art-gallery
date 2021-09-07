@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import auth from './auth-helper';
+import auth from '../api/auth-helper';
 import { Button } from 'antd';
 
 

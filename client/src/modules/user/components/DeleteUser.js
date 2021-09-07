@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import auth from '../auth/auth-helper';
+import auth from '../../auth/api/auth-helper';
 import { useMutation } from 'react-query';
-import {success} from '../../components/Message';
-import { remove } from './api-user.js';
+import {success} from '../../../components/Message';
+import { remove } from '../api/api-user.js';
 import { Redirect } from 'react-router-dom';
 import { Modal, Button } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
-import { useHttpError } from '../../hooks/http-hook';
+import { useHttpError } from '../../../hooks/http-hook';
 
 export default function DeleteUser(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);

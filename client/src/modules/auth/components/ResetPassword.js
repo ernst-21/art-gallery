@@ -1,11 +1,11 @@
 import React, { useState, useEffect, memo } from 'react';
 import { Link, Redirect, useParams } from 'react-router-dom';
 import { Button, Card, Form, Input } from 'antd';
-import { useHttpError } from '../../hooks/http-hook';
-import { resetPass } from '../user/api-user';
-import { strongPass, wrongPasswordMessage } from '../../config/config';
+import { useHttpError } from '../../../hooks/http-hook';
+import { resetPass } from '../../user/api/api-user';
+import { strongPass, wrongPasswordMessage } from '../../../config/config';
 import { useMutation } from 'react-query';
-import { success } from '../../components/Message';
+import { success } from '../../../components/Message';
 
 const ResetPassword = () => {
   const [redirect, setRedirect] = useState(false);

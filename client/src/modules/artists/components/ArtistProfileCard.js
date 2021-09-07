@@ -1,12 +1,12 @@
 import { Redirect } from 'react-router-dom';
 import { Card } from 'antd';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-import { likeArtist, unlikeArtist } from './api-artists';
+import { likeArtist, unlikeArtist } from '../api/api-artists';
 import { useMutation, useQueryClient } from 'react-query';
-import auth from '../auth/auth-helper';
+import auth from '../../auth/api/auth-helper';
 import React from 'react';
-import useSignToVote from '../../hooks/useSignToVote';
-import SignModal from '../../components/SignModal';
+import useSignToVote from '../../../hooks/useSignToVote';
+import SignModal from '../../../components/SignModal';
 
 const { Meta } = Card;
 

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import auth from '../auth/auth-helper';
-import { read, update } from './api-user.js';
+import auth from '../../auth/api/auth-helper';
+import { read, update } from '../api/api-user.js';
 import { Link, Redirect, useParams, useHistory } from 'react-router-dom';
 import { Avatar, Button, Card, Form, Input, Spin } from 'antd';
-import { useHttpError } from '../../hooks/http-hook';
+import { useHttpError } from '../../../hooks/http-hook';
 import AvatarUpload from './AvatarUpload';
-import useUploadImage from '../../hooks/useUploadImage';
+import useUploadImage from '../../../hooks/useUploadImage';
 import { DeleteOutlined } from '@ant-design/icons';
-import { strongPass, wrongPasswordMessage } from '../../config/config';
+import { strongPass, wrongPasswordMessage } from '../../../config/config';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { success } from '../../components/Message';
+import { success } from '../../../components/Message';
 
 const EditProfile = () => {
   const [redirectToSignin, setRedirectToSignin] = useState(false);

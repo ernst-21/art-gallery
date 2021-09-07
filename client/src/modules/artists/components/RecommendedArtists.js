@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query';
-import ElementsGrid from '../../components/ElementsGrid';
-import { listArtists } from './api-artists';
+import ElementsGrid from '../../../components/ElementsGrid';
+import { listArtists } from '../api/api-artists';
 import { Redirect } from 'react-router-dom';
-import SpinLoader from '../../components/SpinLoader';
+import SpinLoader from '../../../components/SpinLoader';
 
 const RecommendedArtists = () => {
   const { data: artists = [], isLoading, isError } = useQuery(

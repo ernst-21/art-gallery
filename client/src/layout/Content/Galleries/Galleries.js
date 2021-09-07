@@ -1,4 +1,4 @@
-import GalleriesTabs from '../../../modules/galleries/GalleriesTabs';
+import GalleriesTabs from '../../../modules/galleries/components/GalleriesTabs';
 
 const Galleries = () => {
   return (
