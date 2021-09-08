@@ -48,11 +48,22 @@ const userArtists = async (userId) =>
     body: JSON.stringify(userId)
   });
 
+const searchArtists = async (filters) =>
+  await fetch('http://localhost:5000/api/artists/search', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(filters)
+  });
+
 export {
   likeArtist,
   readArtist,
   listArtists,
   unlikeArtist,
   listArtistsByDiscipline,
-  userArtists
+  userArtists,
+  searchArtists
 };

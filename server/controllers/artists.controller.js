@@ -91,6 +91,20 @@ const userArtists = async (req, res) => {
   }
 };
 
+const searchArtists = async (req, res) => {
+  let recommended = req.body.recommended;
+  let likes = req.body.likes;
+  let discipline = req.body.discipline;
+   try {
+    let foundArtist = await Artist.find({
+      $and: [{recommended: {$in: recommended}}, {$expr: {$gte: [{$size: "$likes"}, likes[0]]}} , {$expr: {$lte: [{$size: "$likes"}, likes[1]]}}, {discipline: {$in: discipline}}]
+    }).select('name artworks category _id discipline likes recommended pic country');
+    res.json(foundArtist);
+  } catch (err) {
+    return res.status(422).json({ error: err });
+  }
+};
+
 exports.listArtists = listArtists;
 exports.listByDiscipline = listByDiscipline;
 exports.artistByID = artistByID;
@@ -98,3 +112,4 @@ exports.readArtist = readArtist;
 exports.likeArtist = likeArtist;
 exports.unLikeArtist = unLikeArtist;
 exports.userArtists = userArtists;
+exports.searchArtists = searchArtists;

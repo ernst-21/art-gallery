@@ -2,11 +2,28 @@
 .artists-page {
   display: block;
   margin: 0;
+
   .artist-filter__container {
-    border: 1px solid red;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 1em;
+    .filter-action {
+      text-align: center;
+    }
+    .reset-filter__btn {
+      display: flex;
+      justify-content: center;
+    }
+    .artists-filters {
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+      flex-direction: column;
+      align-items: center;
+      padding: 1em;
+      .artists-discipline-filter, .recommended-filter, .artist-likes-filter {
+        width: 100%;
+        padding: 1em;
+      }
+    }
   }
   .filtered-artists__section {
     background-color: @background-gray;
@@ -16,8 +33,15 @@
 @media (min-width: 768px) {
   .artists-page {
     .artist-filter__container {
-      flex-direction: row;
-      justify-content: center;
+      padding: 2em 3em;
+      .artists-filters {
+        flex-direction: row;
+        justify-content: space-around;
+        .artists-discipline-filter, .recommended-filter, .artist-likes-filter {
+          width: 25%;
+          padding: 1em 3em;
+        }
+      }
     }
   }
 }

@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Button, Space } from 'antd';
 import { categories, sizes, orientation } from '../../../../mockData';
-import PriceSlider from './components/PriceSlider';
+import SliderFilter from '../../../../components/SliderFilter';
 import MoreFilters from './components/MoreFilters';
 import RadioFilter from './components/RadioFilter';
 import useFilterChange from '../../../../hooks/useFilterChange';
 import {filterDefaults} from '../../../../mockData';
 
 const ArtworksFilter = ({ searchMutation }) => {
-  const { filters, onRadioChange, onSelectChange, onSliderChange } = useFilterChange();
+  const { filters, onRadioChange, onSelectChange, onSliderChange } = useFilterChange(filterDefaults);
   const [moreFilters, setMoreFilters] = useState(false);
 
   const onCategoryChange = (e) => {
@@ -59,7 +59,7 @@ const ArtworksFilter = ({ searchMutation }) => {
       </div>
       <div className="filter-price-orientation-size__container">
         <div className="slider-price__container">
-          Price $: <PriceSlider onAfterChange={onPriceChange}/>
+          Price $: <SliderFilter min={0} max={10000} onAfterChange={onPriceChange}/>
         </div>
         <div className="radio-orientation__container">
           <RadioFilter

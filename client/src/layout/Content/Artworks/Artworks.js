@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FilteredArtworks from '../../../modules/artworks/components/FilteredArtworks';
 import ArtworksFilter from '../../../modules/artworks/components/ArtworksFilter/ArtworksFilter';
 import {
@@ -19,7 +19,10 @@ const Artworks = () => {
         .then((res) => res.json())
         .then((data) => data),
     {
-      onSuccess: () => setFilteredArtworks(receivedArtworks),
+      // onSuccess: (data) => {
+      //   console.log(data);
+      //   setFilteredArtworks(receivedArtworks);
+      // }
       staleTime: Infinity,
       cacheTime: Infinity
     }
@@ -36,6 +39,11 @@ const Artworks = () => {
       }
     }
   );
+
+  useEffect(() => {
+    setFilteredArtworks(receivedArtworks);
+    console.log(receivedArtworks);
+  }, [receivedArtworks]);
 
   if (isError || status === 'error') {
     return <Redirect to="/info-network-error" />;

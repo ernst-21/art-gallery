@@ -23,6 +23,8 @@ export const forCarousel = [
 
 export const galleries = ['All', 'Paris', 'Berlin', 'London', 'New York'];
 
+export const discipline = ['All', 'Painter', 'Printmaker', 'Sculptor', 'Photographer'];
+
 export const artists = [
   'All',
   'William Shakespeare',
@@ -396,7 +398,7 @@ export const filterDefaults = {
     'head',
     'children',
     'dog',
-    'daked',
+    'naked',
     'dish',
     'bottle',
     'pottery',
@@ -412,3 +414,9 @@ export const filterDefaults = {
     'mythology'
   ],
   colors : ['maroon', 'orange', 'yellow', 'limegreen','olive',  'green', 'darkcyan', 'blue','darkblue','darkviolet', 'pink', 'magenta', 'white', 'gray','black']};
+
+export const artistFiltersDefaults = {
+  discipline : ['painter', 'sculptor', 'photographer', 'printmaker'],
+  recommended: [true, false],
+  likes: [0, 10]
+};

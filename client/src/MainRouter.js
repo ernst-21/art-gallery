@@ -23,7 +23,7 @@ const MainRouter = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/artists" component={Artists} />
-        <Route path="/artworks" component={Artworks} />
+        <Route exact path="/artworks" component={Artworks} />
         <Route path="/galleries" component={Galleries} />
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />

@@ -69,7 +69,7 @@ const similarArtworks = async (similarPlusId) =>
   });
 
 const searchArtworks = async (filters) =>
-  await fetch('http://localhost:5000/api/artworks/search', {
+  await fetch('http://localhost:5000/api/artworks/search/searchArtworks', {
     method: 'POST',
     headers: {
       Accept: 'application/json',

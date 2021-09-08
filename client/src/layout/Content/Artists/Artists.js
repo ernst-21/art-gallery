@@ -1,21 +1,41 @@
-import ArtistsFilter from '../../../modules/artists/components/ArtistsFilter';
+import {useState} from 'react';
+import ArtistsFilter from '../../../modules/artists/components/ArtistsFilter/ArtistsFilter';
 import FilteredArtists from '../../../modules/artists/components/FilteredArtists';
-import {useQuery} from 'react-query';
-import { listArtists } from '../../../modules/artists/api/api-artists';
+import {useQuery, useMutation} from 'react-query';
+import { listArtists, searchArtists } from '../../../modules/artists/api/api-artists';
 import { Redirect } from 'react-router-dom';
 import SpinLoader from '../../../components/SpinLoader';
 
 const Artists = () => {
-  const {data: artists = [], isLoading, isError } = useQuery('artists', () => listArtists().then(res => res.json()).then(data => data));
+  const [filteredArtists, setFilteredArtists] = useState([]);
 
-  if (isError) {
+  const {data: artists = [], isLoading, isError } = useQuery('artists', () => listArtists().then(res => res.json()).then(data => data), {
+    onSuccess: () => setFilteredArtists(artists),
+    staleTime: Infinity,
+    cacheTime: Infinity
+  });
+
+  const { mutate: searchArtistMutation, status } = useMutation(
+    (filter) =>
+      searchArtists(filter)
+        .then((res) => res.json())
+        .then((data) => data),
+    {
+      onSuccess: (data) => {
+        console.log(data);
+        setFilteredArtists(data);
+      }
+    }
+  );
+
+  if (isError || status === 'error') {
     return <Redirect to="/info-network-error" />;
   }
 
   return (
     <div className='artists-page'>
-      <ArtistsFilter />
-      {isLoading ? (<SpinLoader />) : (<FilteredArtists specialty='All artists' artists={artists} />)}
+      {filteredArtists && <ArtistsFilter searchArtistMutation={searchArtistMutation} />}
+      {isLoading ? (<SpinLoader />) : (filteredArtists.length > 0 ? (<FilteredArtists specialty='Artists' artists={filteredArtists} />) : (<FilteredArtists specialty='No artists to display' artists={[]} />))}
 
     </div>
   );

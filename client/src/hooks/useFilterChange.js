@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import {filterDefaults} from '../mockData';
 
-const useFilterChange = () => {
-  const [filters, setFilters] = useState(filterDefaults);
+const useFilterChange = (filterSubject) => {
+  const [filters, setFilters] = useState(filterSubject);
 
   const onRadioChange = (e, name, arr) => {
     let value;
@@ -24,9 +23,26 @@ const useFilterChange = () => {
     }
   };
   const onSliderChange = (value, name) => {
-    setFilters({...filters, [name]: value});
+    setFilters({ ...filters, [name]: value });
   };
-  return { filters, onRadioChange, onSelectChange, onSliderChange };
+
+  const onCheckboxChange = (e, name) => {
+    let value;
+    if (e.target.checked === false) {
+      value = [true, false];
+      setFilters({ ...filters, [name]: value });
+    } else if (e.target.checked === true) {
+      value = true;
+      setFilters({ ...filters, [name]: value });
+    }
+  };
+  return {
+    filters,
+    onRadioChange,
+    onSelectChange,
+    onSliderChange,
+    onCheckboxChange
+  };
 };
 
 export default useFilterChange;

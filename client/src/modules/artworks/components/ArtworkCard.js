@@ -35,7 +35,7 @@ const ArtworkCard = forwardRef((props, ref) => {
         .then((data) => data),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries({ exact: true });
+        queryClient.invalidateQueries({exact: true});
       }
     }
   );
