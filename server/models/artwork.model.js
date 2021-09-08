@@ -43,10 +43,7 @@ const ArtworkSchema = new mongoose.Schema({
     required: true
   },
   voters : [{type: ObjectId, ref: 'User'}],
-  purchased: {
-    type: Boolean,
-    required: true
-  }
+  purchased: [{type: ObjectId, ref: 'User'}]
 });
 
 module.exports = mongoose.model('Artwork', ArtworkSchema);

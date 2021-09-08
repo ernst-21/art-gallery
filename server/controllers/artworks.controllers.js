@@ -3,7 +3,7 @@ const errorHandler = require('../helpers/dbErrorHandler');
 
 const listArtworks = async (req, res) => {
   try {
-    let artworks = await Artwork.find({ 'purchased': { $in: false } }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
+    let artworks = await Artwork.find().select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     res.json(artworks);
   } catch (err) {
     return res.status(400).json({
@@ -17,11 +17,10 @@ const listByCategory = async (req, res) => {
   let artworks;
   try {
     if (category === 'all') {
-      artworks = await Artwork.find({ 'purchased': { $in: false } }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
+      artworks = await Artwork.find().select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     } else {
       artworks = await Artwork.find({
         category: category,
-        'purchased': { $in: false }
       }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     }
     res.json(artworks);
@@ -88,8 +87,7 @@ const artistArtworks = async (req, res) => {
   let artistWork = req.body.artistWork;
   try {
     let foundArtworks = await Artwork.find({
-      '_id': { $in: artistWork },
-      'purchased': { $in: false }
+      '_id': { $in: artistWork }
     }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     res.json(foundArtworks);
   } catch (err) {
@@ -101,8 +99,7 @@ const userArtworks = async (req, res) => {
   let userId = req.body.userId;
   try {
     let foundArtworks = await Artwork.find({
-      'voters': { $in: userId },
-      'purchased': { $in: false }
+      'voters': { $in: userId }
     }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     res.json(foundArtworks);
   } catch (err) {
@@ -116,8 +113,7 @@ const similarArtworks = async (req, res) => {
   try {
     let foundArtworks = await Artwork.find({
       'tags': { $in: similar },
-      '_id': { $nin: artworkId },
-      'purchased': { $in: false }
+      '_id': { $nin: artworkId }
     }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     res.json(foundArtworks);
   } catch (err) {
@@ -138,7 +134,7 @@ const searchArtworks = async (req, res) => {
 
   try {
     let foundArtworks = await Artwork.find({
-      $and: [{ purchased: { $in: false } }, { category: { $in: category } }, { orientation: { $in: orientation } }, { size: { $in: size } }, { gallery: { $in: gallery } }, { artist: { $in: artist } }, { tags: { $in: tags } }, { colors: { $in: colors } }, {
+      $and: [ { category: { $in: category } }, { orientation: { $in: orientation } }, { size: { $in: size } }, { gallery: { $in: gallery } }, { artist: { $in: artist } }, { tags: { $in: tags } }, { colors: { $in: colors } }, {
         price: {
           $gt: price[0],
           $lt: price[1]

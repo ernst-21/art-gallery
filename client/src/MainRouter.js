@@ -16,6 +16,9 @@ import InfoError from './components/InfoError';
 import ArtistProfile from './modules/artists/pages/ArtistProfile';
 import ArtworkPage from './modules/artworks/pages/ArtworkPage';
 import StoriesPage from './modules/artworks/pages/StoriesPage';
+import CartPage from './layout/Content/Cart/CartPage';
+import Purchased from './layout/Content/Purchased/PurchasedPage';
+import PaymentPage from './layout/Content/Payment/PaymentPage';
 
 const MainRouter = () => {
   return (
@@ -32,10 +35,13 @@ const MainRouter = () => {
         <Route path="/info" component={InfoSuccess} />
         <Route path="/info-network-error" component={InfoError} />
         <PrivateRoute path="/user/edit/:userId" component={EditProfile} />
-        <Route path="/user/:userId" component={Profile} />
+        <Route exact path="/user/:userId" component={Profile} />
         <Route path="/artists/:artistId" component={ArtistProfile} />
         <Route path="/artworks/:artworkId" component={ArtworkPage} />
         <Route exact path="/artwork/carousel/stories" component={StoriesPage} />
+        <Route path="/user/cart/:userId" component={CartPage} />
+        <Route path="/user/purchased/:userId" component={Purchased} />
+        <Route path="/user/payment/:userId" component={PaymentPage} />
       </Switch>
     </div>
   );
