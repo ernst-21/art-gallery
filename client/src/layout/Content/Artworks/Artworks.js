@@ -19,10 +19,6 @@ const Artworks = () => {
         .then((res) => res.json())
         .then((data) => data),
     {
-      // onSuccess: (data) => {
-      //   console.log(data);
-      //   setFilteredArtworks(receivedArtworks);
-      // }
       staleTime: Infinity,
       cacheTime: Infinity
     }
@@ -42,7 +38,6 @@ const Artworks = () => {
 
   useEffect(() => {
     setFilteredArtworks(receivedArtworks);
-    console.log(receivedArtworks);
   }, [receivedArtworks]);
 
   if (isError || status === 'error') {
@@ -55,7 +50,7 @@ const Artworks = () => {
       {isLoading ? (
         <SpinLoader />
       ) : filteredArtworks.length > 0 ? (
-        <FilteredArtworks title="Artworks" artworks={filteredArtworks} />
+        <FilteredArtworks searchMutation={searchMutation} title="Artworks" artworks={filteredArtworks} />
       ) : (
         <FilteredArtworks title="No artworks to display" artworks={[]} />
       )}

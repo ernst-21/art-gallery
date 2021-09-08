@@ -1,11 +1,12 @@
 import ElementsGrid from '../../../components/ElementsGrid';
 
-const FilteredArtworks = (props) => {
+const FilteredArtworks = ({title, artworks, searchMutation}) => {
   return (
     <div className="section filtered-artworks__section">
       <ElementsGrid
-        title={props.title} // change this dynamically
-        elements={props.artworks} // and this
+        searchMutation={searchMutation}
+        title={title}
+        elements={artworks}
         artworks={true}
       />
     </div>

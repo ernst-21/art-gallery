@@ -1,14 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Button, Space } from 'antd';
 import { categories, sizes, orientation } from '../../../../mockData';
 import SliderFilter from '../../../../components/SliderFilter';
 import MoreFilters from './components/MoreFilters';
 import RadioFilter from './components/RadioFilter';
 import useFilterChange from '../../../../hooks/useFilterChange';
+import {FilterContext} from '../../../../context/FilterContext';
 import {filterDefaults} from '../../../../mockData';
 
 const ArtworksFilter = ({ searchMutation }) => {
-  const { filters, onRadioChange, onSelectChange, onSliderChange } = useFilterChange(filterDefaults);
+  const {setFilters} = useContext(FilterContext);
+  const { filters, onRadioChange, onSelectChange, onSliderChange } = useFilterChange(FilterContext);
   const [moreFilters, setMoreFilters] = useState(false);
 
   const onCategoryChange = (e) => {
@@ -47,6 +49,11 @@ const ArtworksFilter = ({ searchMutation }) => {
   useEffect(() => {
     searchMutation(filters);
   }, [filters, searchMutation]);
+
+  useEffect(() => {
+    setFilters(filterDefaults);
+    //eslint-disable-next-line
+  }, []);
 
   return (
     <div className="artworks-filter__container">

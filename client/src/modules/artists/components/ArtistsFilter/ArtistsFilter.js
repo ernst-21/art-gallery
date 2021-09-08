@@ -5,9 +5,10 @@ import CheckboxRecommended from './components/CheckboxRecommended';
 import SliderFilter from '../../../../components/SliderFilter';
 import { Button } from 'antd';
 import useFilterChange from '../../../../hooks/useFilterChange';
+import {ArtistFilterContext} from '../../../../context/ArtistFilterContext';
 
 const ArtistsFilter = ({searchArtistMutation}) => {
-  const { filters, onCheckboxChange, onSelectChange, onSliderChange } = useFilterChange(artistFiltersDefaults);
+  const { filters, onCheckboxChange, onSelectChange, onSliderChange } = useFilterChange(ArtistFilterContext);
 
   const onRecommendedChange = (e) => {
     onCheckboxChange(e, 'recommended');

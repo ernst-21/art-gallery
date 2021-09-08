@@ -22,7 +22,6 @@ const Artists = () => {
         .then((data) => data),
     {
       onSuccess: (data) => {
-        console.log(data);
         setFilteredArtists(data);
       }
     }

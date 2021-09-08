@@ -22,6 +22,7 @@ const ElementsGrid = (props) => {
         {props.elements.map((item) =>
           props.artworks === true ? (
             <ArtworkCard
+              searchMutation={props.searchMutation}
               key={item._id}
               id={item._id}
               url={item.url}

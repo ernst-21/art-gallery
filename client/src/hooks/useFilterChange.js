@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 
-const useFilterChange = (filterSubject) => {
-  const [filters, setFilters] = useState(filterSubject);
+
+const useFilterChange = (filterContext) => {
+  const {filters, setFilters} = useContext(filterContext);
 
   const onRadioChange = (e, name, arr) => {
     let value;

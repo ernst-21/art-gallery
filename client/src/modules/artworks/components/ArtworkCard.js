@@ -1,5 +1,6 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import { Card } from 'antd';
+import {FilterContext} from '../../../context/FilterContext';
 import { unVoteArtwork, voteArtwork } from '../api/api-artworks';
 import { useQueryClient, useMutation } from 'react-query';
 import auth from '../../auth/api/auth-helper';
@@ -15,6 +16,7 @@ import LazyLoad from 'react-lazyload';
 
 const ArtworkCard = forwardRef((props, ref) => {
   const {isModalVisible, handleClose, unLikeOrSign} = useSignToVote();
+  const { filters } = useContext(FilterContext);
 
   const jwt = auth.isAuthenticated();
 
@@ -28,6 +30,12 @@ const ArtworkCard = forwardRef((props, ref) => {
     }
   };
 
+  const voteAndSetFilters = () => {
+    if (window.location.pathname === '/artworks') {
+      props.searchMutation(filters);
+    }
+  };
+
   const { mutate: likeMutation, status } = useMutation(
     (user) =>
       voteArtwork({ artworkId: props.id }, { t: jwt.token }, user)
@@ -35,7 +43,11 @@ const ArtworkCard = forwardRef((props, ref) => {
         .then((data) => data),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries({exact: true});
+        queryClient.invalidateQueries({
+          predicate: query =>
+            query.queryKey[0] !== 'artworks'
+        });
+        voteAndSetFilters();
       }
     }
   );
@@ -47,7 +59,11 @@ const ArtworkCard = forwardRef((props, ref) => {
         .then((data) => data),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries({ exact: true });
+        queryClient.invalidateQueries({
+          predicate: query =>
+            query.queryKey[0] !== 'artworks'
+        });
+        voteAndSetFilters();
       }
     }
   );
