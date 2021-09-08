@@ -46,6 +46,10 @@ const ArtworksFilter = ({ searchMutation }) => {
     onSliderChange(value, 'price');
   };
 
+  const onLikesChange = (value) => {
+    onSliderChange(value, 'voters');
+  };
+
   useEffect(() => {
     searchMutation(filters);
   }, [filters, searchMutation]);
@@ -77,6 +81,9 @@ const ArtworksFilter = ({ searchMutation }) => {
         </div>
         <div className="radio-size__container">
           <RadioFilter onChange={onSizeChange} title="Size:" elements={sizes} />
+        </div>
+        <div className="slider-price__container">
+          Likes $: <SliderFilter min={0} max={10} onAfterChange={onLikesChange}/>
         </div>
       </div>
       <Space>

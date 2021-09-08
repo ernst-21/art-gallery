@@ -134,6 +134,7 @@ const searchArtworks = async (req, res) => {
   let tags = req.body.tags;
   let colors = req.body.colors;
   let price = req.body.price;
+  let voters = req.body.voters;
 
   try {
     let foundArtworks = await Artwork.find({
@@ -142,7 +143,7 @@ const searchArtworks = async (req, res) => {
           $gt: price[0],
           $lt: price[1]
         }
-      }]
+      }, {$expr: {$gte: [{$size: "$voters"}, voters[0]]}} , {$expr: {$lte: [{$size: "$voters"}, voters[1]]}}]
     }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     res.json(foundArtworks);
   } catch (err) {

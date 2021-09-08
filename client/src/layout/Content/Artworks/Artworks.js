@@ -39,10 +39,6 @@ const Artworks = () => {
     }
   );
 
-  // useEffect(() => {
-  //   setFilteredArtworks(receivedArtworks);
-  // }, [receivedArtworks]);
-
   if (isError || status === 'error') {
     return <Redirect to="/info-network-error" />;
   }

@@ -372,6 +372,7 @@ export const filterDefaults = {
   size: ['big', 'small', 'medium'],
   gallery: ['Paris', 'London', 'Berlin', 'New York'],
   price: [0, 10000],
+  voters: [0, 10],
   artist: [
     'William Shakespeare',
     'Alice Walker',
