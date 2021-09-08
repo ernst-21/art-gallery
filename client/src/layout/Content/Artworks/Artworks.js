@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import FilteredArtworks from '../../../modules/artworks/components/FilteredArtworks';
 import ArtworksFilter from '../../../modules/artworks/components/ArtworksFilter/ArtworksFilter';
 import {
@@ -9,10 +9,16 @@ import { useQuery, useMutation } from 'react-query';
 import SpinLoader from '../../../components/SpinLoader';
 import { Redirect } from 'react-router-dom';
 import {FilterContext} from '../../../context/FilterContext';
+import { filterDefaults } from '../../../mockData';
 
 const Artworks = () => {
   const [filteredArtworks, setFilteredArtworks] = useState([]);
-  const {filters} = useContext(FilterContext);
+  const {filters, setFilters} = useContext(FilterContext);
+
+  useEffect(() => {
+    setFilters(filterDefaults);
+    //eslint-disable-next-line
+  }, []);
 
   const { isLoading, isError } = useQuery(
     'artworks',

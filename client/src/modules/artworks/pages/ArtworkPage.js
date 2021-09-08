@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import { readArtwork, similarArtworks } from '../api/api-artworks';
 import { useQuery, useMutation } from 'react-query';
 import { Redirect, useParams } from 'react-router-dom';
@@ -60,7 +60,7 @@ const ArtworkPage = () => {
             <div className="artwork-info__container">
               <h1>{artwork.name}</h1>
               <p className="artwork-info__description"><em>{artwork.description}</em></p>
-              <p className="artwork-info__description">Artist: <em>{artwork.artist}</em></p>
+              <p className="artwork-info__description">Artist: <em><Link to={'/artists/' + artwork.artist_Id}>{artwork.artist}</Link></em></p>
               <p className="artwork-info__description">Category: <em>{artwork.category.charAt(0).toUpperCase() + artwork.category.slice(1)}</em></p>
               <p className="artwork-info__description">Size: <em>{artwork.size}</em></p>
               <p className="artwork-info__description">Orientation: <em>{artwork.orientation}</em></p>
