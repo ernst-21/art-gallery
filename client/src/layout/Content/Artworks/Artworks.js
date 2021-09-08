@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import FilteredArtworks from '../../../modules/artworks/components/FilteredArtworks';
 import ArtworksFilter from '../../../modules/artworks/components/ArtworksFilter/ArtworksFilter';
 import {
@@ -8,17 +8,20 @@ import {
 import { useQuery, useMutation } from 'react-query';
 import SpinLoader from '../../../components/SpinLoader';
 import { Redirect } from 'react-router-dom';
+import {FilterContext} from '../../../context/FilterContext';
 
 const Artworks = () => {
   const [filteredArtworks, setFilteredArtworks] = useState([]);
+  const {filters} = useContext(FilterContext);
 
-  const { data: receivedArtworks = [], isLoading, isError } = useQuery(
+  const { isLoading, isError } = useQuery(
     'artworks',
     () =>
       listArtworks()
         .then((res) => res.json())
         .then((data) => data),
     {
+      onSuccess: () => searchMutation(filters),
       staleTime: Infinity,
       cacheTime: Infinity
     }
@@ -36,9 +39,9 @@ const Artworks = () => {
     }
   );
 
-  useEffect(() => {
-    setFilteredArtworks(receivedArtworks);
-  }, [receivedArtworks]);
+  // useEffect(() => {
+  //   setFilteredArtworks(receivedArtworks);
+  // }, [receivedArtworks]);
 
   if (isError || status === 'error') {
     return <Redirect to="/info-network-error" />;
@@ -46,11 +49,11 @@ const Artworks = () => {
 
   return (
     <div className="artworks-page">
-      {filteredArtworks && <ArtworksFilter searchMutation={searchMutation} />}
+      <ArtworksFilter searchMutation={searchMutation} />
       {isLoading ? (
         <SpinLoader />
       ) : filteredArtworks.length > 0 ? (
-        <FilteredArtworks searchMutation={searchMutation} title="Artworks" artworks={filteredArtworks} />
+        <FilteredArtworks title="Artworks" artworks={filteredArtworks} />
       ) : (
         <FilteredArtworks title="No artworks to display" artworks={[]} />
       )}

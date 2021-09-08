@@ -1,6 +1,5 @@
-import React, { forwardRef, useContext } from 'react';
+import React, { forwardRef } from 'react';
 import { Card } from 'antd';
-import {FilterContext} from '../../../context/FilterContext';
 import { unVoteArtwork, voteArtwork } from '../api/api-artworks';
 import { useQueryClient, useMutation } from 'react-query';
 import auth from '../../auth/api/auth-helper';
@@ -15,8 +14,7 @@ import useSignToVote from '../../../hooks/useSignToVote';
 import LazyLoad from 'react-lazyload';
 
 const ArtworkCard = forwardRef((props, ref) => {
-  const {isModalVisible, handleClose, unLikeOrSign} = useSignToVote();
-  const { filters } = useContext(FilterContext);
+  const { isModalVisible, handleClose, unLikeOrSign } = useSignToVote();
 
   const jwt = auth.isAuthenticated();
 
@@ -30,12 +28,6 @@ const ArtworkCard = forwardRef((props, ref) => {
     }
   };
 
-  const voteAndSetFilters = () => {
-    if (window.location.pathname === '/artworks') {
-      props.searchMutation(filters);
-    }
-  };
-
   const { mutate: likeMutation, status } = useMutation(
     (user) =>
       voteArtwork({ artworkId: props.id }, { t: jwt.token }, user)
@@ -44,10 +36,8 @@ const ArtworkCard = forwardRef((props, ref) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries({
-          predicate: query =>
-            query.queryKey[0] !== 'artworks'
+          exact: true
         });
-        voteAndSetFilters();
       }
     }
   );
@@ -60,10 +50,8 @@ const ArtworkCard = forwardRef((props, ref) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries({
-          predicate: query =>
-            query.queryKey[0] !== 'artworks'
+          exact: true
         });
-        voteAndSetFilters();
       }
     }
   );
@@ -80,17 +68,21 @@ const ArtworkCard = forwardRef((props, ref) => {
         style={setStyles(props.artworkPage)}
         cover={
           <LazyLoad>
-            {props.artworkPage ? (<img
-              style={{ width: '100%', height: 'auto' }}
-              alt={props.name}
-              src={props.url}
-            />) : (<Link to={'/artworks/' + props.id}>
+            {props.artworkPage ? (
               <img
                 style={{ width: '100%', height: 'auto' }}
                 alt={props.name}
                 src={props.url}
               />
-            </Link>)}
+            ) : (
+              <Link to={'/artworks/' + props.id}>
+                <img
+                  style={{ width: '100%', height: 'auto' }}
+                  alt={props.name}
+                  src={props.url}
+                />
+              </Link>
+            )}
           </LazyLoad>
         }
         actions={
@@ -162,7 +154,11 @@ const ArtworkCard = forwardRef((props, ref) => {
           </>
         )}
       </Card>
-      <SignModal isModalVisible={isModalVisible} visible={isModalVisible} handleClose={handleClose} />
+      <SignModal
+        isModalVisible={isModalVisible}
+        visible={isModalVisible}
+        handleClose={handleClose}
+      />
     </>
   );
 });
