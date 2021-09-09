@@ -1,14 +1,13 @@
-import React from 'react';
-import { FaShoppingCart } from 'react-icons/fa';
-import {Space} from 'antd';
 import { NavLink, useHistory } from 'react-router-dom';
 import auth from '../../modules/auth/api/auth-helper';
 import SignoutBtn from '../../modules/auth/components/Signout';
 import UserMenuIcon from './UserMenuIcon';
 import { isActive } from '../../utils/navlinkStyles';
+import CartIconComponent from './CartIconComponent';
 
 const MenuItems = (props) => {
   const history = useHistory();
+
   return (
     <ul className={props.className}>
       <li onClick={props.onClick}>
@@ -125,12 +124,7 @@ const MenuItems = (props) => {
                   )}
                   to={'/user/cart/' + auth.isAuthenticated().user._id}
                 >
-                  <Space>
-                    <FaShoppingCart
-                      style={{ fontSize: '22px', marginTop: '1.2rem' }}
-                    />
-                    <p style={{ marginTop: '1rem' }}>0</p>
-                  </Space>
+                  <CartIconComponent />
                 </NavLink>
               </li>
             </>

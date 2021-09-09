@@ -11,6 +11,8 @@ router.route('/api/artworks/cart/add/:artworkId').put(authCtrl.requireSignin, ar
 
 router.route('/api/artworks/cart/remove/:artworkId').put(authCtrl.requireSignin, artworkCtrl.removeArtworkFromCart);
 
+router.route('/api/artworks/cart/cartArtworks').post(artworkCtrl.listCartItems);
+
 router.route('/api/artworks/vote/:artworkId').put(authCtrl.requireSignin, artworkCtrl.voteArtwork);
 
 router.route('/api/artworks/unvote/:artworkId').put(authCtrl.requireSignin, artworkCtrl.unVoteArtwork);

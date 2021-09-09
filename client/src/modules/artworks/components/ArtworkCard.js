@@ -1,12 +1,5 @@
 import React, { forwardRef } from 'react';
 import { Card, Tooltip } from 'antd';
-import {
-  unVoteArtwork,
-  voteArtwork,
-  addArtworkToCart,
-  removeArtworkFromCart
-} from '../api/api-artworks';
-import { useQueryClient, useMutation } from 'react-query';
 import auth from '../../auth/api/auth-helper';
 import SignModal from '../../../components/SignModal';
 import {
@@ -18,13 +11,11 @@ import {
 import { Link, Redirect } from 'react-router-dom';
 import useSignToAction from '../../../hooks/useSignToAction';
 import LazyLoad from 'react-lazyload';
+import useLikeAndCart from '../../../hooks/useLikeAndCart';
 
 const ArtworkCard = forwardRef((props, ref) => {
+  const {likeMutation, status, unLikeMutation, isError, addToCartMutation, toCartStatus, fromCartMutation, fromCartStatus} = useLikeAndCart();
   const { isModalVisible, handleClose, unDoOrSign } = useSignToAction();
-
-  const jwt = auth.isAuthenticated();
-
-  const queryClient = useQueryClient();
 
   const setStyles = (arg) => {
     if (arg === false) {
@@ -33,62 +24,6 @@ const ArtworkCard = forwardRef((props, ref) => {
       return { textAlign: 'center' };
     }
   };
-
-  const { mutate: likeMutation, status } = useMutation(
-    (user) =>
-      voteArtwork({ artworkId: props.id }, { t: jwt.token }, user)
-        .then((res) => res.json())
-        .then((data) => data),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          exact: true
-        });
-      }
-    }
-  );
-
-  const { mutate: unLikeMutation, isError } = useMutation(
-    (user) =>
-      unVoteArtwork({ artworkId: props.id }, { t: jwt.token }, user)
-        .then((res) => res.json())
-        .then((data) => data),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          exact: true
-        });
-      }
-    }
-  );
-
-  const { mutate: addToCartMutation, status: toCartStatus } = useMutation(
-    (user) =>
-      addArtworkToCart({ artworkId: props.id }, { t: jwt.token }, user)
-        .then((res) => res.json())
-        .then((data) => data),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          exact: true
-        });
-      }
-    }
-  );
-
-  const { mutate: fromCartMutation, status: fromCartStatus } = useMutation(
-    (user) =>
-      removeArtworkFromCart({ artworkId: props.id }, { t: jwt.token }, user)
-        .then((res) => res.json())
-        .then((data) => data),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          exact: true
-        });
-      }
-    }
-  );
 
   if (
     isError ||
@@ -140,7 +75,7 @@ const ArtworkCard = forwardRef((props, ref) => {
                   />
                 ) : (
                   <AiOutlineHeart
-                    onClick={() => unDoOrSign(likeMutation)}
+                    onClick={() => unDoOrSign(likeMutation, props.id)}
                     className="artwork-card__icon outline-heart"
                     key="like"
                   />
@@ -150,9 +85,9 @@ const ArtworkCard = forwardRef((props, ref) => {
                   <Tooltip title="Remove from cart">
                     <MdRemoveShoppingCart
                       onClick={() =>
-                        fromCartMutation({
+                        fromCartMutation([{
                           userId: auth.isAuthenticated()?.user._id
-                        })
+                        }, props.id])
                       }
                       className="artwork-card__icon remove-cart__icon"
                       key="removeFromCart"
@@ -161,7 +96,7 @@ const ArtworkCard = forwardRef((props, ref) => {
                 ) : (
                   <Tooltip title='Add to cart'>
                     <FaCartPlus
-                      onClick={() => unDoOrSign(addToCartMutation)}
+                      onClick={() => unDoOrSign(addToCartMutation, props.id)}
                       className="artwork-card__icon add-cart__icon"
                       key="addToCart"
                     />
@@ -174,16 +109,16 @@ const ArtworkCard = forwardRef((props, ref) => {
                   <AiFillHeart
                     style={{ color: 'red' }}
                     onClick={() =>
-                      unLikeMutation({
+                      unLikeMutation([{
                         userId: auth.isAuthenticated()?.user._id
-                      })
+                      }, props.id])
                     }
                     className="artwork-card__icon"
                     key="unlike"
                   />
                 ) : (
                   <AiOutlineHeart
-                    onClick={() => unDoOrSign(likeMutation)}
+                    onClick={() => unDoOrSign(likeMutation, props.id)}
                     className="artwork-card__icon outline-heart"
                     key="like"
                   />
@@ -219,5 +154,7 @@ const ArtworkCard = forwardRef((props, ref) => {
     </>
   );
 });
+
+ArtworkCard.displayName = 'ArtworkCard';
 
 export default ArtworkCard;

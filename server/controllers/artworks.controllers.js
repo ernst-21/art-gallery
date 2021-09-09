@@ -12,6 +12,18 @@ const listArtworks = async (req, res) => {
   }
 };
 
+const listCartItems = async (req, res) => {
+  let userId = req.body.userId;
+  try {
+    let artworks = await Artwork.find({'addedToCart': {$in: userId}}).select('name artist addedToCart category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
+    res.json(artworks);
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err)
+    });
+  }
+};
+
 const listByCategory = async (req, res) => {
   const category = req.params.artCategory;
   let artworks;
@@ -191,3 +203,4 @@ exports.userArtworks = userArtworks;
 exports.searchArtworks = searchArtworks;
 exports.addArtworkToCart = addArtworkToCart;
 exports.removeArtworkFromCart = removeArtworkFromCart;
+exports.listCartItems = listCartItems;

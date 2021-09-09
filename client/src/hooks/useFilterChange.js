@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 
-
 const useFilterChange = (filterContext) => {
   const {filters, setFilters} = useContext(filterContext);
 

@@ -11,9 +11,9 @@ const useSignToAction = () => {
     setIsModalVisible(false);
   };
 
-  const unDoOrSign = (cb) => {
+  const unDoOrSign = (cb, id) => {
     auth.isAuthenticated()
-      ? cb({ userId: auth.isAuthenticated().user._id })
+      ? cb([{ userId: auth.isAuthenticated().user._id }, id])
       : showModal();
   };
   return {isModalVisible, handleClose, unDoOrSign };

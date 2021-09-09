@@ -3,11 +3,11 @@ import { readArtwork, similarArtworks } from '../api/api-artworks';
 import { useQuery, useMutation } from 'react-query';
 import { Redirect, useParams } from 'react-router-dom';
 import SpinLoader from '../../../components/SpinLoader';
-import { Button } from 'antd';
 import ArtworkTags from '../components/ArtworkTags';
 import {Link} from 'react-router-dom';
 import ArtworkCard from '../components/ArtworkCard';
 import ElementsGrid from '../../../components/ElementsGrid';
+import AddRemoveCartButton from '../components/AddRemoveCartButton';
 
 const ArtworkPage = () => {
   const artworkId = useParams().artworkId;
@@ -69,9 +69,7 @@ const ArtworkPage = () => {
                 <em>likes: {artwork.voters.length}</em>
               </h4>
               <p className="artwork-info__description">Price: ${artwork.price}</p>
-              <Button size="large" style={{ marginTop: '1rem' }} type="primary">
-                <Link to={'/home'}>Add to Cart</Link>
-              </Button>
+              <AddRemoveCartButton id={artworkId} addedToCart={artwork.addedToCart} />
             </div>
           </div>
           <div className="similar-artworks__container">
