@@ -1,9 +1,9 @@
-import useSignToAction from '../../../hooks/useSignToAction';
+import useSignToAction from '../../../hooks/Auth/useSignToAction';
 import auth from '../../auth/api/auth-helper';
 import SignModal from '../../../components/SignModal';
 import { Redirect } from 'react-router-dom';
 import { Button } from 'antd';
-import useLikeAndCart from '../../../hooks/useLikeAndCart';
+import useLikeAndCart from '../../../hooks/Cart/useLikeAndCart';
 
 const AddRemoveCartButton = (props) => {
   const { isModalVisible, handleClose, unDoOrSign } = useSignToAction();

@@ -2,7 +2,7 @@ import React, {useEffect, useState, memo} from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Button, Card, Form, Input } from 'antd';
 import { emailToPass } from '../../user/api/api-user';
-import { useHttpError } from '../../../hooks/http-hook';
+import { useHttpError } from '../../../hooks/Http/http-hook';
 import {useMutation} from 'react-query';
 import {success} from '../../../components/Message';
 

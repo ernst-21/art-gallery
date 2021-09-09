@@ -1,13 +1,13 @@
 import {useContext} from 'react';
-import { CartContext } from '../context/CartContext';
-import auth from '../modules/auth/api/auth-helper';
+import { CartContext } from '../../context/CartContext';
+import auth from '../../modules/auth/api/auth-helper';
 import { useMutation, useQueryClient } from 'react-query';
 import {
   addArtworkToCart,
   removeArtworkFromCart,
   unVoteArtwork,
   voteArtwork
-} from '../modules/artworks/api/api-artworks';
+} from '../../modules/artworks/api/api-artworks';
 
 const useLikeAndCart = () => {
   const { cartItems, setCartItems } = useContext(CartContext);

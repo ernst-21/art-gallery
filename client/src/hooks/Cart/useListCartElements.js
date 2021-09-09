@@ -1,15 +1,15 @@
 import { useEffect, useState, useContext } from 'react';
-import { CartContext } from '../context/CartContext';
+import { CartContext } from '../../context/CartContext';
 import { useMutation } from 'react-query';
-import { listCartItems } from '../modules/artworks/api/api-artworks';
-import auth from '../modules/auth/api/auth-helper';
+import { listCartItems } from '../../modules/artworks/api/api-artworks';
+import auth from '../../modules/auth/api/auth-helper';
 
 const useListCartElements = () => {
   const { cartItems } = useContext(CartContext);
   const [cartElements, setCartElements] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const { mutate: cartItemsMutation, isError } = useMutation(
+  const { mutate: cartItemsMutation, isError, status } = useMutation(
     (user) =>
       listCartItems(user)
         .then((res) => res.json())
@@ -34,7 +34,7 @@ const useListCartElements = () => {
     }
   }, [cartItems, cartItemsMutation]);
 
-  return { isError, cartElements, totalPrice };
+  return { isError, cartElements, totalPrice, status };
 };
 
 export default useListCartElements;

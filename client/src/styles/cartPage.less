@@ -1,0 +1,35 @@
+@import './variables';
+
+.cart-page {
+  display: block;
+  margin: 0;
+  padding: 1em;
+  .cart-list {
+    margin-top: 1rem;
+    .remove-from-cart__icon {
+      font-size: 1.5rem;
+      color: @heart-color;
+    }
+    .cart-list__avatar {
+      border-radius: 0;
+    }
+  }
+  .cart-list-price__container {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.cart-page__skeleton {
+  padding: 2em;
+}
+
+@media (min-width: 768px) {
+  .cart-page {
+    padding: 1em 6em;
+    .cart-list {
+
+    }
+  }
+}

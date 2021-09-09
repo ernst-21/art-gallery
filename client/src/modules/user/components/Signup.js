@@ -1,7 +1,7 @@
 import React, { useState, useEffect, memo } from 'react';
 import { create } from '../api/api-user.js';
 import { Link, Redirect } from 'react-router-dom';
-import { useHttpError } from '../../../hooks/http-hook';
+import { useHttpError } from '../../../hooks/Http/http-hook';
 import { Form, Input, Button, Card, Grid } from 'antd';
 import { strongPass, wrongPasswordMessage } from '../../../config/config';
 import { useMutation } from 'react-query';

@@ -5,7 +5,7 @@ import { likeArtist, unlikeArtist } from '../api/api-artists';
 import { useMutation, useQueryClient } from 'react-query';
 import auth from '../../auth/api/auth-helper';
 import React from 'react';
-import useSignToVote from '../../../hooks/useSignToAction';
+import useSignToVote from '../../../hooks/Auth/useSignToAction';
 import SignModal from '../../../components/SignModal';
 
 const { Meta } = Card;

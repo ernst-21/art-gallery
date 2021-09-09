@@ -9,9 +9,9 @@ import {
   MdRemoveShoppingCart
 } from 'react-icons/all';
 import { Link, Redirect } from 'react-router-dom';
-import useSignToAction from '../../../hooks/useSignToAction';
+import useSignToAction from '../../../hooks/Auth/useSignToAction';
 import LazyLoad from 'react-lazyload';
-import useLikeAndCart from '../../../hooks/useLikeAndCart';
+import useLikeAndCart from '../../../hooks/Cart/useLikeAndCart';
 
 const ArtworkCard = forwardRef((props, ref) => {
   const {likeMutation, status, unLikeMutation, isError, addToCartMutation, toCartStatus, fromCartMutation, fromCartStatus} = useLikeAndCart();

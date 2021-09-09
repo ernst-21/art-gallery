@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import auth from '../modules/auth/api/auth-helper';
+import auth from '../../modules/auth/api/auth-helper';
 
 const useSignToAction = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);

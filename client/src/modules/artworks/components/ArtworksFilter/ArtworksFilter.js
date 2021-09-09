@@ -4,7 +4,7 @@ import { categories, sizes, orientation } from '../../../../mockData';
 import SliderFilter from '../../../../components/SliderFilter';
 import MoreFilters from './components/MoreFilters';
 import RadioFilter from './components/RadioFilter';
-import useFilterChange from '../../../../hooks/useFilterChange';
+import useFilterChange from '../../../../hooks/Filters/useFilterChange';
 import {FilterContext} from '../../../../context/FilterContext';
 import {filterDefaults} from '../../../../mockData';
 

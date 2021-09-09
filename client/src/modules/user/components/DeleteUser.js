@@ -6,7 +6,7 @@ import { remove } from '../api/api-user.js';
 import { Redirect } from 'react-router-dom';
 import { Modal, Button } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
-import { useHttpError } from '../../../hooks/http-hook';
+import { useHttpError } from '../../../hooks/Http/http-hook';
 
 export default function DeleteUser(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);

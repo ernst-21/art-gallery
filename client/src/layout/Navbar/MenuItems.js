@@ -72,8 +72,8 @@ const MenuItems = (props) => {
             </li>
             <li onClick={props.onClick}>
               <NavLink
-                style={isActive(props.history, '/user/cart/:userId')}
-                to="/user/cart/:userId"
+                style={isActive(props.history, '/user/cart/'+ auth.isAuthenticated().user._id)}
+                to={'/user/cart/' + auth.isAuthenticated().user._id}
               >
               Cart
               </NavLink>
@@ -85,17 +85,6 @@ const MenuItems = (props) => {
                   '/user/purchased/' + auth.isAuthenticated().user._id
                 )}
                 to={'/user/purchased/' + auth.isAuthenticated().user._id}
-              >
-              Purchased
-              </NavLink>
-            </li>
-            <li onClick={props.onClick}>
-              <NavLink
-                style={isActive(
-                  props.history,
-                  '/user/payment/' + auth.isAuthenticated().user._id
-                )}
-                to={'/user/payment/' + auth.isAuthenticated().user._id}
               >
               Purchased
               </NavLink>

@@ -1,16 +1,28 @@
-import { List, Empty } from 'antd';
-import {IoRemoveCircleOutline} from 'react-icons/all';
-import useListCartElements from '../../../hooks/useListCartElements';
+import { List, Skeleton, Avatar, Empty, Divider } from 'antd';
+import { Link } from 'react-router-dom';
+import { IoRemoveCircleOutline } from 'react-icons/all';
+import useListCartElements from '../../../hooks/Cart/useListCartElements';
 import { Redirect } from 'react-router-dom';
 import auth from '../../../modules/auth/api/auth-helper';
-import useLikeAndCart from '../../../hooks/useLikeAndCart';
+import useLikeAndCart from '../../../hooks/Cart/useLikeAndCart';
 
 const CartPage = () => {
-  const { cartElements, isError, totalPrice } = useListCartElements();
-  const {fromCartMutation} = useLikeAndCart();
+  const { cartElements, isError, totalPrice, status } = useListCartElements();
+  const arr = [1, 2, 3, 4, 5];
+  const { fromCartMutation } = useLikeAndCart();
 
   if (isError) {
     return <Redirect to="/info-network-error" />;
+  }
+
+  if (status === 'loading') {
+    return (
+      <div className="cart-page__skeleton">
+        {arr.map((item) => (
+          <Skeleton key={item} avatar title={false} active />
+        ))}
+      </div>
+    );
   }
 
   if (!cartElements || cartElements.length === 0) {
@@ -19,16 +31,45 @@ const CartPage = () => {
 
   return (
     <div className="cart-page">
-      <List itemLayout="horizontal">
-        {cartElements.map((item) => (
-          <List.Item key={item._id} actions={[<IoRemoveCircleOutline onClick={() =>
-            fromCartMutation([{
-              userId: auth.isAuthenticated()?.user._id
-            }, item._id])
-          } key={item._id}/>]}>{item.name}<p>{item.price}</p></List.Item>
-        ))}
-      </List>
-      <h3>Total: {totalPrice}</h3>
+      <List
+        className="cart-list"
+        itemLayout="horizontal"
+        dataSource={cartElements}
+        pagination={{
+          pageSize: 5
+        }}
+        renderItem={(item) => (
+          <List.Item
+            actions={[
+              <IoRemoveCircleOutline
+                className="remove-from-cart__icon"
+                onClick={() =>
+                  fromCartMutation([
+                    {
+                      userId: auth.isAuthenticated()?.user._id
+                    },
+                    item._id
+                  ])
+                }
+                key={item._id}
+              />
+            ]}
+          >
+            <List.Item.Meta
+              avatar={<Avatar className="cart-list__avatar" src={item.url} />}
+              title={<Link to={'/artworks/' + item._id}>{item.name}</Link>}
+              description={
+                item.category.charAt(0).toUpperCase() + item.category.slice(1)
+              }
+            />
+            <div><h3>${item.price}</h3></div>
+          </List.Item>
+        )}
+      />
+      <Divider />
+      <div className='cart-list-price__container'>
+        <h2>Total: ${totalPrice}</h2>
+      </div>
     </div>
   );
 };

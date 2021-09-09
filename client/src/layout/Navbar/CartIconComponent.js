@@ -1,7 +1,7 @@
 import { FaShoppingCart } from 'react-icons/fa';
 import { Space } from 'antd';
 import { Redirect } from 'react-router-dom';
-import useListCartElements from '../../hooks/useListCartElements';
+import useListCartElements from '../../hooks/Cart/useListCartElements';
 
 const CartIconComponent = () => {
   const {cartElements, isError} = useListCartElements();
