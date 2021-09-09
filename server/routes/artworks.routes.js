@@ -7,6 +7,10 @@ const router = express.Router();
 router.route('/api/artworks').get(artworkCtrl.listArtworks);
 router.route('/api/artworks/category/:artCategory').get(artworkCtrl.listByCategory);
 
+router.route('/api/artworks/cart/add/:artworkId').put(authCtrl.requireSignin, artworkCtrl.addArtworkToCart);
+
+router.route('/api/artworks/cart/remove/:artworkId').put(authCtrl.requireSignin, artworkCtrl.removeArtworkFromCart);
+
 router.route('/api/artworks/vote/:artworkId').put(authCtrl.requireSignin, artworkCtrl.voteArtwork);
 
 router.route('/api/artworks/unvote/:artworkId').put(authCtrl.requireSignin, artworkCtrl.unVoteArtwork);

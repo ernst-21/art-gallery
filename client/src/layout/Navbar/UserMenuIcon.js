@@ -17,6 +17,11 @@ const UserMenu = (props) => {
         </NavLink>
       </Menu.Item>
       <Menu.Item key='2'>
+        <NavLink style={isActive(props.history, '/user/purchased/' + auth.isAuthenticated().user._id)} to={'/user/purchased/' + auth.isAuthenticated().user._id}>
+          My Purchases
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item key='3'>
         <SignoutBtn />
       </Menu.Item>
     </Menu>
@@ -25,7 +30,7 @@ const UserMenu = (props) => {
 
 const UserMenuIcon = (props) => {
   return (
-    <MenuDropDown className='user-dropdown' overlay={<UserMenu history={props.history} />} placement="bottomCenter">
+    <MenuDropDown className='user-dropdown' overlay={<UserMenu history={props.history}/>} placement="bottomCenter">
       <a onClick={(e) => e.preventDefault()}>
         <BiUser style={{fontSize: '22px', marginTop: '1.5rem'}} />
       </a>

@@ -43,6 +43,7 @@ const ArtworkSchema = new mongoose.Schema({
     required: true
   },
   voters : [{type: ObjectId, ref: 'User'}],
+  addedToCart : [{type: ObjectId, ref: 'User'}],
   purchased: [{type: ObjectId, ref: 'User'}]
 });
 

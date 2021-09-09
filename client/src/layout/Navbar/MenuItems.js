@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
+import {Space} from 'antd';
 import { NavLink, useHistory } from 'react-router-dom';
 import auth from '../../modules/auth/api/auth-helper';
 import SignoutBtn from '../../modules/auth/components/Signout';
@@ -80,27 +81,35 @@ const MenuItems = (props) => {
             </li>
             <li onClick={props.onClick}>
               <NavLink
-                style={isActive(props.history, '/user/purchased/:userId')}
-                to="/user/purchased/:userId"
+                style={isActive(
+                  props.history,
+                  '/user/purchased/' + auth.isAuthenticated().user._id
+                )}
+                to={'/user/purchased/' + auth.isAuthenticated().user._id}
               >
-                Purchased
+              Purchased
               </NavLink>
             </li>
             <li onClick={props.onClick}>
               <NavLink
-                style={isActive(props.history, '/user/payment/:userId')}
-                to="/user/payment/:userId"
+                style={isActive(
+                  props.history,
+                  '/user/payment/' + auth.isAuthenticated().user._id
+                )}
+                to={'/user/payment/' + auth.isAuthenticated().user._id}
               >
-                Purchased
+              Purchased
               </NavLink>
             </li>
-            <SignoutBtn
-              onClick={() => {
-                auth.clearJWT(() => history.push('/'));
-              }}
-            >
-            Sign out
-            </SignoutBtn>
+            <li onClick={props.onClick}>
+              <SignoutBtn
+                onClick={() => {
+                  auth.clearJWT(() => history.push('/'));
+                }}
+              >
+              Sign out
+              </SignoutBtn>
+            </li>
           </>
         ) : (
           auth.isAuthenticated() && (
@@ -110,10 +119,18 @@ const MenuItems = (props) => {
               </li>
               <li>
                 <NavLink
-                  style={isActive(props.history, '/user/cart/:userId')}
-                  to="/user/cart/:userId"
+                  style={isActive(
+                    props.history,
+                    '/user/cart/' + auth.isAuthenticated().user._id
+                  )}
+                  to={'/user/cart/' + auth.isAuthenticated().user._id}
                 >
-                  <FaShoppingCart />
+                  <Space>
+                    <FaShoppingCart
+                      style={{ fontSize: '22px', marginTop: '1.2rem' }}
+                    />
+                    <p style={{ marginTop: '1rem' }}>0</p>
+                  </Space>
                 </NavLink>
               </li>
             </>

@@ -38,6 +38,28 @@ const unVoteArtwork = async (params, credentials, user) =>
     body: JSON.stringify(user)
   });
 
+const addArtworkToCart = async (params, credentials, user) =>
+  await fetch('http://localhost:5000/api/artworks/cart/add/' + params.artworkId, {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + credentials.t
+    },
+    body: JSON.stringify(user)
+  });
+
+const removeArtworkFromCart = async (params, credentials, user) =>
+  await fetch('http://localhost:5000/api/artworks/cart/remove/' + params.artworkId, {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + credentials.t
+    },
+    body: JSON.stringify(user)
+  });
+
 const artistArtworks = async (artistWork) =>
   await fetch('http://localhost:5000/api/artworks/artistArtworks', {
     method: 'POST',
@@ -88,4 +110,6 @@ export {
   userArtworks,
   similarArtworks,
   searchArtworks,
+  addArtworkToCart,
+  removeArtworkFromCart
 };

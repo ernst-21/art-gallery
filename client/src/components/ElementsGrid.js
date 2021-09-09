@@ -32,6 +32,7 @@ const ElementsGrid = (props) => {
               artist_Id={item.artist_Id}
               gallery={item.gallery}
               voters={item.voters}
+              addedToCart={item.addedToCart}
               artworkPage={false}
             />
           ) : (

@@ -1,20 +1,26 @@
 import React, { forwardRef } from 'react';
-import { Card } from 'antd';
-import { unVoteArtwork, voteArtwork } from '../api/api-artworks';
+import { Card, Tooltip } from 'antd';
+import {
+  unVoteArtwork,
+  voteArtwork,
+  addArtworkToCart,
+  removeArtworkFromCart
+} from '../api/api-artworks';
 import { useQueryClient, useMutation } from 'react-query';
 import auth from '../../auth/api/auth-helper';
 import SignModal from '../../../components/SignModal';
 import {
   AiFillHeart,
   AiOutlineHeart,
-  AiOutlineShoppingCart
-} from 'react-icons/ai';
+  FaCartPlus,
+  MdRemoveShoppingCart
+} from 'react-icons/all';
 import { Link, Redirect } from 'react-router-dom';
-import useSignToVote from '../../../hooks/useSignToVote';
+import useSignToAction from '../../../hooks/useSignToAction';
 import LazyLoad from 'react-lazyload';
 
 const ArtworkCard = forwardRef((props, ref) => {
-  const { isModalVisible, handleClose, unLikeOrSign } = useSignToVote();
+  const { isModalVisible, handleClose, unDoOrSign } = useSignToAction();
 
   const jwt = auth.isAuthenticated();
 
@@ -56,7 +62,40 @@ const ArtworkCard = forwardRef((props, ref) => {
     }
   );
 
-  if (isError || status === 'error') {
+  const { mutate: addToCartMutation, status: toCartStatus } = useMutation(
+    (user) =>
+      addArtworkToCart({ artworkId: props.id }, { t: jwt.token }, user)
+        .then((res) => res.json())
+        .then((data) => data),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          exact: true
+        });
+      }
+    }
+  );
+
+  const { mutate: fromCartMutation, status: fromCartStatus } = useMutation(
+    (user) =>
+      removeArtworkFromCart({ artworkId: props.id }, { t: jwt.token }, user)
+        .then((res) => res.json())
+        .then((data) => data),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          exact: true
+        });
+      }
+    }
+  );
+
+  if (
+    isError ||
+    status === 'error' ||
+    toCartStatus === 'error' ||
+    fromCartStatus === 'error'
+  ) {
     return <Redirect to="/info-network-error" />;
   }
 
@@ -101,15 +140,33 @@ const ArtworkCard = forwardRef((props, ref) => {
                   />
                 ) : (
                   <AiOutlineHeart
-                    onClick={() => unLikeOrSign(likeMutation)}
+                    onClick={() => unDoOrSign(likeMutation)}
                     className="artwork-card__icon outline-heart"
                     key="like"
                   />
                 ),
-              <AiOutlineShoppingCart
-                className="artwork-card__icon"
-                key="addToCart"
-              />
+              auth.isAuthenticated() &&
+                props.addedToCart.includes(auth.isAuthenticated()?.user._id) ? (
+                  <Tooltip title="Remove from cart">
+                    <MdRemoveShoppingCart
+                      onClick={() =>
+                        fromCartMutation({
+                          userId: auth.isAuthenticated()?.user._id
+                        })
+                      }
+                      className="artwork-card__icon remove-cart__icon"
+                      key="removeFromCart"
+                    />
+                  </Tooltip>
+                ) : (
+                  <Tooltip title='Add to cart'>
+                    <FaCartPlus
+                      onClick={() => unDoOrSign(addToCartMutation)}
+                      className="artwork-card__icon add-cart__icon"
+                      key="addToCart"
+                    />
+                  </Tooltip>
+                )
             ]
             : [
               auth.isAuthenticated() &&
@@ -126,7 +183,7 @@ const ArtworkCard = forwardRef((props, ref) => {
                   />
                 ) : (
                   <AiOutlineHeart
-                    onClick={() => unLikeOrSign(likeMutation)}
+                    onClick={() => unDoOrSign(likeMutation)}
                     className="artwork-card__icon outline-heart"
                     key="like"
                   />

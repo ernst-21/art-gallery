@@ -5,13 +5,13 @@ import { likeArtist, unlikeArtist } from '../api/api-artists';
 import { useMutation, useQueryClient } from 'react-query';
 import auth from '../../auth/api/auth-helper';
 import React from 'react';
-import useSignToVote from '../../../hooks/useSignToVote';
+import useSignToVote from '../../../hooks/useSignToAction';
 import SignModal from '../../../components/SignModal';
 
 const { Meta } = Card;
 
 const ArtistProfileCard = (props) => {
-  const {isModalVisible, handleClose, unLikeOrSign} = useSignToVote();
+  const {isModalVisible, handleClose, unDoOrSign} = useSignToVote();
   const jwt = auth.isAuthenticated();
 
   const queryClient = useQueryClient();
@@ -60,7 +60,7 @@ const ArtistProfileCard = (props) => {
               />
             ) : (
               <AiOutlineHeart
-                onClick={() => unLikeOrSign(likeArtistMutation)}
+                onClick={() => unDoOrSign(likeArtistMutation)}
                 key="vote"
                 style={{ fontSize: '2rem' }}
               />

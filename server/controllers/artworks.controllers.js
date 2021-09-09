@@ -3,7 +3,7 @@ const errorHandler = require('../helpers/dbErrorHandler');
 
 const listArtworks = async (req, res) => {
   try {
-    let artworks = await Artwork.find().select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
+    let artworks = await Artwork.find().select('name artist addedToCart category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     res.json(artworks);
   } catch (err) {
     return res.status(400).json({
@@ -17,11 +17,11 @@ const listByCategory = async (req, res) => {
   let artworks;
   try {
     if (category === 'all') {
-      artworks = await Artwork.find().select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
+      artworks = await Artwork.find().select('name artist addedToCart category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     } else {
       artworks = await Artwork.find({
         category: category,
-      }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
+      }).select('name artist addedToCart category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     }
     res.json(artworks);
   } catch (err) {
@@ -67,6 +67,22 @@ const voteArtwork = async (req, res) => {
   });
 };
 
+const addArtworkToCart = async (req, res) => {
+  await Artwork.findByIdAndUpdate(
+    req.params.artworkId,
+    {
+      $push: { addedToCart: req.body.userId }
+    },
+    { new: true }
+  ).exec((err, result) => {
+    if (err) {
+      return res.status(422).json({ error: err });
+    } else {
+      res.json(result);
+    }
+  });
+};
+
 const unVoteArtwork = async (req, res) => {
   await Artwork.findByIdAndUpdate(
     req.params.artworkId,
@@ -83,12 +99,28 @@ const unVoteArtwork = async (req, res) => {
   });
 };
 
+const removeArtworkFromCart = async (req, res) => {
+  await Artwork.findByIdAndUpdate(
+    req.params.artworkId,
+    {
+      $pull: { addedToCart: req.body.userId }
+    },
+    { new: true }
+  ).exec((err, result) => {
+    if (err) {
+      return res.status(422).json({ error: err });
+    } else {
+      res.json(result);
+    }
+  });
+};
+
 const artistArtworks = async (req, res) => {
   let artistWork = req.body.artistWork;
   try {
     let foundArtworks = await Artwork.find({
       '_id': { $in: artistWork }
-    }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
+    }).select('name artist category price _id gallery addedToCart tags colors featured orientation url voters size purchased artist_Id');
     res.json(foundArtworks);
   } catch (err) {
     return res.status(422).json({ error: err });
@@ -100,7 +132,7 @@ const userArtworks = async (req, res) => {
   try {
     let foundArtworks = await Artwork.find({
       'voters': { $in: userId }
-    }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
+    }).select('name artist category price _id gallery addedToCart tags colors featured orientation url voters size purchased artist_Id');
     res.json(foundArtworks);
   } catch (err) {
     return res.status(422).json({ error: err });
@@ -114,7 +146,7 @@ const similarArtworks = async (req, res) => {
     let foundArtworks = await Artwork.find({
       'tags': { $in: similar },
       '_id': { $nin: artworkId }
-    }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
+    }).select('name artist category price _id gallery addedToCart tags colors featured orientation url voters size purchased artist_Id');
     res.json(foundArtworks);
   } catch (err) {
     return res.status(422).json({ error: err });
@@ -140,7 +172,7 @@ const searchArtworks = async (req, res) => {
           $lt: price[1]
         }
       }, {$expr: {$gte: [{$size: "$voters"}, voters[0]]}} , {$expr: {$lte: [{$size: "$voters"}, voters[1]]}}]
-    }).select('name artist category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
+    }).select('name artist category price _id gallery addedToCart tags colors featured orientation url voters size purchased artist_Id');
     res.json(foundArtworks);
   } catch (err) {
     return res.status(422).json({ error: err });
@@ -157,3 +189,5 @@ exports.artistArtworks = artistArtworks;
 exports.similarArtworks = similarArtworks;
 exports.userArtworks = userArtworks;
 exports.searchArtworks = searchArtworks;
+exports.addArtworkToCart = addArtworkToCart;
+exports.removeArtworkFromCart = removeArtworkFromCart;

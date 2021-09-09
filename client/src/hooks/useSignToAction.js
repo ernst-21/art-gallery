@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import auth from '../modules/auth/api/auth-helper';
 
-const useSignToVote = () => {
+const useSignToAction = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const showModal = () => {
     setIsModalVisible(true);
@@ -11,12 +11,12 @@ const useSignToVote = () => {
     setIsModalVisible(false);
   };
 
-  const unLikeOrSign = (cb) => {
+  const unDoOrSign = (cb) => {
     auth.isAuthenticated()
       ? cb({ userId: auth.isAuthenticated().user._id })
       : showModal();
   };
-  return {isModalVisible, handleClose, unLikeOrSign };
+  return {isModalVisible, handleClose, unDoOrSign };
 };
 
-export default useSignToVote;
+export default useSignToAction;
