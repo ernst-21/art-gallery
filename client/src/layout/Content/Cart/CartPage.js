@@ -5,6 +5,7 @@ import useListCartElements from '../../../hooks/Cart/useListCartElements';
 import { Redirect } from 'react-router-dom';
 import auth from '../../../modules/auth/api/auth-helper';
 import useLikeAndCart from '../../../hooks/Cart/useLikeAndCart';
+import StripeButton from '../../../components/StripeButton';
 
 const CartPage = () => {
   const { cartElements, isError, totalPrice, status } = useListCartElements();
@@ -26,7 +27,11 @@ const CartPage = () => {
   }
 
   if (!cartElements || cartElements.length === 0) {
-    return <Empty description={<p>No items in your cart yet</p>} />;
+    return (
+      <div className='cart-page__empty'>
+        <Empty description={<p>No items in your cart yet</p>} />
+      </div>
+    );
   }
 
   return (
@@ -62,12 +67,20 @@ const CartPage = () => {
                 item.category.charAt(0).toUpperCase() + item.category.slice(1)
               }
             />
-            <div><h3>${item.price}</h3></div>
+            <div>
+              <h3>${item.price}</h3>
+            </div>
           </List.Item>
         )}
       />
       <Divider />
-      <div className='cart-list-price__container'>
+      <div className="cart-list-price__container">
+        <StripeButton totalPrice={totalPrice} />
+        <div className='warning-text'>
+          <p>
+            Please for payments use the Stripe Test Card: <br/> No. 4242-4242-4242-4242 // CVC: Any 3 digits. // Expiration: Any future date with format MM/YY.
+          </p>
+        </div>
         <h2>Total: ${totalPrice}</h2>
       </div>
     </div>

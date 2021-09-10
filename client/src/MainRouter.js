@@ -18,7 +18,6 @@ import ArtworkPage from './modules/artworks/pages/ArtworkPage';
 import StoriesPage from './modules/artworks/pages/StoriesPage';
 import CartPage from './layout/Content/Cart/CartPage';
 import Purchased from './layout/Content/Purchased/PurchasedPage';
-import PaymentPage from './layout/Content/Payment/PaymentPage';
 
 const MainRouter = () => {
   return (
@@ -41,7 +40,6 @@ const MainRouter = () => {
         <Route exact path="/artwork/carousel/stories" component={StoriesPage} />
         <Route path="/user/cart/:userId" component={CartPage} />
         <Route path="/user/purchased/:userId" component={Purchased} />
-        <Route path="/user/payment/:userId" component={PaymentPage} />
       </Switch>
     </div>
   );
