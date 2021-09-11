@@ -17,7 +17,7 @@ const UserMenu = (props) => {
         </NavLink>
       </Menu.Item>
       <Menu.Item key='2'>
-        <NavLink style={isActive(props.history, '/user/purchased/' + auth.isAuthenticated().user._id)} to={'/user/purchased/' + auth.isAuthenticated().user._id}>
+        <NavLink style={isActive(props.history, '/artworks/purchased/' + auth.isAuthenticated().user._id)} to={'/artworks/purchased/' + auth.isAuthenticated().user._id}>
           My Purchases
         </NavLink>
       </Menu.Item>

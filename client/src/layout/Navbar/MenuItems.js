@@ -82,9 +82,9 @@ const MenuItems = (props) => {
               <NavLink
                 style={isActive(
                   props.history,
-                  '/user/purchased/' + auth.isAuthenticated().user._id
+                  '/artworks/purchased/' + auth.isAuthenticated().user._id
                 )}
-                to={'/user/purchased/' + auth.isAuthenticated().user._id}
+                to={'/artworks/purchased/' + auth.isAuthenticated().user._id}
               >
               Purchased
               </NavLink>

@@ -66,9 +66,9 @@ const ArtworkCard = forwardRef((props, ref) => {
               props.voters.includes(auth.isAuthenticated()?.user._id) ? (
                   <AiFillHeart
                     onClick={() =>
-                      unLikeMutation({
+                      unLikeMutation([{
                         userId: auth.isAuthenticated()?.user._id
-                      })
+                      }, props.id])
                     }
                     className="artwork-card__icon filled-heart"
                     key="unlike"

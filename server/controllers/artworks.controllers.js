@@ -15,7 +15,7 @@ const listArtworks = async (req, res) => {
 const listCartItems = async (req, res) => {
   let userId = req.body.userId;
   try {
-    let artworks = await Artwork.find({'addedToCart': {$in: userId}}).select('name artist addedToCart category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
+    let artworks = await Artwork.find({ 'addedToCart': { $in: userId } }).select('name artist addedToCart category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     res.json(artworks);
   } catch (err) {
     return res.status(400).json({
@@ -24,17 +24,10 @@ const listCartItems = async (req, res) => {
   }
 };
 
-const listByCategory = async (req, res) => {
-  const category = req.params.artCategory;
-  let artworks;
+const listPurchased = async (req, res) => {
+  const userId = req.params.userId;
   try {
-    if (category === 'all') {
-      artworks = await Artwork.find().select('name artist addedToCart category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
-    } else {
-      artworks = await Artwork.find({
-        category: category,
-      }).select('name artist addedToCart category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
-    }
+    let artworks = await Artwork.find({'purchased': {$in: userId}}).select('name category price _id url');
     res.json(artworks);
   } catch (err) {
     return res.status(400).json({
@@ -178,12 +171,12 @@ const searchArtworks = async (req, res) => {
 
   try {
     let foundArtworks = await Artwork.find({
-      $and: [ { category: { $in: category } }, { orientation: { $in: orientation } }, { size: { $in: size } }, { gallery: { $in: gallery } }, { artist: { $in: artist } }, { tags: { $in: tags } }, { colors: { $in: colors } }, {
+      $and: [{ category: { $in: category } }, { orientation: { $in: orientation } }, { size: { $in: size } }, { gallery: { $in: gallery } }, { artist: { $in: artist } }, { tags: { $in: tags } }, { colors: { $in: colors } }, {
         price: {
           $gt: price[0],
           $lt: price[1]
         }
-      }, {$expr: {$gte: [{$size: "$voters"}, voters[0]]}} , {$expr: {$lte: [{$size: "$voters"}, voters[1]]}}]
+      }, { $expr: { $gte: [{ $size: '$voters' }, voters[0]] } }, { $expr: { $lte: [{ $size: '$voters' }, voters[1]] } }]
     }).select('name artist category price _id gallery addedToCart tags colors featured orientation url voters size purchased artist_Id');
     res.json(foundArtworks);
   } catch (err) {
@@ -196,9 +189,9 @@ const purchaseArtworks = async (req, res) => {
   let userId = req.body.userId;
 
   try {
-    let foundArtworks = await Artwork.updateMany({'_id': {$in: artworksIds}}, {
-      $push: { purchased: userId }, $pull: {addedToCart: userId}
-    }, {multi: true});
+    let foundArtworks = await Artwork.updateMany({ '_id': { $in: artworksIds } }, {
+      $push: { purchased: userId }, $pull: { addedToCart: userId }
+    }, { multi: true });
     res.json(foundArtworks);
   } catch (err) {
     return res.status(422).json({ error: err });
@@ -206,7 +199,7 @@ const purchaseArtworks = async (req, res) => {
 };
 
 exports.listArtworks = listArtworks;
-exports.listByCategory = listByCategory;
+exports.listPurchased = listPurchased;
 exports.artworkByID = artworkByID;
 exports.readArtwork = readArtwork;
 exports.voteArtwork = voteArtwork;

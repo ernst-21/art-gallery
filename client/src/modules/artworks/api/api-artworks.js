@@ -3,9 +3,9 @@ const listArtworks = async () =>
     method: 'GET'
   });
 
-const listArtworksByCategory = async (params) =>
+const listPurchased = async (params) =>
   await fetch(
-    'http://localhost:5000/api/artworks/category/' + params.artCategory,
+    'http://localhost:5000/api/artworks/purchased/' + params.userId,
     {
       method: 'GET'
     }
@@ -126,7 +126,6 @@ export {
   readArtwork,
   voteArtwork,
   unVoteArtwork,
-  listArtworksByCategory,
   artistArtworks,
   userArtworks,
   similarArtworks,
@@ -134,5 +133,6 @@ export {
   addArtworkToCart,
   removeArtworkFromCart,
   listCartItems,
-  purchaseArtworks
+  purchaseArtworks,
+  listPurchased
 };

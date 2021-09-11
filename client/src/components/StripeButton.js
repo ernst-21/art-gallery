@@ -45,7 +45,7 @@ const StripeButton = ({ totalPrice, userId }) => {
       label="Pay Now"
       name="VRTL"
       billingAddress={false}
-      description={`Your total is $${totalPrice}`}
+      description={`Your total is $ ${totalPrice}`}
       amount={priceForStripe}
       panelLabel="Pay Now"
       token={onToken}

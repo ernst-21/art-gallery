@@ -38,10 +38,10 @@ const MainRouter = () => {
         <PrivateRoute path="/user/edit/:userId" component={EditProfile} />
         <Route exact path="/user/:userId" component={Profile} />
         <Route path="/artists/:artistId" component={ArtistProfile} />
-        <Route path="/artworks/:artworkId" component={ArtworkPage} />
+        <Route exact path="/artworks/:artworkId" component={ArtworkPage} />
         <Route exact path="/artwork/carousel/stories" component={StoriesPage} />
         <Route path="/user/cart/:userId" component={CartPage} />
-        <Route path="/user/purchased/:userId" component={Purchased} />
+        <Route path="/artworks/purchased/:userId" component={Purchased} />
       </Switch>
     </div>
   );
