@@ -17,8 +17,8 @@ const ArtistProfileCard = (props) => {
   const queryClient = useQueryClient();
 
   const { mutate: likeArtistMutation, status } = useMutation(
-    (user) =>
-      likeArtist({ artistId: props.id }, { t: jwt.token }, user)
+    ([user, id]) =>
+      likeArtist({ artistId: id }, { t: jwt.token }, user)
         .then((res) => res.json())
         .then((data) => data),
     {
@@ -27,8 +27,8 @@ const ArtistProfileCard = (props) => {
   );
 
   const { mutate: unLikeArtistMutation, isError } = useMutation(
-    (user) =>
-      unlikeArtist({ artistId: props.id }, { t: jwt.token }, user)
+    ([user, id]) =>
+      unlikeArtist({ artistId: id }, { t: jwt.token }, user)
         .then((res) => res.json())
         .then((data) => data),
     {
@@ -53,14 +53,14 @@ const ArtistProfileCard = (props) => {
                 key="unvote"
                 style={{ fontSize: '2rem', color: '#cd6153' }}
                 onClick={() =>
-                  unLikeArtistMutation({
+                  unLikeArtistMutation([{
                     userId: auth.isAuthenticated().user._id
-                  })
+                  }, props.id])
                 }
               />
             ) : (
               <AiOutlineHeart
-                onClick={() => unDoOrSign(likeArtistMutation)}
+                onClick={() => unDoOrSign(likeArtistMutation, props.id)}
                 key="vote"
                 style={{ fontSize: '2rem' }}
               />
