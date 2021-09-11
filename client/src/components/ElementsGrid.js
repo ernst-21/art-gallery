@@ -33,6 +33,7 @@ const ElementsGrid = (props) => {
               gallery={item.gallery}
               voters={item.voters}
               addedToCart={item.addedToCart}
+              purchased={item.purchased}
               artworkPage={false}
             />
           ) : (

@@ -5,9 +5,10 @@ import { listCartItems } from '../../modules/artworks/api/api-artworks';
 import auth from '../../modules/auth/api/auth-helper';
 
 const useListCartElements = () => {
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, setCartItems } = useContext(CartContext);
   const [cartElements, setCartElements] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [cartElementsId, setCartElementsId] = useState([]);
 
   const { mutate: cartItemsMutation, isError, status } = useMutation(
     (user) =>
@@ -18,9 +19,11 @@ const useListCartElements = () => {
       onSuccess: (data) => {
         setCartElements(data);
         if (data.length > 1) {
+          setCartElementsId(data.map(item => item._id));
           setTotalPrice(data.reduce((total,currentItem) =>  total + currentItem.price , 0));
         } else if (data.length === 1) {
           setTotalPrice(data[0].price);
+          setCartElementsId(data[0]._id);
         } else {
           return totalPrice;
         }
@@ -34,7 +37,7 @@ const useListCartElements = () => {
     }
   }, [cartItems, cartItemsMutation]);
 
-  return { isError, cartElements, totalPrice, status };
+  return { isError, cartElements, totalPrice, status, cartElementsId, setCartItems, setCartElements };
 };
 
 export default useListCartElements;

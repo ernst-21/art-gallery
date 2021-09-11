@@ -2,14 +2,15 @@ import { List, Skeleton, Avatar, Empty, Divider } from 'antd';
 import { Link } from 'react-router-dom';
 import { IoRemoveCircleOutline } from 'react-icons/all';
 import useListCartElements from '../../../hooks/Cart/useListCartElements';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import auth from '../../../modules/auth/api/auth-helper';
 import useLikeAndCart from '../../../hooks/Cart/useLikeAndCart';
 import StripeButton from '../../../components/StripeButton';
 
 const CartPage = () => {
   const { cartElements, isError, totalPrice, status } = useListCartElements();
-  const arr = [1, 2, 3, 4, 5];
+  const userId = useParams().userId;
+  const arr = [1,2,3,4,5];
   const { fromCartMutation } = useLikeAndCart();
 
   if (isError) {
@@ -75,7 +76,7 @@ const CartPage = () => {
       />
       <Divider />
       <div className="cart-list-price__container">
-        <StripeButton totalPrice={totalPrice} />
+        <StripeButton totalPrice={totalPrice} userId={userId} />
         <div className='warning-text'>
           <p>
             Please for payments use the Stripe Test Card: <br/> No. 4242-4242-4242-4242 // CVC: Any 3 digits. // Expiration: Any future date with format MM/YY.

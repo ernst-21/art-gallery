@@ -191,6 +191,20 @@ const searchArtworks = async (req, res) => {
   }
 };
 
+const purchaseArtworks = async (req, res) => {
+  let artworksIds = req.body.artworksIds;
+  let userId = req.body.userId;
+
+  try {
+    let foundArtworks = await Artwork.updateMany({'_id': {$in: artworksIds}}, {
+      $push: { purchased: userId }, $pull: {addedToCart: userId}
+    }, {multi: true});
+    res.json(foundArtworks);
+  } catch (err) {
+    return res.status(422).json({ error: err });
+  }
+};
+
 exports.listArtworks = listArtworks;
 exports.listByCategory = listByCategory;
 exports.artworkByID = artworkByID;
@@ -204,3 +218,4 @@ exports.searchArtworks = searchArtworks;
 exports.addArtworkToCart = addArtworkToCart;
 exports.removeArtworkFromCart = removeArtworkFromCart;
 exports.listCartItems = listCartItems;
+exports.purchaseArtworks = purchaseArtworks;

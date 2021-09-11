@@ -36,7 +36,7 @@ const ArtworkCard = forwardRef((props, ref) => {
 
   return (
     <>
-      <Card
+      {auth.isAuthenticated() && props.purchased.includes(auth.isAuthenticated().user._id ) ? null : (<Card
         innerref={ref}
         hoverable
         style={setStyles(props.artworkPage)}
@@ -63,7 +63,7 @@ const ArtworkCard = forwardRef((props, ref) => {
           !props.artworkPage
             ? [
               auth.isAuthenticated() &&
-                props.voters.includes(auth.isAuthenticated()?.user._id) ? (
+              props.voters.includes(auth.isAuthenticated()?.user._id) ? (
                   <AiFillHeart
                     onClick={() =>
                       unLikeMutation({
@@ -81,7 +81,7 @@ const ArtworkCard = forwardRef((props, ref) => {
                   />
                 ),
               auth.isAuthenticated() &&
-                props.addedToCart.includes(auth.isAuthenticated()?.user._id) ? (
+              props.addedToCart.includes(auth.isAuthenticated()?.user._id) ? (
                   <Tooltip title="Remove from cart">
                     <MdRemoveShoppingCart
                       onClick={() =>
@@ -105,7 +105,7 @@ const ArtworkCard = forwardRef((props, ref) => {
             ]
             : [
               auth.isAuthenticated() &&
-                props.voters.includes(auth.isAuthenticated()?.user._id) ? (
+              props.voters.includes(auth.isAuthenticated()?.user._id) ? (
                   <AiFillHeart
                     style={{ color: 'red' }}
                     onClick={() =>
@@ -145,7 +145,8 @@ const ArtworkCard = forwardRef((props, ref) => {
             <p className="card-text">Gallery: {props.gallery}</p>
           </>
         )}
-      </Card>
+      </Card>)}
+
       <SignModal
         isModalVisible={isModalVisible}
         visible={isModalVisible}

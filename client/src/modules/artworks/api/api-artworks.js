@@ -110,6 +110,17 @@ const searchArtworks = async (filters) =>
     body: JSON.stringify(filters)
   });
 
+const purchaseArtworks = async (credentials, userAndArtworks) =>
+  await fetch('http://localhost:5000/api/artworks/purchase/buyArtworks', {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + credentials.t
+    },
+    body: JSON.stringify(userAndArtworks)
+  });
+
 export {
   listArtworks,
   readArtwork,
@@ -122,5 +133,6 @@ export {
   searchArtworks,
   addArtworkToCart,
   removeArtworkFromCart,
-  listCartItems
+  listCartItems,
+  purchaseArtworks
 };

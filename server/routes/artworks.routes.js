@@ -21,6 +21,7 @@ router.route('/api/artworks/artistArtworks').post(artworkCtrl.artistArtworks);
 
 router.route('/api/artworks/userArtworks').post(artworkCtrl.userArtworks);
 router.route('/api/artworks/search/searchArtworks').post(artworkCtrl.searchArtworks);
+router.route('/api/artworks/purchase/buyArtworks').put(authCtrl.requireSignin, artworkCtrl.purchaseArtworks);
 
 router.route('/api/artworks/similarArtworks').post(artworkCtrl.similarArtworks);
 

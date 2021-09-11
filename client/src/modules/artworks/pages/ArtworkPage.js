@@ -49,6 +49,7 @@ const ArtworkPage = () => {
           <div className="artwork-data__container">
             <div className="artwork-photo__container">
               <ArtworkCard
+                purchased={artwork.purchased}
                 id={artwork._id}
                 style={{ fontSize: '2rem' }}
                 url={artwork.url}

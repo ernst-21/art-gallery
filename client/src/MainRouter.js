@@ -18,6 +18,7 @@ import ArtworkPage from './modules/artworks/pages/ArtworkPage';
 import StoriesPage from './modules/artworks/pages/StoriesPage';
 import CartPage from './layout/Content/Cart/CartPage';
 import Purchased from './layout/Content/Purchased/PurchasedPage';
+import InfoPayment from './components/InfoPayment';
 
 const MainRouter = () => {
   return (
@@ -33,6 +34,7 @@ const MainRouter = () => {
         <Route path="/email" component={EmailRequest} />
         <Route path="/info" component={InfoSuccess} />
         <Route path="/info-network-error" component={InfoError} />
+        <Route path="/info-payment-success/:userId" component={InfoPayment} />
         <PrivateRoute path="/user/edit/:userId" component={EditProfile} />
         <Route exact path="/user/:userId" component={Profile} />
         <Route path="/artists/:artistId" component={ArtistProfile} />
