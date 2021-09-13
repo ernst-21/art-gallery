@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import { FilterProvider } from './context/FilterContext';
 import { ArtistFilterProvider } from './context/ArtistFilterContext';
 import { CartProvider } from './context/CartContext';
@@ -6,10 +7,21 @@ import { Layout } from 'antd';
 import MainRouter from './MainRouter';
 import Navbar from './layout/Navbar/Navbar';
 import FooterComponent from './layout/Footer/FooterComponent';
+import useFirstVisit from './hooks/FirstVisitPopup/useFirstVisit';
 
 const { Header, Content } = Layout;
 
 function App() {
+  const {info, setIsModalVisible} = useFirstVisit();
+
+  useEffect(() => {
+    let firstVisit = localStorage.getItem('visited');
+    if (firstVisit !== 'true') {
+      setIsModalVisible(true);
+      info();
+    }
+    //eslint-disable-next-line
+  }, []);
 
   return (
     <CartProvider>
