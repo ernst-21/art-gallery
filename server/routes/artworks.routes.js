@@ -5,6 +5,7 @@ const artworkCtrl = require('../controllers/artworks.controllers')
 const router = express.Router();
 
 router.route('/api/artworks').get(artworkCtrl.listArtworks);
+router.route('/api/artworks/featured').get(artworkCtrl.listFeatured);
 router.route('/api/artworks/purchased/:userId').get(artworkCtrl.listPurchased);
 
 router.route('/api/artworks/cart/add/:artworkId').put(authCtrl.requireSignin, artworkCtrl.addArtworkToCart);

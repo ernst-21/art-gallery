@@ -3,6 +3,11 @@ const listArtworks = async () =>
     method: 'GET'
   });
 
+const listFeatured = async () =>
+  await fetch('http://localhost:5000/api/artworks/featured', {
+    method: 'GET'
+  });
+
 const listPurchased = async (params) =>
   await fetch(
     'http://localhost:5000/api/artworks/purchased/' + params.userId,
@@ -134,5 +139,6 @@ export {
   removeArtworkFromCart,
   listCartItems,
   purchaseArtworks,
-  listPurchased
+  listPurchased,
+  listFeatured
 };

@@ -3,7 +3,18 @@ const errorHandler = require('../helpers/dbErrorHandler');
 
 const listArtworks = async (req, res) => {
   try {
-    let artworks = await Artwork.find().select('name artist addedToCart category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
+    let artworks = await Artwork.find({'featured': {$in: false}}).select('name artist addedToCart category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
+    res.json(artworks);
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err)
+    });
+  }
+};
+
+const listFeatured = async (req, res) => {
+  try {
+    let artworks = await Artwork.find({'featured': {$in: true}}).select('name artist addedToCart category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     res.json(artworks);
   } catch (err) {
     return res.status(400).json({
@@ -15,7 +26,7 @@ const listArtworks = async (req, res) => {
 const listCartItems = async (req, res) => {
   let userId = req.body.userId;
   try {
-    let artworks = await Artwork.find({ 'addedToCart': { $in: userId } }).select('name artist addedToCart category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
+    let artworks = await Artwork.find({ $and: [{ addedToCart: { $in: userId } }, { purchased: { $nin: userId } }] }).select('name artist addedToCart category price _id gallery tags colors featured orientation url voters size purchased artist_Id');
     res.json(artworks);
   } catch (err) {
     return res.status(400).json({
@@ -27,7 +38,7 @@ const listCartItems = async (req, res) => {
 const listPurchased = async (req, res) => {
   const userId = req.params.userId;
   try {
-    let artworks = await Artwork.find({'purchased': {$in: userId}}).select('name category price _id url');
+    let artworks = await Artwork.find({ 'purchased': { $in: userId } }).select('name category price _id url');
     res.json(artworks);
   } catch (err) {
     return res.status(400).json({
@@ -123,8 +134,8 @@ const removeArtworkFromCart = async (req, res) => {
 const artistArtworks = async (req, res) => {
   let artistWork = req.body.artistWork;
   try {
-    let foundArtworks = await Artwork.find({
-      '_id': { $in: artistWork }
+    let foundArtworks = await Artwork.find({'_id': { $in: artistWork }, 'featured': {$in: false}
+
     }).select('name artist category price _id gallery addedToCart tags colors featured orientation url voters size purchased artist_Id');
     res.json(foundArtworks);
   } catch (err) {
@@ -135,8 +146,8 @@ const artistArtworks = async (req, res) => {
 const userArtworks = async (req, res) => {
   let userId = req.body.userId;
   try {
-    let foundArtworks = await Artwork.find({
-      'voters': { $in: userId }
+    let foundArtworks = await Artwork.find({$and: [{voters: { $in: userId }}, {purchased: {$nin: userId}}, {featured: {$in: false}}]
+
     }).select('name artist category price _id gallery addedToCart tags colors featured orientation url voters size purchased artist_Id');
     res.json(foundArtworks);
   } catch (err) {
@@ -150,7 +161,8 @@ const similarArtworks = async (req, res) => {
   try {
     let foundArtworks = await Artwork.find({
       'tags': { $in: similar },
-      '_id': { $nin: artworkId }
+      '_id': { $nin: artworkId },
+      'featured': {$in: false}
     }).select('name artist category price _id gallery addedToCart tags colors featured orientation url voters size purchased artist_Id');
     res.json(foundArtworks);
   } catch (err) {
@@ -176,7 +188,7 @@ const searchArtworks = async (req, res) => {
           $gt: price[0],
           $lt: price[1]
         }
-      }, { $expr: { $gte: [{ $size: '$voters' }, voters[0]] } }, { $expr: { $lte: [{ $size: '$voters' }, voters[1]] } }]
+      }, { $expr: { $gte: [{ $size: '$voters' }, voters[0]] } }, { $expr: { $lte: [{ $size: '$voters' }, voters[1]] } }, {featured: {$in: false}}]
     }).select('name artist category price _id gallery addedToCart tags colors featured orientation url voters size purchased artist_Id');
     res.json(foundArtworks);
   } catch (err) {
@@ -199,6 +211,7 @@ const purchaseArtworks = async (req, res) => {
 };
 
 exports.listArtworks = listArtworks;
+exports.listFeatured = listFeatured;
 exports.listPurchased = listPurchased;
 exports.artworkByID = artworkByID;
 exports.readArtwork = readArtwork;
