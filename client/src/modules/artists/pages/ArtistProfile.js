@@ -8,6 +8,7 @@ import { artistArtworks } from '../../artworks/api/api-artworks';
 import SpinLoader from '../../../components/SpinLoader';
 import ArtistSocial from '../components/artistSocialIcons';
 import ElementsGrid from '../../../components/ElementsGrid';
+import auth from '../../auth/api/auth-helper';
 
 const ArtistProfile = () => {
   const artistId = useParams().artistId;
@@ -30,7 +31,12 @@ const ArtistProfile = () => {
         .then((data) => data),
     {
       onSuccess: (data) => {
-        setArtistWork(data);
+        if (auth.isAuthenticated()) {
+          const noPurchased = data.filter(item => !item.purchased.includes(auth.isAuthenticated().user._id));
+          setArtistWork(noPurchased);
+        } else {
+          setArtistWork(data);
+        }
       }
     }
   );

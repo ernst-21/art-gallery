@@ -10,6 +10,7 @@ import SpinLoader from '../../../components/SpinLoader';
 import { Redirect } from 'react-router-dom';
 import {FilterContext} from '../../../context/FilterContext';
 import { filterDefaults } from '../../../mockData';
+import auth from '../../../modules/auth/api/auth-helper';
 
 const Artworks = () => {
   const [filteredArtworks, setFilteredArtworks] = useState([]);
@@ -40,7 +41,12 @@ const Artworks = () => {
         .then((data) => data),
     {
       onSuccess: (data) => {
-        setFilteredArtworks(data);
+        if (auth.isAuthenticated()) {
+          const noPurchased = data.filter(item => !item.purchased.includes(auth.isAuthenticated().user._id));
+          setFilteredArtworks(noPurchased);
+        } else {
+          setFilteredArtworks(data);
+        }
       }
     }
   );

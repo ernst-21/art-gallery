@@ -14,7 +14,16 @@ import LazyLoad from 'react-lazyload';
 import useLikeAndCart from '../../../hooks/Cart/useLikeAndCart';
 
 const ArtworkCard = forwardRef((props, ref) => {
-  const {likeMutation, status, unLikeMutation, isError, addToCartMutation, toCartStatus, fromCartMutation, fromCartStatus} = useLikeAndCart();
+  const {
+    likeMutation,
+    status,
+    unLikeMutation,
+    isError,
+    addToCartMutation,
+    toCartStatus,
+    fromCartMutation,
+    fromCartStatus
+  } = useLikeAndCart();
   const { isModalVisible, handleClose, unDoOrSign } = useSignToAction();
 
   const setStyles = (arg) => {
@@ -36,7 +45,7 @@ const ArtworkCard = forwardRef((props, ref) => {
 
   return (
     <>
-      {auth.isAuthenticated() && props.purchased.includes(auth.isAuthenticated().user._id ) ? null : (<Card
+      <Card
         innerref={ref}
         hoverable
         style={setStyles(props.artworkPage)}
@@ -63,12 +72,15 @@ const ArtworkCard = forwardRef((props, ref) => {
           !props.artworkPage
             ? [
               auth.isAuthenticated() &&
-              props.voters.includes(auth.isAuthenticated()?.user._id) ? (
+                props.voters.includes(auth.isAuthenticated()?.user._id) ? (
                   <AiFillHeart
                     onClick={() =>
-                      unLikeMutation([{
-                        userId: auth.isAuthenticated()?.user._id
-                      }, props.id])
+                      unLikeMutation([
+                        {
+                          userId: auth.isAuthenticated()?.user._id
+                        },
+                        props.id
+                      ])
                     }
                     className="artwork-card__icon filled-heart"
                     key="unlike"
@@ -81,20 +93,23 @@ const ArtworkCard = forwardRef((props, ref) => {
                   />
                 ),
               auth.isAuthenticated() &&
-              props.addedToCart.includes(auth.isAuthenticated()?.user._id) ? (
+                props.addedToCart.includes(auth.isAuthenticated()?.user._id) ? (
                   <Tooltip title="Remove from cart">
                     <MdRemoveShoppingCart
                       onClick={() =>
-                        fromCartMutation([{
-                          userId: auth.isAuthenticated()?.user._id
-                        }, props.id])
+                        fromCartMutation([
+                          {
+                            userId: auth.isAuthenticated()?.user._id
+                          },
+                          props.id
+                        ])
                       }
                       className="artwork-card__icon remove-cart__icon"
                       key="removeFromCart"
                     />
                   </Tooltip>
                 ) : (
-                  <Tooltip title='Add to cart'>
+                  <Tooltip title="Add to cart">
                     <FaCartPlus
                       onClick={() => unDoOrSign(addToCartMutation, props.id)}
                       className="artwork-card__icon add-cart__icon"
@@ -105,12 +120,15 @@ const ArtworkCard = forwardRef((props, ref) => {
             ]
             : [
               auth.isAuthenticated() &&
-              props.voters.includes(auth.isAuthenticated()?.user._id) ? (
+                props.voters.includes(auth.isAuthenticated()?.user._id) ? (
                   <AiFillHeart
                     onClick={() =>
-                      unLikeMutation([{
-                        userId: auth.isAuthenticated()?.user._id
-                      }, props.id])
+                      unLikeMutation([
+                        {
+                          userId: auth.isAuthenticated()?.user._id
+                        },
+                        props.id
+                      ])
                     }
                     className="artwork-card__icon filled-heart"
                     key="unlike"
@@ -144,7 +162,7 @@ const ArtworkCard = forwardRef((props, ref) => {
             <p className="card-text">Gallery: {props.gallery}</p>
           </>
         )}
-      </Card>)}
+      </Card>
 
       <SignModal
         isModalVisible={isModalVisible}

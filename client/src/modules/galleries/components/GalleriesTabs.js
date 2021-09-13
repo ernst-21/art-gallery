@@ -1,14 +1,26 @@
+import {useState} from 'react';
 import { Tabs } from 'antd';
 import {useQuery} from 'react-query';
 import {listArtworks} from '../../artworks/api/api-artworks';
 import ElementsGrid from '../../../components/ElementsGrid';
 import SpinLoader from '../../../components/SpinLoader';
 import { Redirect } from 'react-router-dom';
+import auth from '../../auth/api/auth-helper';
 
 const { TabPane } = Tabs;
 
 const GalleriesTabs = () => {
-  const {data: galleries = [], isLoading, isError} = useQuery('galleries', () => listArtworks().then(res => res.json()).then(data => data));
+  const [galleries, setGalleries] = useState([]);
+  const {isLoading, isError} = useQuery('galleries', () => listArtworks().then(res => res.json()).then(data => data), {
+    onSuccess: (data) => {
+      if (auth.isAuthenticated()) {
+        const noPurchased = data.filter(item => !item.purchased.includes(auth.isAuthenticated().user._id));
+        setGalleries(noPurchased);
+      } else {
+        setGalleries(data);
+      }
+    }
+  });
   const parisCollection = galleries.filter(item => item.gallery === 'Paris');
   const londonCollection = galleries.filter(item => item.gallery === 'London');
   const berlinCollection = galleries.filter(item => item.gallery === 'Berlin');
