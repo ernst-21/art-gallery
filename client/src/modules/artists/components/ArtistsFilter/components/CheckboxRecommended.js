@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import {Checkbox} from 'antd';
 
 const CheckboxRecommended = (props) => {
@@ -6,4 +7,4 @@ const CheckboxRecommended = (props) => {
   );
 };
 
-export default CheckboxRecommended;
+export default memo(CheckboxRecommended);

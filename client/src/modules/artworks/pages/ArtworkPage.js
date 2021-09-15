@@ -5,7 +5,7 @@ import { Redirect, useParams } from 'react-router-dom';
 import SpinLoader from '../../../components/SpinLoader';
 import ArtworkTags from '../components/ArtworkTags';
 import {Link} from 'react-router-dom';
-import ArtworkCard from '../components/ArtworkCard';
+import ArtworkCard from '../components/ArtworkCard/ArtworkCard';
 import ElementsGrid from '../../../components/ElementsGrid';
 import AddRemoveCartButton from '../components/AddRemoveCartButton';
 

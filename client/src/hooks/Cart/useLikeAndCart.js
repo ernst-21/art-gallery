@@ -29,7 +29,7 @@ const useLikeAndCart = () => {
     }
   );
 
-  const { mutate: unLikeMutation, isError } = useMutation(
+  const { mutate: unLikeMutation, isError, isLoading } = useMutation(
     ([user, id]) =>
       unVoteArtwork({ artworkId: id }, { t: jwt.token }, user)
         .then((res) => res.json())
@@ -73,7 +73,7 @@ const useLikeAndCart = () => {
       }
     }
   );
-  return {likeMutation, status, unLikeMutation, isError, addToCartMutation, toCartStatus, fromCartMutation, fromCartStatus};
+  return {likeMutation, status, unLikeMutation, isError, addToCartMutation, toCartStatus, fromCartMutation, fromCartStatus, isLoading};
 };
 
 export default useLikeAndCart;

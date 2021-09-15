@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import ArtworkCard from '../modules/artworks/components/ArtworkCard';
+import ArtworkCard from '../modules/artworks/components/ArtworkCard/ArtworkCard';
 import ArtistCard from '../modules/artists/components/ArtistCard';
 import Masonry from 'react-masonry-css';
 import SectionTitle from './SectionTitle';

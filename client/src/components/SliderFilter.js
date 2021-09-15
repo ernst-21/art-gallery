@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import {Slider} from 'antd';
 
 const SliderFilter = (props) => {
@@ -6,4 +7,4 @@ const SliderFilter = (props) => {
   );
 };
 
-export default SliderFilter;
+export default memo(SliderFilter);

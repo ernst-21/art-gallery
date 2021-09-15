@@ -1,4 +1,4 @@
-import {useState, useContext} from 'react';
+import {useState, useContext, memo} from 'react';
 import ArtistsFilter from '../../../modules/artists/components/ArtistsFilter/ArtistsFilter';
 import FilteredArtists from '../../../modules/artists/components/FilteredArtists';
 import {useQuery, useMutation} from 'react-query';
@@ -35,10 +35,10 @@ const Artists = () => {
   return (
     <div className='artists-page'>
       <ArtistsFilter searchArtistMutation={searchArtistMutation} />
-      {isLoading ? (<SpinLoader />) : (filteredArtists.length > 0 ? (<FilteredArtists specialty='Artists' artists={filteredArtists} />) : (<FilteredArtists specialty='No artists to display' artists={[]} />))}
+      {isLoading ? (<SpinLoader />) : (<FilteredArtists specialty={filteredArtists.length > 0 ? 'Artists' : 'No artists to display'} artists={filteredArtists} />)}
 
     </div>
   );
 };
 
-export default Artists;
+export default memo(Artists);

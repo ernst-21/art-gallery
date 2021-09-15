@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import ElementsGrid from '../../../components/ElementsGrid';
 
 const FilteredArtworks = ({title, artworks }) => {
@@ -12,4 +13,4 @@ const FilteredArtworks = ({title, artworks }) => {
   );
 };
 
-export default FilteredArtworks;
+export default memo(FilteredArtworks);

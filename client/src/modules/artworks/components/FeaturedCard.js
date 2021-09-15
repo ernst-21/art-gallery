@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import {Card, Image} from 'antd';
 import LazyLoad from 'react-lazyload';
 
@@ -25,4 +25,4 @@ const FeaturedCard = (props) => {
   );
 };
 
-export default FeaturedCard;
+export default memo(FeaturedCard);

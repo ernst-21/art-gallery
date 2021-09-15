@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, memo } from 'react';
 import { artistFiltersDefaults, discipline } from '../../../../mockData';
 import SelectElements from '../../../../components/SelectElements';
 import CheckboxRecommended from './components/CheckboxRecommended';
@@ -59,4 +59,4 @@ const ArtistsFilter = ({searchArtistMutation}) => {
   );
 };
 
-export default ArtistsFilter;
+export default memo(ArtistsFilter);

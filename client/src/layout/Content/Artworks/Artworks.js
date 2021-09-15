@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, memo } from 'react';
 import FilteredArtworks from '../../../modules/artworks/components/FilteredArtworks';
 import ArtworksFilter from '../../../modules/artworks/components/ArtworksFilter/ArtworksFilter';
 import {
@@ -22,7 +22,9 @@ const Artworks = () => {
         .then((res) => res.json())
         .then((data) => data),
     {
-      onSuccess: () => searchMutation(filters)
+      onSuccess: () => searchMutation(filters),
+      staleTime: Infinity,
+      cacheTime: Infinity
     }
   );
 
@@ -59,4 +61,4 @@ const Artworks = () => {
   );
 };
 
-export default Artworks;
+export default memo(Artworks);

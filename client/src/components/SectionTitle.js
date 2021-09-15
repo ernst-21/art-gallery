@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import {Typography} from 'antd';
 
 const {Title} = Typography;
@@ -8,4 +9,4 @@ const SectionTitle = (props) => {
   );
 };
 
-export default SectionTitle;
+export default memo(SectionTitle);

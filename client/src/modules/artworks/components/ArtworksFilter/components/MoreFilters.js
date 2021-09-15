@@ -1,4 +1,4 @@
-import {useContext} from 'react';
+import {useContext, memo} from 'react';
 import { galleries, artists, themes, colors } from '../../../../../mockData';
 import SelectElements from '../../../../../components/SelectElements';
 import RadioFilter from './RadioFilter';
@@ -27,4 +27,4 @@ const MoreFilters = (props) => {
   );
 };
 
-export default MoreFilters;
+export default memo(MoreFilters);

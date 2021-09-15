@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { Space, Tag } from 'antd';
 
 const ArtworkTags = (props) => {
@@ -7,4 +7,4 @@ const ArtworkTags = (props) => {
   );
 };
 
-export default ArtworkTags;
+export default memo(ArtworkTags);

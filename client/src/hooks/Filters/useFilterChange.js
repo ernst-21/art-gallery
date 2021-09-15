@@ -1,9 +1,9 @@
-import { useContext } from 'react';
+import { useContext, useCallback } from 'react';
 
 const useFilterChange = (filterContext) => {
   const {filters, setFilters} = useContext(filterContext);
 
-  const onRadioChange = (e, name, arr) => {
+  const onRadioChange = useCallback((e, name, arr) => {
     let value;
     if (e.target.value === 'all' || e.target.value === 'All') {
       value = arr;
@@ -12,21 +12,22 @@ const useFilterChange = (filterContext) => {
       value = e.target.value;
       setFilters({ ...filters, [name]: value });
     }
-  };
+  }, [filters, setFilters]);
 
-  const onSelectChange = (value, name, arr) => {
+  const onSelectChange = useCallback((value, name, arr) => {
     if (value === 'all' || value === 'All') {
       value = arr;
       setFilters({ ...filters, [name]: value });
     } else {
       setFilters({ ...filters, [name]: value });
     }
-  };
-  const onSliderChange = (value, name) => {
-    setFilters({ ...filters, [name]: value });
-  };
+  }, [filters, setFilters]);
 
-  const onCheckboxChange = (e, name) => {
+  const onSliderChange = useCallback((value, name) => {
+    setFilters({ ...filters, [name]: value });
+  }, [filters, setFilters]);
+
+  const onCheckboxChange = useCallback((e, name) => {
     let value;
     if (e.target.checked === false) {
       value = [true, false];
@@ -35,7 +36,7 @@ const useFilterChange = (filterContext) => {
       value = true;
       setFilters({ ...filters, [name]: value });
     }
-  };
+  }, [filters, setFilters]);
   return {
     filters,
     setFilters,

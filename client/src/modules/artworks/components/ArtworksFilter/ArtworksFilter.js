@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { Button, Space } from 'antd';
 import { categories, sizes, orientation } from '../../../../mockData';
 import SliderFilter from '../../../../components/SliderFilter';
@@ -96,4 +96,4 @@ const ArtworksFilter = ({ searchMutation }) => {
   );
 };
 
-export default ArtworksFilter;
+export default memo(ArtworksFilter);

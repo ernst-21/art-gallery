@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, memo } from 'react';
 import { Radio } from 'antd';
 
 const RadioFilter = (props) => {
@@ -26,4 +26,4 @@ const RadioFilter = (props) => {
   );
 };
 
-export default RadioFilter;
+export default memo(RadioFilter);

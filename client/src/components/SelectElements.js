@@ -1,8 +1,10 @@
+import {memo} from 'react';
 import {Select} from 'antd';
 
 const {Option} = Select;
 
 const SelectElements = (props) => {
+
   return (
     <>
       <p>{props.label}</p>
@@ -14,4 +16,4 @@ const SelectElements = (props) => {
   );
 };
 
-export default SelectElements;
+export default memo(SelectElements);
