@@ -3,12 +3,13 @@ import { Radio } from 'antd';
 
 const RadioFilter = (props) => {
   const nodeRef = useRef();
+
   return (
     <div>
       <p>{props.title}</p>
       <Radio.Group
         onChange={props.onChange}
-        defaultValue="all"
+        defaultValue={props.defaultValue}
         buttonStyle="solid"
       >
         {props.elements.map((item) => (
@@ -19,7 +20,7 @@ const RadioFilter = (props) => {
             )}
           </Radio>
         ))}
-        <Radio value="all">All</Radio>
+        <Radio value="All">All</Radio>
       </Radio.Group>
     </div>
   );

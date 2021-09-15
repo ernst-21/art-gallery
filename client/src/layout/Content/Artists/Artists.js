@@ -1,18 +1,19 @@
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import ArtistsFilter from '../../../modules/artists/components/ArtistsFilter/ArtistsFilter';
 import FilteredArtists from '../../../modules/artists/components/FilteredArtists';
 import {useQuery, useMutation} from 'react-query';
 import { listArtists, searchArtists } from '../../../modules/artists/api/api-artists';
 import { Redirect } from 'react-router-dom';
 import SpinLoader from '../../../components/SpinLoader';
+import {ArtistFilterContext} from '../../../context/ArtistFilterContext';
 
 const Artists = () => {
   const [filteredArtists, setFilteredArtists] = useState([]);
+  const {filters} = useContext(ArtistFilterContext);
 
-  const {data: artists = [], isLoading, isError } = useQuery('artists', () => listArtists().then(res => res.json()).then(data => data), {
-    onSuccess: () => setFilteredArtists(artists),
-    staleTime: Infinity,
-    cacheTime: Infinity
+
+  const {isLoading, isError } = useQuery('artists', () => listArtists().then(res => res.json()).then(data => data), {
+    onSuccess: () => searchArtistMutation(filters)
   });
 
   const { mutate: searchArtistMutation, status } = useMutation(
@@ -33,7 +34,7 @@ const Artists = () => {
 
   return (
     <div className='artists-page'>
-      {filteredArtists && <ArtistsFilter searchArtistMutation={searchArtistMutation} />}
+      <ArtistsFilter searchArtistMutation={searchArtistMutation} />
       {isLoading ? (<SpinLoader />) : (filteredArtists.length > 0 ? (<FilteredArtists specialty='Artists' artists={filteredArtists} />) : (<FilteredArtists specialty='No artists to display' artists={[]} />))}
 
     </div>

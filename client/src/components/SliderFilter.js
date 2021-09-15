@@ -2,7 +2,7 @@ import {Slider} from 'antd';
 
 const SliderFilter = (props) => {
   return (
-    <Slider range defaultValue={[props.min, props.max]} min={props.min} max={props.max} tooltipVisible tooltipPlacement='bottom' onAfterChange={props.onAfterChange} />
+    <Slider range defaultValue={props.defaultValue} min={props.min} max={props.max} tooltipVisible tooltipPlacement='bottom' onAfterChange={props.onAfterChange} />
   );
 };
 

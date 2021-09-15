@@ -7,6 +7,7 @@ import RadioFilter from './components/RadioFilter';
 import useFilterChange from '../../../../hooks/Filters/useFilterChange';
 import {FilterContext} from '../../../../context/FilterContext';
 import {filterDefaults} from '../../../../mockData';
+import {settingDefault} from '../../../../utils/defaultFilters-wrangler';
 
 const ArtworksFilter = ({ searchMutation }) => {
   const { filters, onRadioChange, onSelectChange, onSliderChange } = useFilterChange(FilterContext);
@@ -58,26 +59,28 @@ const ArtworksFilter = ({ searchMutation }) => {
       <div className="filter-categories__container">
         <RadioFilter
           isCategory={true}
+          defaultValue={settingDefault(filters.category)}
           onChange={onCategoryChange}
           elements={categories}
         />
       </div>
       <div className="filter-price-orientation-size__container">
         <div className="slider-price__container">
-          Price $: <SliderFilter min={0} max={10000} onAfterChange={onPriceChange}/>
+          Price $: <SliderFilter defaultValue={[filters.price[0], filters.price[1]]} min={0} max={10000} onAfterChange={onPriceChange}/>
         </div>
         <div className="radio-orientation__container">
           <RadioFilter
+            defaultValue={settingDefault(filters.orientation)}
             onChange={onOrientationChange}
             title="Orientation:"
             elements={orientation}
           />
         </div>
         <div className="radio-size__container">
-          <RadioFilter onChange={onSizeChange} title="Size:" elements={sizes} />
+          <RadioFilter defaultValue={settingDefault(filters.size)} onChange={onSizeChange} title="Size:" elements={sizes} />
         </div>
         <div className="slider-price__container">
-          Likes $: <SliderFilter min={0} max={10} onAfterChange={onLikesChange}/>
+          Likes $: <SliderFilter defaultValue={[filters.voters[0], filters.voters[1]]} min={0} max={10} onAfterChange={onLikesChange}/>
         </div>
       </div>
       <Space>

@@ -6,6 +6,7 @@ import SliderFilter from '../../../../components/SliderFilter';
 import { Button } from 'antd';
 import useFilterChange from '../../../../hooks/Filters/useFilterChange';
 import {ArtistFilterContext} from '../../../../context/ArtistFilterContext';
+import {settingDefault, recommendedCheckValue} from '../../../../utils/defaultFilters-wrangler';
 
 const ArtistsFilter = ({searchArtistMutation}) => {
   const { filters, onCheckboxChange, onSelectChange, onSliderChange } = useFilterChange(ArtistFilterContext);
@@ -34,10 +35,11 @@ const ArtistsFilter = ({searchArtistMutation}) => {
       </div>
       <div className="artists-filters">
         <div className="recommended-filter">
-          <CheckboxRecommended onChange={onRecommendedChange} />
+          <CheckboxRecommended checked={recommendedCheckValue(filters.recommended)} onChange={onRecommendedChange} />
         </div>
         <div className="artists-discipline-filter">
           <SelectElements
+            defaultValue={settingDefault(filters.discipline)}
             onChange={onDisciplineChange}
             elements={discipline}
             label="Specialty:"
@@ -45,7 +47,7 @@ const ArtistsFilter = ({searchArtistMutation}) => {
         </div>
 
         <div className="artist-likes-filter">
-          Likes: <SliderFilter min={0} max={10} onAfterChange={onLikesChange} />
+          Likes: <SliderFilter defaultValue={[filters.likes[0], filters.likes[1]]} min={0} max={10} onAfterChange={onLikesChange} />
         </div>
       </div>
       <div className="reset-filter__btn">

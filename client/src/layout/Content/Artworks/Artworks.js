@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import FilteredArtworks from '../../../modules/artworks/components/FilteredArtworks';
 import ArtworksFilter from '../../../modules/artworks/components/ArtworksFilter/ArtworksFilter';
 import {
@@ -9,17 +9,11 @@ import { useQuery, useMutation } from 'react-query';
 import SpinLoader from '../../../components/SpinLoader';
 import { Redirect } from 'react-router-dom';
 import {FilterContext} from '../../../context/FilterContext';
-import { filterDefaults } from '../../../mockData';
 import auth from '../../../modules/auth/api/auth-helper';
 
 const Artworks = () => {
   const [filteredArtworks, setFilteredArtworks] = useState([]);
-  const {filters, setFilters} = useContext(FilterContext);
-
-  useEffect(() => {
-    setFilters(filterDefaults);
-    //eslint-disable-next-line
-  }, []);
+  const {filters} = useContext(FilterContext);
 
   const { isLoading, isError } = useQuery(
     'artworks',
@@ -28,9 +22,7 @@ const Artworks = () => {
         .then((res) => res.json())
         .then((data) => data),
     {
-      onSuccess: () => searchMutation(filters),
-      staleTime: Infinity,
-      cacheTime: Infinity
+      onSuccess: () => searchMutation(filters)
     }
   );
 
@@ -60,10 +52,8 @@ const Artworks = () => {
       <ArtworksFilter searchMutation={searchMutation} />
       {isLoading ? (
         <SpinLoader />
-      ) : filteredArtworks.length > 0 ? (
-        <FilteredArtworks title="Artworks" artworks={filteredArtworks} />
       ) : (
-        <FilteredArtworks title="No artworks to display" artworks={[]} />
+        <FilteredArtworks title={filteredArtworks.length > 0 ? 'Artworks' : 'No artworks to display'} artworks={filteredArtworks} />
       )}
     </div>
   );

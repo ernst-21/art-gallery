@@ -38,6 +38,7 @@ const useFilterChange = (filterContext) => {
   };
   return {
     filters,
+    setFilters,
     onRadioChange,
     onSelectChange,
     onSliderChange,
