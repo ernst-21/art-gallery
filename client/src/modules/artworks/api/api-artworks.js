@@ -21,48 +21,48 @@ const readArtwork = async (params) =>
     method: 'GET'
   });
 
-const voteArtwork = async (params, credentials, user) =>
-  await fetch('http://localhost:5000/api/artworks/vote/' + params.artworkId, {
+const voteArtwork = async (credentials, artworkId) =>
+  await fetch('http://localhost:5000/api/artworks/vote', {
     method: 'PUT',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + credentials.t
     },
-    body: JSON.stringify(user)
+    body: JSON.stringify(artworkId)
   });
 
-const unVoteArtwork = async (params, credentials, user) =>
-  await fetch('http://localhost:5000/api/artworks/unvote/' + params.artworkId, {
+const unVoteArtwork = async (credentials, artworkId) =>
+  await fetch('http://localhost:5000/api/artworks/unvote', {
     method: 'PUT',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + credentials.t
     },
-    body: JSON.stringify(user)
+    body: JSON.stringify(artworkId)
   });
 
-const addArtworkToCart = async (params, credentials, user) =>
-  await fetch('http://localhost:5000/api/artworks/cart/add/' + params.artworkId, {
+const addArtworkToCart = async (credentials, artWorkId) =>
+  await fetch('http://localhost:5000/api/artworks/cart/add', {
     method: 'PUT',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + credentials.t
     },
-    body: JSON.stringify(user)
+    body: JSON.stringify(artWorkId)
   });
 
-const removeArtworkFromCart = async (params, credentials, user) =>
-  await fetch('http://localhost:5000/api/artworks/cart/remove/' + params.artworkId, {
+const removeArtworkFromCart = async (credentials, artworkId) =>
+  await fetch('http://localhost:5000/api/artworks/cart/remove', {
     method: 'PUT',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + credentials.t
     },
-    body: JSON.stringify(user)
+    body: JSON.stringify(artworkId)
   });
 
 const artistArtworks = async (artistWork) =>
@@ -115,7 +115,7 @@ const searchArtworks = async (filters) =>
     body: JSON.stringify(filters)
   });
 
-const purchaseArtworks = async (credentials, userAndArtworks) =>
+const purchaseArtworks = async (credentials, artworks) =>
   await fetch('http://localhost:5000/api/artworks/purchase/buyArtworks', {
     method: 'PUT',
     headers: {
@@ -123,7 +123,7 @@ const purchaseArtworks = async (credentials, userAndArtworks) =>
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + credentials.t
     },
-    body: JSON.stringify(userAndArtworks)
+    body: JSON.stringify(artworks)
   });
 
 export {

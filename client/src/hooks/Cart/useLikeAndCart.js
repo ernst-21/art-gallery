@@ -16,8 +16,8 @@ const useLikeAndCart = () => {
   const queryClient = useQueryClient();
 
   const { mutate: likeMutation, status } = useMutation(
-    ([user, id]) =>
-      voteArtwork({ artworkId: id }, { t: jwt.token }, user)
+    (id) =>
+      voteArtwork( { t: jwt.token }, { artworkId: id })
         .then((res) => res.json())
         .then((data) => data),
     {
@@ -30,8 +30,8 @@ const useLikeAndCart = () => {
   );
 
   const { mutate: unLikeMutation, isError, isLoading } = useMutation(
-    ([user, id]) =>
-      unVoteArtwork({ artworkId: id }, { t: jwt.token }, user)
+    (id) =>
+      unVoteArtwork( { t: jwt.token }, { artworkId: id } )
         .then((res) => res.json())
         .then((data) => data),
     {
@@ -44,8 +44,8 @@ const useLikeAndCart = () => {
   );
 
   const { mutate: addToCartMutation, status: toCartStatus } = useMutation(
-    ([user, id]) =>
-      addArtworkToCart({ artworkId: id }, { t: jwt.token }, user)
+    (id) =>
+      addArtworkToCart({ t: jwt.token }, { artworkId: id })
         .then((res) => res.json())
         .then((data) => data),
     {
@@ -59,8 +59,8 @@ const useLikeAndCart = () => {
   );
 
   const { mutate: fromCartMutation, status: fromCartStatus } = useMutation(
-    ([user, id]) =>
-      removeArtworkFromCart({ artworkId: id }, { t: jwt.token }, user)
+    (id) =>
+      removeArtworkFromCart( { t: jwt.token }, { artworkId: id })
         .then((res) => res.json())
         .then((data) => data),
     {

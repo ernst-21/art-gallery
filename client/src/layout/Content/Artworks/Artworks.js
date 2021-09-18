@@ -13,6 +13,7 @@ import auth from '../../../modules/auth/api/auth-helper';
 
 const Artworks = () => {
   const [filteredArtworks, setFilteredArtworks] = useState([]);
+  const [title, setTitle] = useState('');
   const {filters} = useContext(FilterContext);
 
   const { isLoading, isError } = useQuery(
@@ -22,9 +23,7 @@ const Artworks = () => {
         .then((res) => res.json())
         .then((data) => data),
     {
-      onSuccess: () => searchMutation(filters),
-      staleTime: Infinity,
-      cacheTime: Infinity
+      onSuccess: () => searchMutation(filters)
     }
   );
 
@@ -35,6 +34,11 @@ const Artworks = () => {
         .then((data) => data),
     {
       onSuccess: (data) => {
+        if (data.length > 0) {
+          setTitle('Artworks');
+        } else {
+          setTitle('No artworks to display');
+        }
         if (auth.isAuthenticated()) {
           const noPurchased = data.filter(item => !item.purchased.includes(auth.isAuthenticated().user._id));
           setFilteredArtworks(noPurchased);
@@ -55,7 +59,7 @@ const Artworks = () => {
       {isLoading ? (
         <SpinLoader />
       ) : (
-        <FilteredArtworks title={filteredArtworks.length > 0 ? 'Artworks' : 'No artworks to display'} artworks={filteredArtworks} />
+        <FilteredArtworks title={title.length === 0 ? 'Loading...' : title} artworks={filteredArtworks} />
       )}
     </div>
   );

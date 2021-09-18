@@ -8,14 +8,14 @@ import { Redirect } from 'react-router-dom';
 
 const publishableKey = 'pk_test_51HNBGQLhGzqI0oVPHQxA9BfH1TD4JccRq3a3QeWqFuLLga8DvO4y5hbwFcEdsfCggk7HJKXPGpMJDIzqvyY4Ctax003R7bsnIT';
 
-const StripeButton = ({ totalPrice, userId }) => {
+const StripeButton = ({ totalPrice }) => {
   const { isError, cartElementsId } = useListCartElements();
   const jwt = auth.isAuthenticated();
   const priceForStripe = totalPrice * 100;
   const [paymentToken, setPaymentToken] = useState(null);
 
-  const { mutate: purchaseMutation, status } = useMutation((userAndArtworks) =>
-    purchaseArtworks({ t: jwt.token }, userAndArtworks)
+  const { mutate: purchaseMutation, status } = useMutation((artworks) =>
+    purchaseArtworks({ t: jwt.token }, artworks)
       .then((res) => res.json())
       .then((data) => data)
   );
@@ -27,7 +27,7 @@ const StripeButton = ({ totalPrice, userId }) => {
 
   useEffect(() => {
     if (paymentToken) {
-      purchaseMutation({ artworksIds: cartElementsId, userId: userId });
+      purchaseMutation({ artworksIds: cartElementsId });
     }
     //eslint-disable-next-line
   }, [paymentToken]);

@@ -18,9 +18,7 @@ const AddRemoveCartButton = (props) => {
       {auth.isAuthenticated() &&
       props.addedToCart.includes(auth.isAuthenticated()?.user._id) ? (
           <Button onClick={() =>
-            fromCartMutation([{
-              userId: auth.isAuthenticated()?.user._id
-            }, props.id])
+            fromCartMutation(props.id)
           } size="large" style={{ marginTop: '1rem' }} type="primary">
           Remove from Cart
           </Button>

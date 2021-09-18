@@ -1,20 +1,30 @@
-import {useState, useContext, memo} from 'react';
+import { useState, useContext, memo } from 'react';
 import ArtistsFilter from '../../../modules/artists/components/ArtistsFilter/ArtistsFilter';
 import FilteredArtists from '../../../modules/artists/components/FilteredArtists';
-import {useQuery, useMutation} from 'react-query';
-import { listArtists, searchArtists } from '../../../modules/artists/api/api-artists';
+import { useQuery, useMutation } from 'react-query';
+import {
+  listArtists,
+  searchArtists
+} from '../../../modules/artists/api/api-artists';
 import { Redirect } from 'react-router-dom';
 import SpinLoader from '../../../components/SpinLoader';
-import {ArtistFilterContext} from '../../../context/ArtistFilterContext';
+import { ArtistFilterContext } from '../../../context/ArtistFilterContext';
 
 const Artists = () => {
   const [filteredArtists, setFilteredArtists] = useState([]);
-  const {filters} = useContext(ArtistFilterContext);
+  const [title, setTitle] = useState('');
+  const { filters } = useContext(ArtistFilterContext);
 
-
-  const {isLoading, isError } = useQuery('artists', () => listArtists().then(res => res.json()).then(data => data), {
-    onSuccess: () => searchArtistMutation(filters)
-  });
+  const { isLoading, isError } = useQuery(
+    'artists',
+    () =>
+      listArtists()
+        .then((res) => res.json())
+        .then((data) => data),
+    {
+      onSuccess: () => searchArtistMutation(filters)
+    }
+  );
 
   const { mutate: searchArtistMutation, status } = useMutation(
     (filter) =>
@@ -23,6 +33,11 @@ const Artists = () => {
         .then((data) => data),
     {
       onSuccess: (data) => {
+        if (data.length > 0) {
+          setTitle('Artists');
+        } else {
+          setTitle('No artists to display');
+        }
         setFilteredArtists(data);
       }
     }
@@ -33,10 +48,16 @@ const Artists = () => {
   }
 
   return (
-    <div className='artists-page'>
+    <div className="artists-page">
       <ArtistsFilter searchArtistMutation={searchArtistMutation} />
-      {isLoading ? (<SpinLoader />) : (<FilteredArtists specialty={filteredArtists.length > 0 ? 'Artists' : 'No artists to display'} artists={filteredArtists} />)}
-
+      {isLoading ? (
+        <SpinLoader />
+      ) : (
+        <FilteredArtists
+          specialty={title.length === 0 ? 'Loading...' : title}
+          artists={filteredArtists}
+        />
+      )}
     </div>
   );
 };

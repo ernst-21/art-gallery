@@ -16,26 +16,24 @@ const readArtist = async (params) =>
     method: 'GET'
   });
 
-const likeArtist = async (params, credentials, user) =>
+const likeArtist = async (params, credentials) =>
   await fetch('http://localhost:5000/api/artists/like/' + params.artistId, {
     method: 'PUT',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + credentials.t
-    },
-    body: JSON.stringify(user)
+    }
   });
 
-const unlikeArtist = async (params, credentials, user) =>
+const unlikeArtist = async (params, credentials) =>
   await fetch('http://localhost:5000/api/artists/unlike/' + params.artistId, {
     method: 'PUT',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + credentials.t
-    },
-    body: JSON.stringify(user)
+    }
   });
 
 const userArtists = async (userId) =>

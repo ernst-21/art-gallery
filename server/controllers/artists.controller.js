@@ -53,7 +53,7 @@ const likeArtist = async (req, res) => {
   await Artist.findByIdAndUpdate(
     req.params.artistId,
     {
-      $push: { likes: req.body.userId }
+      $push: { likes: req.auth._id }
     },
     { new: true }
   ).exec((err, result) => {
@@ -69,7 +69,7 @@ const unLikeArtist = async (req, res) => {
   await Artist.findByIdAndUpdate(
     req.params.artistId,
     {
-      $pull: { likes: req.body.userId }
+      $pull: { likes: req.auth._id }
     },
     { new: true }
   ).exec((err, result) => {

@@ -8,15 +8,15 @@ router.route('/api/artworks').get(artworkCtrl.listArtworks);
 router.route('/api/artworks/featured').get(artworkCtrl.listFeatured);
 router.route('/api/artworks/purchased/:userId').get(artworkCtrl.listPurchased);
 
-router.route('/api/artworks/cart/add/:artworkId').put(authCtrl.requireSignin, artworkCtrl.addArtworkToCart);
+router.route('/api/artworks/cart/add').put(authCtrl.requireSignin, artworkCtrl.addArtworkToCart);
 
-router.route('/api/artworks/cart/remove/:artworkId').put(authCtrl.requireSignin, artworkCtrl.removeArtworkFromCart);
+router.route('/api/artworks/cart/remove').put(authCtrl.requireSignin, artworkCtrl.removeArtworkFromCart);
 
 router.route('/api/artworks/cart/cartArtworks').post(artworkCtrl.listCartItems);
 
-router.route('/api/artworks/vote/:artworkId').put(authCtrl.requireSignin, artworkCtrl.voteArtwork);
+router.route('/api/artworks/vote').put(authCtrl.requireSignin, artworkCtrl.voteArtwork);
 
-router.route('/api/artworks/unvote/:artworkId').put(authCtrl.requireSignin, artworkCtrl.unVoteArtwork);
+router.route('/api/artworks/unvote').put(authCtrl.requireSignin, artworkCtrl.unVoteArtwork);
 
 router.route('/api/artworks/artistArtworks').post(artworkCtrl.artistArtworks);
 

@@ -12,7 +12,16 @@ import AddToShoppingCart from './components/AddToShoppingCart';
 import CardCover from './components/CardCover';
 
 const ArtworkCard = forwardRef((props, ref) => {
-  const { status, isError, toCartStatus, fromCartStatus, likeMutation, unLikeMutation, addToCartMutation, fromCartMutation } = useLikeAndCart();
+  const {
+    status,
+    isError,
+    toCartStatus,
+    fromCartStatus,
+    likeMutation,
+    unLikeMutation,
+    addToCartMutation,
+    fromCartMutation
+  } = useLikeAndCart();
   const { isModalVisible, handleClose, unDoOrSign } = useSignToAction();
 
   const setStyles = (arg) => {
@@ -51,42 +60,31 @@ const ArtworkCard = forwardRef((props, ref) => {
             ? [
               auth.isAuthenticated() &&
                 props.voters.includes(auth.isAuthenticated()?.user._id) ? (
-                  <FilledHeart onClick={() =>
-                    unLikeMutation([
-                      {
-                        userId: auth.isAuthenticated()?.user._id
-                      },
-                      props.id
-                    ])} />
+                  <FilledHeart onClick={() => unLikeMutation(props.id)} />
                 ) : (
-                  <OutlinedHeart onClick={() => unDoOrSign(likeMutation, props.id)} />
+                  <OutlinedHeart
+                    onClick={() => unDoOrSign(likeMutation, props.id)}
+                  />
                 ),
               auth.isAuthenticated() &&
                 props.addedToCart.includes(auth.isAuthenticated()?.user._id) ? (
-                  <RemoveShoppingCart onClick={() =>
-                    fromCartMutation([
-                      {
-                        userId: auth.isAuthenticated()?.user._id
-                      },
-                      props.id
-                    ])
-                  } />
+                  <RemoveShoppingCart
+                    onClick={() => fromCartMutation(props.id)}
+                  />
                 ) : (
-                  <AddToShoppingCart onClick={() => unDoOrSign(addToCartMutation, props.id)} />
+                  <AddToShoppingCart
+                    onClick={() => unDoOrSign(addToCartMutation, props.id)}
+                  />
                 )
             ]
             : [
               auth.isAuthenticated() &&
                 props.voters.includes(auth.isAuthenticated()?.user._id) ? (
-                  <FilledHeart onClick={() =>
-                    unLikeMutation([
-                      {
-                        userId: auth.isAuthenticated()?.user._id
-                      },
-                      props.id
-                    ])} />
+                  <FilledHeart onClick={() => unLikeMutation(props.id)} />
                 ) : (
-                  <OutlinedHeart onClick={() => unDoOrSign(likeMutation, props.id)} />
+                  <OutlinedHeart
+                    onClick={() => unDoOrSign(likeMutation, props.id)}
+                  />
                 )
             ]
         }
