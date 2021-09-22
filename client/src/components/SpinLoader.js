@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React from 'react';
 import {Spin} from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
@@ -14,4 +14,4 @@ const SpinLoader = () => {
   );
 };
 
-export default memo(SpinLoader);
+export default SpinLoader;

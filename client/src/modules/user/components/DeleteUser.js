@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import auth from '../../auth/api/auth-helper';
 import { useMutation } from 'react-query';
 import {success} from '../../../components/Message';
@@ -8,7 +8,7 @@ import { Modal, Button } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 import { useHttpError } from '../../../hooks/Http/http-hook';
 
-export default function DeleteUser(props) {
+const DeleteUser = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const { error, showErrorModal, httpError } = useHttpError();
@@ -79,4 +79,6 @@ export default function DeleteUser(props) {
       </Modal>
     </>
   );
-}
+};
+
+export default memo(DeleteUser);

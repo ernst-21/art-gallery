@@ -1,4 +1,4 @@
-import React from 'react';
+import {memo} from 'react';
 import { Divider, Modal } from 'antd';
 import { AiOutlineClose } from 'react-icons/ai';
 import Signin from '../modules/auth/components/Signin';
@@ -22,4 +22,4 @@ const SignModal = ({ handleClose, visible, isModalVisible }) => {
   );
 };
 
-export default SignModal;
+export default memo(SignModal);

@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import { Card } from 'antd';
 import LazyLoad from 'react-lazyload';
 
@@ -32,4 +33,4 @@ const ArtistCard = (props) => {
   );
 };
 
-export default ArtistCard;
+export default memo(ArtistCard);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Redirect, useParams } from 'react-router-dom';
 import { Button, Card, Form, Input } from 'antd';
 import { useHttpError } from '../../../hooks/Http/http-hook';
@@ -121,4 +121,4 @@ const ResetPassword = () => {
   );
 };
 
-export default memo(ResetPassword);
+export default ResetPassword;

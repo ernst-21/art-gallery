@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import {Link} from 'react-router-dom';
 import ArtworkCard from '../modules/artworks/components/ArtworkCard/ArtworkCard';
 import ArtistCard from '../modules/artists/components/ArtistCard';
@@ -54,4 +55,4 @@ const ElementsGrid = (props) => {
   );
 };
 
-export default ElementsGrid;
+export default memo(ElementsGrid);

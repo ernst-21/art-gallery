@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { Space } from 'antd';
 
@@ -19,4 +20,4 @@ const ArtistSocial = (props) => {
   );
 };
 
-export default ArtistSocial;
+export default memo(ArtistSocial);

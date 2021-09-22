@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import { Redirect } from 'react-router-dom';
 import { Card } from 'antd';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
@@ -85,4 +86,4 @@ const ArtistProfileCard = (props) => {
   );
 };
 
-export default ArtistProfileCard;
+export default memo(ArtistProfileCard);

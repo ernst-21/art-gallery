@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useMemo} from 'react';
 import { Tabs } from 'antd';
 import {useQuery} from 'react-query';
 import {listArtworks} from '../../artworks/api/api-artworks';
@@ -21,10 +21,10 @@ const GalleriesTabs = () => {
       }
     }
   });
-  const parisCollection = galleries.filter(item => item.gallery === 'Paris');
-  const londonCollection = galleries.filter(item => item.gallery === 'London');
-  const berlinCollection = galleries.filter(item => item.gallery === 'Berlin');
-  const nyCollection = galleries.filter(item => item.gallery === 'New York');
+  const parisCollection = useMemo(() => galleries.filter(item => item.gallery === 'Paris'), [galleries]);
+  const londonCollection = useMemo(() => galleries.filter(item => item.gallery === 'London'), [galleries]);
+  const berlinCollection = useMemo(() => galleries.filter(item => item.gallery === 'Berlin'), [galleries]);
+  const nyCollection = useMemo(() => galleries.filter(item => item.gallery === 'New York'), [galleries]);
 
   if (isError) {
     return <Redirect to="/info-network-error" />;

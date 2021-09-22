@@ -1,4 +1,4 @@
-import { useState, useContext, memo } from 'react';
+import { useState, useContext } from 'react';
 import ArtistsFilter from '../../../modules/artists/components/ArtistsFilter/ArtistsFilter';
 import FilteredArtists from '../../../modules/artists/components/FilteredArtists';
 import { useQuery, useMutation } from 'react-query';
@@ -62,4 +62,4 @@ const Artists = () => {
   );
 };
 
-export default memo(Artists);
+export default Artists;

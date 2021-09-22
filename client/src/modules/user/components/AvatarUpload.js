@@ -1,4 +1,4 @@
-import React from 'react';
+import {memo} from 'react';
 import { Upload, message } from 'antd';
 import { LoadingOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
@@ -46,4 +46,4 @@ const AvatarUpload = (props) => {
   );
 };
 
-export default AvatarUpload;
+export default memo(AvatarUpload);

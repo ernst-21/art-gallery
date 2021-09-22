@@ -1,18 +1,18 @@
-import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Carousel } from 'antd';
 import { forCarousel } from '../../../mockData';
 
-const settings = {
-  dots: true,
-  infinite: true,
-  autoplay: true,
-  speed: 1500,
-  autoplaySpeed: 7000,
-  cssEase: 'ease-in-out'
-};
-
 const ArtworksCarousel = () => {
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    autoplay: true,
+    speed: 1500,
+    autoplaySpeed: 7000,
+    cssEase: 'ease-in-out'
+  };
+
   return (
     <Carousel {...settings}>
       {forCarousel.map((item, i) => (
@@ -31,4 +31,4 @@ const ArtworksCarousel = () => {
   );
 };
 
-export default memo(ArtworksCarousel);
+export default ArtworksCarousel;

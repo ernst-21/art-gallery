@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import { FilterProvider } from './context/FilterContext';
 import { ArtistFilterProvider } from './context/ArtistFilterContext';
 import { CartProvider } from './context/CartContext';
@@ -12,14 +12,18 @@ import useFirstVisit from './hooks/FirstVisitPopup/useFirstVisit';
 const { Header, Content } = Layout;
 
 function App() {
-  const {info, setIsModalVisible} = useFirstVisit();
+  const { info, setIsModalVisible } = useFirstVisit();
 
   useEffect(() => {
     let firstVisit = localStorage.getItem('visited');
+    let timer;
     if (firstVisit !== 'true') {
-      setIsModalVisible(true);
-      info();
+      timer = setTimeout(() => {
+        setIsModalVisible(true);
+        info();
+      }, 8000);
     }
+    return () => clearTimeout(timer);
     //eslint-disable-next-line
   }, []);
 

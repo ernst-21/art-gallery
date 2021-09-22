@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import useSignToAction from '../../../hooks/Auth/useSignToAction';
 import auth from '../../auth/api/auth-helper';
 import SignModal from '../../../components/SignModal';
@@ -36,4 +37,4 @@ const AddRemoveCartButton = (props) => {
   );
 };
 
-export default AddRemoveCartButton;
+export default memo(AddRemoveCartButton);

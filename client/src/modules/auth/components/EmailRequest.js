@@ -1,4 +1,4 @@
-import React, {useEffect, useState, memo} from 'react';
+import React, {useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Button, Card, Form, Input } from 'antd';
 import { emailToPass } from '../../user/api/api-user';
@@ -89,4 +89,4 @@ const EmailRequest = () => {
   );
 };
 
-export default memo(EmailRequest);
+export default EmailRequest;
