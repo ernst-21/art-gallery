@@ -14,8 +14,7 @@ import { success } from '../../../components/Message';
 const EditProfile = () => {
   const [redirectToSignin, setRedirectToSignin] = useState(false);
   const jwt = auth.isAuthenticated();
-  const { imageUrl, uploadPic, deleteImageUrl } = useUploadImage();
-  const [image, setImage] = useState('');
+  const { imageUrl, setImageUrl, uploadPic, deleteImageUrl } = useUploadImage();
   const { error, showErrorModal, httpError } = useHttpError();
   const userId = useParams().userId;
   const history = useHistory();
@@ -27,13 +26,21 @@ const EditProfile = () => {
     return () => showErrorModal(null);
   }, [error, httpError, showErrorModal]);
 
-  const { data: user, isLoading, isError } = useQuery(
+  const {
+    data: user,
+    isLoading,
+    isError
+  } = useQuery(
     ['user', userId],
     () =>
       read({ userId: userId }, { t: jwt.token })
         .then((res) => res.json())
         .then((data) => data),
     {
+      refetchOnWindowFocus: false,
+      refetchOnmount: false,
+      refetchOnReconnect: false,
+      retry: false,
       onSuccess: (data) => {
         if (data && data.error) {
           setRedirectToSignin(true);
@@ -69,11 +76,11 @@ const EditProfile = () => {
   }
 
   const handleImageChange = (info) => {
-    setImage(info.file.originFileObj);
+    setImageUrl(info.file.originFileObj);
   };
 
   const handleImgDelete = () => {
-    setImage('');
+    setImageUrl('');
     deleteImageUrl();
   };
 
@@ -131,11 +138,11 @@ const EditProfile = () => {
                 ) : (
                   <AvatarUpload
                     onChange={handleImageChange}
-                    customRequest={() => uploadPic(image)}
+                    customRequest={() => uploadPic(imageUrl)}
                     handleDelete={handleImgDelete}
                     url={imageUrl}
                     src={imageUrl}
-                    img={image}
+                    img={imageUrl}
                   />
                 )}
               </div>

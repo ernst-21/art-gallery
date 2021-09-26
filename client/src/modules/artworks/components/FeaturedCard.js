@@ -7,7 +7,7 @@ const FeaturedCard = (props) => {
     <Card
       cover={<LazyLoad>
         <Image
-          style={{ width: '100%', height: 'auto' }}
+          style={{ width: '100%', height: '250px' }}
           src={props.url}
         />
       </LazyLoad>}

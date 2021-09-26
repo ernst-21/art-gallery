@@ -2,17 +2,14 @@ import React, { useState, useEffect, memo } from 'react';
 import { create } from '../api/api-user.js';
 import { Link, Redirect } from 'react-router-dom';
 import { useHttpError } from '../../../hooks/Http/http-hook';
-import { Form, Input, Button, Card, Grid } from 'antd';
+import { Form, Input, Button, Card } from 'antd';
 import { strongPass, wrongPasswordMessage } from '../../../config/config';
 import { useMutation } from 'react-query';
 import { success } from '../../../components/Message';
 
-const { useBreakpoint } = Grid;
-
 const Signup = (props) => {
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
   const { error, showErrorModal, httpError } = useHttpError();
-  const screens = useBreakpoint();
 
   const { mutate: signUpMutation, isError } = useMutation(
     (user) => create(user).then(res => res.json()).then((data) => data),
@@ -62,7 +59,7 @@ const Signup = (props) => {
     <div className='sign-section'>
       <div className="form-card-container">
         <Card
-          className={screens.xs === true ? 'drawer-card' : 'form-card'}
+          className='form-card'
           title="Register"
           extra={<Link to="/signin">Already registered? Login instead</Link>}
         >
@@ -160,9 +157,6 @@ const Signup = (props) => {
                 </Button>
               </div>
             </Form.Item>
-            <div className="lower-link">
-              <Link to="/email">Forgot password?</Link>
-            </div>
           </Form>
         </Card>
       </div>

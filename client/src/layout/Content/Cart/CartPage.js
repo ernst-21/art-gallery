@@ -1,3 +1,4 @@
+import {useMemo} from 'react';
 import { List, Skeleton, Avatar, Empty, Divider } from 'antd';
 import { Link } from 'react-router-dom';
 import { IoRemoveCircleOutline } from 'react-icons/all';
@@ -9,7 +10,7 @@ import StripeButton from '../../../components/StripeButton';
 
 const CartPage = () => {
   const { cartElements, isError, totalPrice, status } = useListCartElements();
-  const arr = [1,2,3,4,5];
+  const arr = useMemo(() => [1,2,3,4,5], []);
   const { fromCartMutation } = useLikeAndCart();
 
   if (isError) {
