@@ -12,7 +12,7 @@ const ArtistCard = (props) => {
       cover={
         <LazyLoad>
           <img
-            style={{ width: '100%', height: 'auto' }}
+            style={{ width: '100%', height: '200px' }}
             alt={props.name}
             src={props.pic}
           />
