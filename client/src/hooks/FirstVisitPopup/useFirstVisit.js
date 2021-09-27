@@ -7,6 +7,7 @@ const useFirstVisit = () => {
   function info() {
     Modal.info({
       title: 'Important',
+      icon: null,
       width: 1000,
       visible: isModalVisible,
       content: (
