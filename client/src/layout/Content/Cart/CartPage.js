@@ -6,12 +6,17 @@ import useListCartElements from '../../../hooks/Cart/useListCartElements';
 import { Redirect } from 'react-router-dom';
 import useLikeAndCart from '../../../hooks/Cart/useLikeAndCart';
 import StripeButton from '../../../components/StripeButton';
+import auth from '../../../modules/auth/api/auth-helper';
 
 
 const CartPage = () => {
   const { cartElements, isError, totalPrice, status } = useListCartElements();
   const arr = useMemo(() => [1,2,3,4,5], []);
   const { fromCartMutation } = useLikeAndCart();
+
+  if (!auth.isAuthenticated()) {
+    return <Redirect to="/signin" />;
+  }
 
   if (isError) {
     return <Redirect to="/info-network-error" />;

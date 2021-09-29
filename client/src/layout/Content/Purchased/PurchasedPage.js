@@ -3,6 +3,7 @@ import { listPurchased } from '../../../modules/artworks/api/api-artworks';
 import { useQuery } from 'react-query';
 import { Avatar, Divider, List, Skeleton, Empty } from 'antd';
 import { Redirect, useParams } from 'react-router-dom';
+import auth from '../../../modules/auth/api/auth-helper';
 
 const PurchasedPage = () => {
   const userId = useParams().userId;
@@ -32,6 +33,10 @@ const PurchasedPage = () => {
       }
     }
   );
+
+  if (!auth.isAuthenticated()) {
+    return <Redirect to="/signin" />;
+  }
 
   if (isLoading) {
     return (
