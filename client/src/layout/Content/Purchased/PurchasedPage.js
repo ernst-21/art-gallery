@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { listPurchased } from '../../../modules/artworks/api/api-artworks';
 import { useQuery } from 'react-query';
 import { Avatar, Divider, List, Skeleton, Empty } from 'antd';
@@ -7,7 +7,7 @@ import auth from '../../../modules/auth/api/auth-helper';
 
 const PurchasedPage = () => {
   const userId = useParams().userId;
-  const arr = [1, 2, 3, 4, 5];
+  const arr = useMemo(() => [1, 2, 3, 4, 5], []);
   const [totalPrice, setTotalPrice] = useState(0);
   const {
     data: purchasedItems = [],
